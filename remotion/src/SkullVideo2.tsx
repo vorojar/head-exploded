@@ -1,3 +1,4 @@
+import {SceneReady} from './SceneReady';
 import { CompactMarkers } from "./LearningOverlay";
 import type { SceneProps } from "./lessons";
 /** Episode 2 video component. Same 3D scene and studio lighting as
@@ -80,6 +81,7 @@ function BoneMesh({ bone }: { bone: BoneState2 }) {
 export const SkullVideo2: React.FC<SceneProps> = ({
   webPlayer = false,
   compactLabels = false,
+  onSceneReady,
 }) => {
   const frame = useCurrentFrame();
   const frameState = useMemo(() => computeFrame2(frame), [frame]);
@@ -107,6 +109,7 @@ export const SkullVideo2: React.FC<SceneProps> = ({
           up={frameState.camUp}
         />
         <StudioEnvironment />
+        {webPlayer && <SceneReady onReady={onSceneReady}/>}
         <directionalLight
           position={[-2.5, 4.0, 3.0]}
           intensity={2.0}

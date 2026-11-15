@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { hydrateRoot } from "react-dom/client";
 import {
   Player,
@@ -56,6 +56,19 @@ function LessonPlayer({ episode }: { episode: number }) {
     () => matchMedia("(max-width: 700px)").matches,
   );
   const [full, setFull] = useState(false);
+  const [rotated,setRotated]=useState(false);
+  const [sceneReady,setSceneReady]=useState(false);
+  const sceneReadyRef=useRef(false);
+  const markSceneReady=useCallback(()=>{sceneReadyRef.current=true;setSceneReady(true);},[]);
+  useEffect(()=>{
+    if(!full){setRotated(false);return;}
+    const previousOverflow=document.body.style.overflow;
+    document.body.style.overflow='hidden';
+    const update=()=>setRotated(matchMedia('(pointer: coarse)').matches&&innerHeight>innerWidth);
+    const escape=(e:KeyboardEvent)=>{if(e.key==='Escape'&&!document.fullscreenElement)setFull(false);};
+    update();window.addEventListener('resize',update);window.addEventListener('keydown',escape);
+    return ()=>{document.body.style.overflow=previousOverflow;window.removeEventListener('resize',update);window.removeEventListener('keydown',escape);screen.orientation?.unlock?.();};
+  },[full]);
   const [speed, setSpeed] = useState(1);
   const [error, setError] = useState("");
   const [controlsVisible,setControlsVisible]=useState(true);
@@ -75,9 +88,7 @@ function LessonPlayer({ episode }: { episode: number }) {
     const revealCurrent = () => {
       const current = strip.querySelector<HTMLElement>('[aria-current="step"]');
       if (!current) return;
-      const item = current.getBoundingClientRect();
-      const row = strip.getBoundingClientRect();
-      const left = strip.scrollLeft + item.left - row.left - (strip.clientWidth - item.width) / 2;
+      const left = current.offsetLeft - (strip.clientWidth - current.offsetWidth) / 2;
       strip.scrollTo({
         left: Math.max(0, Math.min(left, strip.scrollWidth - strip.clientWidth)),
         behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
@@ -109,7 +120,7 @@ function LessonPlayer({ episode }: { episode: number }) {
     if (!p) return;
     const sync: CallbackListener<"frameupdate"> = (e) =>
       setFrame(e.detail.frame);
-    const play = () => setPlaying(true),
+    const play = () => {if(!sceneReadyRef.current){p.pause();return;}setPlaying(true);},
       pause = () => setPlaying(false);
     const mute: CallbackListener<"mutechange"> = (e) => setMuted(e.detail.isMuted);
     const fail: CallbackListener<"error"> = (e) =>
@@ -134,28 +145,39 @@ function LessonPlayer({ episode }: { episode: number }) {
     setFrame(value);
   };
   const toggleFull = async () => {
-    if (document.fullscreenElement) await document.exitFullscreen();
-    else if (shell.current?.requestFullscreen)
-      await shell.current.requestFullscreen();
+    if(full){
+      if(document.fullscreenElement===shell.current)await document.exitFullscreen();
+      setFull(false);return;
+    }
+    try {if(shell.current?.requestFullscreen)await shell.current.requestFullscreen();}
+    catch { /* Use the same fitted stage as an in-page fullscreen on restricted browsers. */ }
+    setFull(true);
+    if(matchMedia('(pointer: coarse)').matches){
+      const orientation=screen.orientation as ScreenOrientation & {lock?:(value:string)=>Promise<void>};
+      try {await orientation?.lock?.('landscape');}
+      catch {setRotated(innerHeight>innerWidth);}
+    }
   };
+
   return (
     <>
       <div className="learning-layout">
         <div className="playback-shell" ref={shell} tabIndex={0} aria-label="视频播放器"
-          data-controls-visible={controlsVisible} data-caption-mode={captionMode}
+          data-controls-visible={controlsVisible} data-caption-mode={captionMode} data-fullscreen={full} data-rotated={rotated} data-scene-ready={sceneReady}
           onPointerMove={revealControls} onPointerDownCapture={revealControls} onFocusCapture={revealControls}>
+          <div className="video-stage">
           <div className="scene-wrap">
             <Player
               ref={player}
               lazyComponent={lesson.load}
-              inputProps={{ webPlayer: true, compactLabels: compact }}
+              inputProps={{ webPlayer: true, compactLabels: compact, onSceneReady:markSceneReady }}
               durationInFrames={lesson.total}
               fps={24}
               compositionWidth={1280}
               compositionHeight={720}
               controls={false}
-              clickToPlay
-              spaceKeyToPlayOrPause
+              clickToPlay={sceneReady}
+              spaceKeyToPlayOrPause={sceneReady}
               acknowledgeRemotionLicense
               numberOfSharedAudioTags={1}
               playbackRate={speed}
@@ -179,19 +201,20 @@ function LessonPlayer({ episode }: { episode: number }) {
             {!playing && frame === 0 && (
               <button
                 className="start-overlay"
-                onClick={() => player.current?.play()}
-                aria-label="开始播放"
+                disabled={!sceneReady}
+                onClick={() => {if(sceneReady)player.current?.play();}}
+                aria-label={sceneReady?"开始播放":"三维画面加载中"}
               >
-                <Icon name="play"/>
+                {sceneReady?<Icon name="play"/>:<span className="scene-spinner" aria-hidden="true"/>}
               </button>
             )}
           </div>
           <nav className="knowledge-strip" ref={knowledgeStrip} aria-label="知识点章节导航">
-            {lesson.segments.map(s=><button className={s.id===segment.id?"knowledge-chip active":"knowledge-chip"} key={s.id} aria-current={s.id===segment.id?"step":undefined} onClick={()=>seek(s.start)}>
+            {lesson.segments.map(s=><button className={s.id===segment.id?"knowledge-chip active":"knowledge-chip"} key={s.id} aria-current={s.id===segment.id?"step":undefined} disabled={!sceneReady} onClick={()=>seek(s.start)}>
               <time>{formatTime(s.start)}</time><span>{chapterTitle(s)}</span>
             </button>)}
           </nav>
-          {cue && <div
+          {sceneReady && cue && <div
             className="subtitle-box" aria-live="off"
             data-testid="subtitle"
             data-start-ms={cue?.startMs}
@@ -207,11 +230,11 @@ function LessonPlayer({ episode }: { episode: number }) {
           <div className="transport" aria-label="播放控制">
             <label className="seek-label">
               <span className="sr-only">播放进度</span>
-              <input aria-label="播放进度" type="range" min={0} max={lesson.total-1} step={1} value={frame}
+              <input aria-label="播放进度" type="range" disabled={!sceneReady} min={0} max={lesson.total-1} step={1} value={frame}
                 aria-valuetext={formatTime(frame)} onChange={e=>seek(Number(e.target.value))}/>
             </label>
             <div className="transport-main">
-              <button title={playing?"暂停":"播放"} onClick={()=>player.current?.toggle()} aria-label={playing?"暂停":"播放"}>
+              <button title={sceneReady?(playing?"暂停":"播放"):"三维画面加载中"} disabled={!sceneReady} onClick={()=>player.current?.toggle()} aria-label={playing?"暂停":"播放"}>
                 <Icon name={playing?"pause":"play"}/>
               </button>
               <button title={muted?"取消静音":"静音"} aria-label={muted?"取消静音":"静音"} onClick={()=>{const p=player.current;if(p){if(p.isMuted())p.unmute();else p.mute();}}}>
@@ -230,10 +253,11 @@ function LessonPlayer({ episode }: { episode: number }) {
                   {[0.75,1,1.25,1.5].map(v=><option key={v} value={v}>{v}×</option>)}
                 </select>
               </label>
-              {document.fullscreenEnabled&&<button title={full?"退出全屏":"全屏"} onClick={()=>{void toggleFull();}} aria-label={full?"退出全屏":"全屏学习"}>
+              {<button title={full?"退出全屏":"全屏"} onClick={()=>{void toggleFull();}} aria-label={full?"退出全屏":"全屏学习"}>
                 <Icon name={full?"exit":"fullscreen"}/>
               </button>}
             </div>
+          </div>
           </div>
           {error && (
             <p className="player-error" role="alert">

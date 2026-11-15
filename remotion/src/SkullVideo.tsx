@@ -1,3 +1,4 @@
+import {SceneReady} from './SceneReady';
 import { CompactMarkers } from "./LearningOverlay";
 import type { SceneProps } from "./lessons";
 import React, { useEffect, useLayoutEffect, useMemo } from "react";
@@ -77,6 +78,7 @@ function BoneMesh({ bone }: { bone: BoneState }) {
 export const SkullVideo: React.FC<SceneProps> = ({
   webPlayer = false,
   compactLabels = false,
+  onSceneReady,
 }) => {
   const frame = useCurrentFrame();
   const frameState = useMemo(() => computeFrame(frame), [frame]);
@@ -100,6 +102,7 @@ export const SkullVideo: React.FC<SceneProps> = ({
         <color attach="background" args={["white"]} />
         <CameraRig position={frameState.camPos} target={frameState.camTarget} />
         <StudioEnvironment />
+        {webPlayer && <SceneReady onReady={onSceneReady}/>}
         {/* Key light (Blender sun) with soft shadows; the environment
             now carries the ambient, so the fill lights are turned down. */}
         <directionalLight
