@@ -130,11 +130,11 @@ main {
   align-items: start;
 }
 /* Captions and chrome share the scene rectangle, just like a video player. */
-.playback-shell{position:relative;background:#000;border:1px solid #34454a;border-radius:14px;overflow:hidden;min-width:0;color:#fff;isolation:isolate}
-.scene-wrap{position:relative;background:#2b2d31;aspect-ratio:16/9;overflow:hidden}
+.playback-shell{position:relative;background:#3a3a3a;border:0;border-radius:14px;overflow:hidden;min-width:0;color:#fff;isolation:isolate}
+.scene-wrap{position:relative;background:#3a3a3a;aspect-ratio:16/9;overflow:hidden}
 .start-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:64px;height:64px;border-radius:50%;border:1px solid #ffffff66;background:#0009;color:white;box-shadow:0 4px 20px #0003;cursor:pointer}
 .start-overlay svg{width:32px;height:32px}
-.loading,.player-error{padding:24px;font-size:16px;color:#bce4d9;background:#172125;line-height:1.6}
+.loading,.player-error{padding:24px;font-size:16px;color:#bce4d9;background:#3a3a3a;line-height:1.6}
 .loading{height:100%;display:grid;place-items:center}
 .playback-shell>.player-error{position:absolute;inset:0;z-index:5}
 .subtitle-box{position:absolute;bottom:20px;left:4%;width:92%;padding:0;min-height:0!important;text-align:center;pointer-events:none;z-index:2;transition:bottom .18s ease;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
@@ -589,16 +589,16 @@ footer p {
 
 /* Shared brand cover is visible in pre-rendered HTML, during loading, and
    until the first play. It never returns over an intentionally paused frame. */
-.brand-poster{position:absolute;inset:0;z-index:3;display:grid;place-items:center;background:#fff;color:#27433b}
+.brand-poster{position:absolute;inset:0;z-index:3;display:grid;place-items:center;background:#3a3a3a;color:#e0e5e3}
 .brand-poster-content{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;gap:16px;text-align:center}
 .brand-poster-logo{display:block;width:min(36%,250px);height:auto;max-height:48%;object-fit:contain}
-.brand-poster-status{font-size:14px;line-height:1.5;color:#6b7d75;margin:0}
+.brand-poster-status{font-size:14px;line-height:1.5;color:#d1d6d3;margin:0}
 .brand-poster-play{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:8px 16px;border:1px solid #315b4933;border-radius:24px;background:#315b4910;color:#315b49;font-size:14px;cursor:pointer}
 @media(max-width:700px){.brand-poster-content{gap:10px}.brand-poster-logo{width:38%}.brand-poster-status,.brand-poster-play{font-size:12px}.brand-poster-play{min-height:34px;padding:5px 12px}}
 
 .playback-shell[data-has-started="false"] .transport{opacity:0;visibility:hidden;pointer-events:none}
 
-.brand-poster-retry{font-size:12px;color:#526e60;background:transparent;border:1px solid #526e6033;border-radius:16px;padding:5px 12px;cursor:pointer}
+.brand-poster-retry{font-size:12px;color:#bcebd8;background:transparent;border:1px solid #bcebd850;border-radius:16px;padding:5px 12px;cursor:pointer}
 
 /* Only the logo determines the centered box; status text never moves it. */
 .brand-poster-content{position:relative;display:block}
