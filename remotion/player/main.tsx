@@ -47,6 +47,7 @@ function Icon({name}:{name:IconName}) {
 function LessonPlayer({ episode }: { episode: number }) {
   const player = useRef<PlayerRef>(null);
   const shell = useRef<HTMLDivElement>(null);
+  const knowledgeStrip = useRef<HTMLElement>(null);
   const [frame, setFrame] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
@@ -67,6 +68,25 @@ function LessonPlayer({ episode }: { episode: number }) {
   useEffect(()=>{revealControls();return ()=>clearTimeout(hideTimer.current);},[playing]);
   const lesson = lessons[episode]!;
   const segment = segmentAt(episode, frame);
+  useEffect(() => {
+    const strip = knowledgeStrip.current;
+    if (!strip) return;
+    const revealCurrent = () => {
+      const current = strip.querySelector<HTMLElement>('[aria-current="step"]');
+      if (!current) return;
+      const item = current.getBoundingClientRect();
+      const row = strip.getBoundingClientRect();
+      const left = strip.scrollLeft + item.left - row.left - (strip.clientWidth - item.width) / 2;
+      strip.scrollTo({
+        left: Math.max(0, Math.min(left, strip.scrollWidth - strip.clientWidth)),
+        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
+    };
+    revealCurrent();
+    const observer = new ResizeObserver(revealCurrent);
+    observer.observe(strip);
+    return () => observer.disconnect();
+  }, [segment.id]);
   const cue = captionAt(episode, frame);
   const annotations = annotationsAt(episode, frame);
   useEffect(() => {
@@ -163,7 +183,7 @@ function LessonPlayer({ episode }: { episode: number }) {
               </button>
             )}
           </div>
-          <nav className="knowledge-strip" aria-label="知识点章节导航">
+          <nav className="knowledge-strip" ref={knowledgeStrip} aria-label="知识点章节导航">
             {lesson.segments.map(s=><button className={s.id===segment.id?"knowledge-chip active":"knowledge-chip"} key={s.id} aria-current={s.id===segment.id?"step":undefined} onClick={()=>seek(s.start)}>
               <time>{formatTime(s.start)}</time><span>{chapterTitle(s)}</span>
             </button>)}

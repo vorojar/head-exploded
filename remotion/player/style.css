@@ -559,3 +559,7 @@ footer p {
 .knowledge-chip.active{background:#315c4820;border-color:#315c4835;color:#173d2c;font-weight:650}
 .knowledge-chip:hover{background:#315c4815}
 @media(max-width:700px){.knowledge-chip{font-size:11px;min-height:28px;padding:4px 8px;gap:5px}.knowledge-chip time{font-size:9px}}
+
+/* Keep the spoken chapter visible and clearly selected in the scrolling row. */
+.knowledge-chip.active{background:#255c49;border-color:#255c49;color:#fff;box-shadow:0 1px 4px #153e2926}
+.knowledge-chip.active time{opacity:.85}
