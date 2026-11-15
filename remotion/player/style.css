@@ -600,3 +600,5 @@ footer p {
 @media(max-width:700px){.brand-poster-content{gap:10px}.brand-poster-logo{width:38%}.brand-poster-status,.brand-poster-play{font-size:12px}.brand-poster-play{min-height:34px;padding:5px 12px}}
 
 .playback-shell[data-has-started="false"] .transport{opacity:0;visibility:hidden;pointer-events:none}
+
+.brand-poster-retry{font-size:12px;color:#526e60;background:transparent;border:1px solid #526e6033;border-radius:16px;padding:5px 12px;cursor:pointer}

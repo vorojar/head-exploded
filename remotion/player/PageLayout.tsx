@@ -21,7 +21,6 @@ export function PageLayout({episode=0,onEpisodeChange,children}:{episode?:number
       </nav>
       <section aria-label={lesson.title}>
         <div className="lesson-heading">
-          <h2>{lesson.title}</h2>
           <p>{lesson.description}</p>
         </div>
         {children}

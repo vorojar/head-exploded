@@ -60,6 +60,12 @@ function LessonPlayer({ episode }: { episode: number }) {
   const [full, setFull] = useState(false);
   const [rotated,setRotated]=useState(false);
   const [sceneReady,setSceneReady]=useState(false);
+  const [loadingSlow,setLoadingSlow]=useState(false);
+  useEffect(()=>{
+    if(sceneReady){setLoadingSlow(false);return;}
+    const timer=setTimeout(()=>setLoadingSlow(true),20000);
+    return ()=>clearTimeout(timer);
+  },[sceneReady]);
   const sceneReadyRef=useRef(false);
   const markSceneReady=useCallback(()=>{sceneReadyRef.current=true;setSceneReady(true);},[]);
   useEffect(()=>{
@@ -212,7 +218,7 @@ function LessonPlayer({ episode }: { episode: number }) {
                 {sceneReady?<Icon name={playing?"pause":"play"}/>:<span className="scene-spinner" aria-hidden="true"/>}
               </button>
             )}
-          {!hasStarted && <BrandPoster ready={sceneReady}/>}
+          {!hasStarted && <BrandPoster ready={sceneReady} slow={loadingSlow}/>}
           <nav className="knowledge-strip" ref={knowledgeStrip} aria-label="知识点章节导航">
             {lesson.segments.map(s=><button className={s.id===segment.id?"knowledge-chip active":"knowledge-chip"} key={s.id} aria-current={s.id===segment.id?"step":undefined} disabled={!sceneReady} onClick={()=>seek(s.start)}>
               <time>{formatTime(s.start)}</time><span>{chapterTitle(s)}</span>

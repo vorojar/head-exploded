@@ -1,13 +1,15 @@
-import {useEffect,useRef} from 'react';
-import {useFrame} from '@react-three/fiber';
-/** Signal readiness only after the committed scene has drawn its first frame. */
+import {useRef} from 'react';
+import {useFrame,useThree} from '@react-three/fiber';
+/** Wait for a completed scene frame, then notify directly on the next frame.
+ * No one-shot RAF remains that an effect cleanup can cancel permanently. */
 export function SceneReady({onReady}:{onReady?:()=>void}){
-  const reported=useRef(false),pending=useRef<number>();
+  const frames=useRef(0),reported=useRef(false);
+  const gl=useThree(state=>state.gl);
   useFrame(()=>{
-    if(reported.current)return;
+    if(reported.current||!onReady||gl.getContext().isContextLost())return;
+    if(++frames.current<2)return;
     reported.current=true;
-    pending.current=requestAnimationFrame(()=>onReady?.());
+    onReady();
   });
-  useEffect(()=>()=>{if(pending.current!==undefined)cancelAnimationFrame(pending.current);},[]);
   return null;
 }
