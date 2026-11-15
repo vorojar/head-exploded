@@ -1,57 +1,41 @@
+import { EmbeddedCaption } from "./LearningOverlay";
 /** Overlay for Episode 2: subtitles + labels.
  * Two label kinds: custom 3D anchor points (sutures, foramina) and
  * bone-anchored pills (facial cluster). Same pill style as Episode 1
  * (English name + Latin second line), same subtitle band.
  */
-import {useMemo} from 'react';
-import {H, W} from './skullMath';
-import type {FrameState2, Segment2} from './skullMath2';
+import { useMemo } from "react";
+import { H, W } from "./skullMath";
+import type { FrameState2, Segment2 } from "./skullMath2";
 
-const INK = '#11141a';
-const GREY = '#6b7280';
-const RED = '#e5484d';
+const INK = "#11141a";
+const GREY = "#6b7280";
+const RED = "#e5484d";
 
 const LATIN: Record<number, string> = {
-  1: 'os frontale',
-  2: 'os parietale',
-  3: 'os parietale',
-  4: 'os temporale',
-  5: 'os temporale',
-  6: 'os occipitale',
-  7: 'os sphenoidale',
-  8: 'os ethmoidale',
-  9: 'os nasale',
-  10: 'os nasale',
-  11: 'maxilla',
-  12: 'maxilla',
-  13: 'os zygomaticum',
-  14: 'os zygomaticum',
-  15: 'mandibula',
-  16: 'os lacrimale',
-  17: 'os lacrimale',
-  18: 'os palatinum',
-  19: 'os palatinum',
-  20: 'concha nasalis inferior',
-  21: 'concha nasalis inferior',
-  22: 'vomer',
+  1: "os frontale",
+  2: "os parietale",
+  3: "os parietale",
+  4: "os temporale",
+  5: "os temporale",
+  6: "os occipitale",
+  7: "os sphenoidale",
+  8: "os ethmoidale",
+  9: "os nasale",
+  10: "os nasale",
+  11: "maxilla",
+  12: "maxilla",
+  13: "os zygomaticum",
+  14: "os zygomaticum",
+  15: "mandibula",
+  16: "os lacrimale",
+  17: "os lacrimale",
+  18: "os palatinum",
+  19: "os palatinum",
+  20: "concha nasalis inferior",
+  21: "concha nasalis inferior",
+  22: "vomer",
 };
-
-function wrapText(text: string, width: number): string[] {
-  const words = text.split(' ');
-  const lines: string[] = [];
-  let cur = '';
-  for (const w of words) {
-    const next = cur ? `${cur} ${w}` : w;
-    if (next.length > width && cur) {
-      lines.push(cur);
-      cur = w;
-    } else {
-      cur = next;
-    }
-  }
-  if (cur) lines.push(cur);
-  return lines;
-}
 
 type Placement = {
   bx: number;
@@ -64,12 +48,12 @@ type Placement = {
 
 /** De-collision ported from Episode 1: 3 passes, push pills apart. */
 function placePills(
-  items: {bx: number; by: number; name: string; latin: string}[],
+  items: { bx: number; by: number; name: string; latin: string }[],
   bandTop: number,
 ): Placement[] {
   const estW = (name: string, latin: string) =>
     Math.max(name.length, latin.length) * 14 + 24;
-  const placements: Placement[] = items.map(({bx, by, name, latin}) => {
+  const placements: Placement[] = items.map(({ bx, by, name, latin }) => {
     let dx = bx - W / 2;
     let dy = by - H / 2;
     if (Math.hypot(dx, dy) < 60) {
@@ -79,7 +63,7 @@ function placePills(
     const norm = Math.max(Math.hypot(dx, dy), 1);
     const lx = Math.min(Math.max(bx + (dx / norm) * 95, 90), W - 90);
     const ly = Math.min(Math.max(by + (dy / norm) * 95, 40), bandTop - 40);
-    return {bx, by, lx, ly, name, latin};
+    return { bx, by, lx, ly, name, latin };
   });
   for (let pass = 0; pass < 3; pass++) {
     let moved = false;
@@ -89,7 +73,10 @@ function placePills(
         const b = placements[j];
         const wa = estW(a.name, a.latin);
         const wb = estW(b.name, b.latin);
-        if (Math.abs(a.lx - b.lx) < (wa + wb) / 2 + 8 && Math.abs(a.ly - b.ly) < 78) {
+        if (
+          Math.abs(a.lx - b.lx) < (wa + wb) / 2 + 8 &&
+          Math.abs(a.ly - b.ly) < 78
+        ) {
           const overlap = (wa + wb) / 2 + 8 - Math.abs(a.lx - b.lx);
           const shift = overlap / 2 + 4;
           if (a.lx <= b.lx) {
@@ -112,13 +99,24 @@ function placePills(
   return placements;
 }
 
-function PillLayer({placements}: {placements: Placement[]}) {
+function PillLayer({ placements }: { placements: Placement[] }) {
   return (
     <>
-      <svg width={W} height={H} style={{position: 'absolute', top: 0, left: 0}}>
+      <svg
+        width={W}
+        height={H}
+        style={{ position: "absolute", top: 0, left: 0 }}
+      >
         {placements.map((p, i) => (
           <g key={i}>
-            <line x1={p.bx} y1={p.by} x2={p.lx} y2={p.ly} stroke={GREY} strokeWidth={2} />
+            <line
+              x1={p.bx}
+              y1={p.by}
+              x2={p.lx}
+              y2={p.ly}
+              stroke={GREY}
+              strokeWidth={2}
+            />
             <circle cx={p.bx} cy={p.by} r={4} fill={RED} />
           </g>
         ))}
@@ -127,22 +125,31 @@ function PillLayer({placements}: {placements: Placement[]}) {
         <div
           key={i}
           style={{
-            position: 'absolute',
+            position: "absolute",
             left: p.lx,
             top: p.ly,
-            transform: 'translate(-50%, -50%)',
-            background: 'white',
-            border: '2px solid #b4b9c0',
+            transform: "translate(-50%, -50%)",
+            background: "white",
+            border: "2px solid #b4b9c0",
             borderRadius: 14,
-            padding: '7px 12px',
-            fontFamily: 'DejaVu Sans, sans-serif',
-            whiteSpace: 'nowrap',
-            textAlign: 'center',
+            padding: "7px 12px",
+            fontFamily: "DejaVu Sans, sans-serif",
+            whiteSpace: "nowrap",
+            textAlign: "center",
           }}
         >
-          <div style={{fontSize: 26, fontWeight: 700, color: INK}}>{p.name}</div>
+          <div style={{ fontSize: 26, fontWeight: 700, color: INK }}>
+            {p.name}
+          </div>
           {p.latin ? (
-            <div style={{fontSize: 18, fontWeight: 400, fontStyle: 'italic', color: GREY}}>
+            <div
+              style={{
+                fontSize: 18,
+                fontWeight: 400,
+                fontStyle: "italic",
+                color: GREY,
+              }}
+            >
               {p.latin}
             </div>
           ) : null}
@@ -152,7 +159,13 @@ function PillLayer({placements}: {placements: Placement[]}) {
   );
 }
 
-function PointLabels({frameState, bandTop}: {frameState: FrameState2; bandTop: number}) {
+function PointLabels({
+  frameState,
+  bandTop,
+}: {
+  frameState: FrameState2;
+  bandTop: number;
+}) {
   const placements = useMemo(() => {
     const items = frameState.points
       .filter((p) => p.pos2D)
@@ -167,9 +180,15 @@ function PointLabels({frameState, bandTop}: {frameState: FrameState2; bandTop: n
   return <PillLayer placements={placements} />;
 }
 
-function BoneLabels({frameState, bandTop}: {frameState: FrameState2; bandTop: number}) {
+function BoneLabels({
+  frameState,
+  bandTop,
+}: {
+  frameState: FrameState2;
+  bandTop: number;
+}) {
   const placements = useMemo(() => {
-    const items: {bx: number; by: number; name: string; latin: string}[] = [];
+    const items: { bx: number; by: number; name: string; latin: string }[] = [];
     const labels = frameState.segment.labels as string[];
     frameState.segment.bones.forEach((num, i) => {
       const b = frameState.bones.find((x) => x.def.num === num);
@@ -178,7 +197,7 @@ function BoneLabels({frameState, bandTop}: {frameState: FrameState2; bandTop: nu
           bx: b.center2D[0],
           by: b.center2D[1],
           name: labels[i],
-          latin: LATIN[num] ?? '',
+          latin: LATIN[num] ?? "",
         });
     });
     return placePills(items, bandTop);
@@ -186,38 +205,29 @@ function BoneLabels({frameState, bandTop}: {frameState: FrameState2; bandTop: nu
   return <PillLayer placements={placements} />;
 }
 
-export function Overlay2({frameState}: {frameState: FrameState2}) {
-  const {segment: seg} = frameState;
-  const lines = useMemo(() => wrapText(seg.text, 60), [seg.text]);
-  const lineH = 34;
-  const bandH = lines.length * lineH + 22;
-  const bandTop = H - bandH;
+export function Overlay2({
+  frameState,
+  embeddedCaptions = true,
+  compactLabels = false,
+}: {
+  frameState: FrameState2;
+  embeddedCaptions?: boolean;
+  compactLabels?: boolean;
+}) {
+  const { segment: seg } = frameState;
+
+  const bandTop = embeddedCaptions ? H - 116 : H - 36;
   const showPoints = seg.points.length > 0;
-  const showBones = seg.mode === 'facial';
+  const showBones = seg.mode === "facial";
   return (
     <>
-      {showPoints && <PointLabels frameState={frameState} bandTop={bandTop} />}
-      {showBones && <BoneLabels frameState={frameState} bandTop={bandTop} />}
-      <div
-        style={{
-          position: 'absolute',
-          left: 0,
-          bottom: 0,
-          width: W,
-          background: '#11141a',
-          color: 'white',
-          fontSize: 26,
-          lineHeight: `${lineH}px`,
-          fontFamily: 'DejaVu Sans, sans-serif',
-          textAlign: 'center',
-          padding: '10px 40px',
-          boxSizing: 'border-box',
-        }}
-      >
-        {lines.map((ln, i) => (
-          <div key={i}>{ln}</div>
-        ))}
-      </div>
+      {!compactLabels && showPoints && (
+        <PointLabels frameState={frameState} bandTop={bandTop} />
+      )}
+      {!compactLabels && showBones && (
+        <BoneLabels frameState={frameState} bandTop={bandTop} />
+      )}
+      {embeddedCaptions && <EmbeddedCaption episode={1} />}
     </>
   );
 }

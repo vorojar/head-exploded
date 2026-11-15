@@ -1,11 +1,13 @@
-import React, {useEffect, useLayoutEffect, useMemo} from 'react';
-import {AbsoluteFill, Audio, staticFile, useCurrentFrame} from 'remotion';
-import {ThreeCanvas} from '@remotion/three';
-import {useThree} from '@react-three/fiber';
-import * as THREE from 'three';
-import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
-import {CAM_FOV, computeFrame, H, W, type BoneState} from './skullMath';
-import {Overlay} from './Overlay';
+import { CompactMarkers } from "./LearningOverlay";
+import type { SceneProps } from "./lessons";
+import React, { useEffect, useLayoutEffect, useMemo } from "react";
+import { AbsoluteFill, Audio, staticFile, useCurrentFrame } from "remotion";
+import { ThreeCanvas } from "@remotion/three";
+import { useThree } from "@react-three/fiber";
+import * as THREE from "three";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { CAM_FOV, computeFrame, H, W, type BoneState } from "./skullMath";
+import { Overlay } from "./Overlay";
 
 /**
  * Procedural studio environment (no network HDR needed): soft image-based
@@ -47,11 +49,17 @@ function CameraRig({
   return null;
 }
 
-function BoneMesh({bone}: {bone: BoneState}) {
+function BoneMesh({ bone }: { bone: BoneState }) {
   const geometry = useMemo(() => {
     const g = new THREE.BufferGeometry();
-    g.setAttribute('position', new THREE.Float32BufferAttribute(bone.def.positions, 3));
-    g.setAttribute('normal', new THREE.Float32BufferAttribute(bone.def.normals, 3));
+    g.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(bone.def.positions, 3),
+    );
+    g.setAttribute(
+      "normal",
+      new THREE.Float32BufferAttribute(bone.def.normals, 3),
+    );
     g.setIndex(bone.def.indices);
     return g;
   }, [bone.def]);
@@ -66,12 +74,18 @@ function BoneMesh({bone}: {bone: BoneState}) {
   );
 }
 
-export const SkullVideo: React.FC = () => {
+export const SkullVideo: React.FC<SceneProps> = ({
+  webPlayer = false,
+  compactLabels = false,
+}) => {
   const frame = useCurrentFrame();
   const frameState = useMemo(() => computeFrame(frame), [frame]);
-  const fade = frame < 24 ? 1 - (frame / 24) * (frame / 24) * (3 - 2 * (frame / 24)) : 0;
+  const fade =
+    !webPlayer && frame < 24
+      ? 1 - (frame / 24) * (frame / 24) * (3 - 2 * (frame / 24))
+      : 0;
   return (
-    <AbsoluteFill style={{width: W, height: H, backgroundColor: 'white'}}>
+    <AbsoluteFill style={{ width: W, height: H, backgroundColor: "white" }}>
       <ThreeCanvas
         width={W}
         height={H}
@@ -83,7 +97,7 @@ export const SkullVideo: React.FC = () => {
           position: frameState.camPos,
         }}
       >
-        <color attach="background" args={['white']} />
+        <color attach="background" args={["white"]} />
         <CameraRig position={frameState.camPos} target={frameState.camTarget} />
         <StudioEnvironment />
         {/* Key light (Blender sun) with soft shadows; the environment
@@ -92,7 +106,7 @@ export const SkullVideo: React.FC = () => {
           position={[-2.5, 4.0, 3.0]}
           intensity={2.0}
           castShadow
-          shadow-mapSize={[2048, 2048]}
+          shadow-mapSize={[1024, 1024]}
           shadow-camera-left={-3}
           shadow-camera-right={3}
           shadow-camera-top={3}
@@ -102,20 +116,25 @@ export const SkullVideo: React.FC = () => {
           shadow-bias={-0.0005}
           shadow-normalBias={0.02}
         />
-        <hemisphereLight args={['#ffffff', '#d8d8d8', 1.0]} />
+        <hemisphereLight args={["#ffffff", "#d8d8d8", 1.0]} />
         <ambientLight intensity={0.35} />
         {frameState.bones.map((b) => (
           <BoneMesh key={b.def.num} bone={b} />
         ))}
       </ThreeCanvas>
-      <Overlay frameState={frameState} />
-      <Audio src={staticFile('mixed.wav')} />
+      <Overlay
+        frameState={frameState}
+        embeddedCaptions={!webPlayer}
+        compactLabels={compactLabels}
+      />
+      {compactLabels && <CompactMarkers episode={0} frameState={frameState} />}
+      <Audio src={staticFile("narration1.mp3")} />
       {fade > 0 && (
         <div
           style={{
-            position: 'absolute',
+            position: "absolute",
             inset: 0,
-            backgroundColor: 'white',
+            backgroundColor: "white",
             opacity: fade,
           }}
         />

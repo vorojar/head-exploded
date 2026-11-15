@@ -1,0 +1,26 @@
+# Changelog
+
+## 2026-11-15 — 医学内容、移动学习与同步字幕
+
+### 学员可见的变化
+
+- 三集 50 段医学文案逐段复核，修正眼眶内容物、视神经传导方向、眶下裂、破裂孔、颏神经阻滞及骨折体征等表述；具体条目和参考资料见 [医学审校记录](docs/medical-review.md)。这是资料核对与内容修订，尚非临床专家签审。
+- 三集全部重新录制为本地 Kokoro 英式英文旁白（`bm_george`），保持统一音色；不再沿用旧 Helio 音轨中的错误表述。
+- 双语字幕改为短句，时间戳直接来自各条实际合成音频及最终变速/拼接结果；导出画面和网页共用同一份字幕数据。
+- 网页字幕从缩放画面中移到独立区域：手机正文可读，控制条不再覆盖字幕。手机画面使用数字标记，结构名称、拉丁名与模型局限在外部标注卡中显示。
+- 新增章节跳转、0.75–1.5 倍速和包含字幕的全屏学习。暂停、拖动、切集时字幕与画面都由 Player 的同一帧驱动。
+- 音频由未压缩 WAV 改为 MP3；网页音频和静态资源使用内容 hash，避免固定 URL 缓存旧配音。
+- 各集三维组件按需加载，首帧直接显示模型。保留 Remotion Studio 和视频导出入口。
+
+### 维护与发布
+
+- Remotion 依赖统一固定为 4.0.543，TypeScript 检查覆盖独立播放器。
+- 新增字幕/时间线/配音完整性检查及 GitHub Actions 构建；不需要导出视频即可验收网页。
+- 重写小米部署脚本：使用现有 SSH 别名与主机校验、独立 release、SHA-256 核对、原子切换和可回退快照；旧 hash 资源保留以支持已打开的页面。
+- 仅为 `/head-exploded/` 配置所需的 CSP（内联样式及播放器静音 data 音频）；其他站点的 CSP 与路由沿用原设置。
+
+### 数据入口
+
+编辑 `remotion/src/lesson-copy.json` → 运行 `scripts/generate-narration.py` → `captions.json` 与 `narration*.mp3` → `npm run verify` → `npm run build` → `scripts/deploy-ep3.sh`。
+
+旧 `docs/ep*-script*.md` 保留为历史研究草稿；当前文案以 `lesson-copy.json` 和 [医学审校记录](docs/medical-review.md) 为准。

@@ -1,50 +1,81 @@
-# Head Exploded — 22 Skull Bones in 3D
+# Head Exploded — 颅骨课堂
 
-A code-generated, narrated 3D anatomy teaching series: the human skull, exploded bone by bone, built entirely in code with **Remotion + Three.js** and real anatomical meshes from **BodyParts3D**. No Blender, no AI-generated geometry — every bone is a real mesh.
+A code-generated 3D anatomy teaching series built with **Remotion + Three.js** and real **BodyParts3D** bone meshes. The web player renders the scene in the learner's browser, so updates do not require an MP4 export.
 
-Live demo: https://xiaomi.bibidu.com/head-exploded/
+**Live:** https://xiaomi.bibidu.com/head-exploded/
+**What changed:** [Changelog](CHANGELOG.md) · [Medical content revision / 医学审校记录](docs/medical-review.md)
 
-## The three episodes
+## Three episodes
 
-| Episode | Title | Length | Content |
-|---|---|---|---|
-| 1 | 22 Skull Bones | 1:55 | All 22 bones, one by one — frontal, parietals, temporals, occipital, sphenoid, ethmoid, nasals, maxillae, zygomatics, mandible, lacrimals, palatines, inferior nasal conchae, vomer. Latin names on every label. |
-| 2 | Sutures & Foramina | 3:07 | Coronal / sagittal / lambdoid / squamous sutures, pterion, cranial fossae, and the foramina that matter for exams — cribriform, optic canal, superior orbital fissure, foramen rotundum / ovale / spinosum, internal acoustic meatus, jugular foramen, hypoglossal canal, foramen magnum — each with its contents and a clinical anchor. |
-| 3 | Systems & Clinical | 3:49 | The complete cranial-nerve–foramen map (12 nerves, 10 doorways), the orbit as a room (7 bones, 4 walls, apex), TMJ and dislocation, Le Fort I / II / III fractures, and base-of-skull fracture signs (Battle's sign, raccoon eyes, CSF leak). |
+| Episode | Content | Length |
+|---|---|---|
+| 1 | 22 cranial and facial bones, separated and reassembled | 1:55 |
+| 2 | Sutures, selected foramina, nerves and vessels | 3:07 |
+| 3 | Cranial nerve routes, orbit, TMJ, Le Fort patterns and skull-base injury signs | 3:49 |
 
-Narration is native professional English (Helio TTS), subtitles match the narration word for word, and each segment's window is set from the measured narration duration + 0.6 s.
+The three episodes contain **50 chapters and 136 bilingual caption cues**. Narration is English; captions are Chinese and English. The mobile player places readable subtitles and annotation legends outside the scaled scene. Small screens use numbered anchors instead of tiny text labels. Chapters, a seek slider, pause/play, playback speed and fullscreen all follow the same Remotion frame clock.
 
-## How it works
+## Run and check
 
-- `remotion/src/skullMath*.ts` — pure per-frame math: cumulative bone separation, focus dimming, and the "protagonist camera" that swings around to frame the bone being taught.
-- `remotion/src/SkullVideo*.tsx` — Three.js scene (studio environment lighting, soft shadows) + Remotion Player.
-- `remotion/src/Overlay*.tsx` — HTML/SVG labels, leader lines, leader dots, fracture lines, bruise patches, and the subtitle band.
-- `remotion/src/timeline*.json` — per-segment staging: camera, look-at, distance, label anchors, bone highlight sets.
-- `remotion/public/skull.json` — the 22 BodyParts3D meshes converted to JSON (positions, colors, explosion directions, AABBs precomputed). See `scripts/obj2json.py`.
-- `remotion/player/` — the standalone web player (Vite + @remotion/player) with three episode tabs. Build with `vite build` from inside `remotion/player/` using the parent's `node_modules/.bin/vite`.
-- `scripts/` — the original Blender pipeline (`head_video.py`, `head_overlay_en.py`) that was superseded by the Remotion rebuild, plus `obj2json.py`, `head_exploded.py`, `make_plate.py`, and the deploy script.
-- `docs/` — the researched episode scripts (foramina contents, suture Latin, clinical points verified against StatPearls / TeachMeAnatomy / Kenhub).
-
-## Run it
+Requirements: Node.js 22+, npm, Python 3 and ffmpeg/ffprobe for content verification. No GPU render is needed for the web build.
 
 ```bash
 cd remotion
-npm install
-npm run start        # Remotion Studio — preview all three compositions
-npm run render       # render Episode 1 to MP4 (needs software WebGL on headless machines)
+npm ci
+npm run player:dev   # standalone web player; URL printed by Vite
+npm run verify       # strict TypeScript + all chapter/caption/audio checks
+npm run build        # remotion/player/dist; assets/audio use content hashes
+npm run start        # Remotion Studio, all three compositions
 ```
 
-The player:
+`npm run render` still exports Episode 1 if an MP4 is explicitly needed. For Episodes 2/3 use `npx remotion render HeadExploded2 ...` / `HeadExploded3 ...`. The headless software-WebGL settings live in `remotion.config.ts`.
+
+## Edit narration and subtitles
+
+1. Edit the bilingual phrase units in `remotion/src/lesson-copy.json`. The generator updates the matching English text in `timeline*.json`. Change camera timings only when changing the visual staging.
+2. Regenerate narration locally. Kokoro `bm_george` replaces the original Helio recordings, maintaining one voice across all corrected content. The generator measures each phrase, fits it to its visual window with pitch-preserving `atempo`, and writes exact final phrase intervals to `captions.json`.
+
+   ```bash
+   uv venv --python 3.12 .venv-audio
+   uv pip install --python .venv-audio/bin/python kokoro==0.9.4 soundfile
+   # First run downloads public model/voice files and the English language model.
+   VIRTUAL_ENV="$PWD/.venv-audio" PATH="$PWD/.venv-audio/bin:$PATH" \
+     .venv-audio/bin/python scripts/generate-narration.py --device cpu
+   # Apple Silicon can use --device mps.
+   ```
+
+3. Run `npm run verify` and `npm run build` in `remotion`, then inspect playback. The audio generator retains phrase WAVs in ignored `work/narration-cache/` for fast regeneration. It never sends source text or audio to a synthesis API.
+
+The four orbit-wall phrases and two-view nerve/orbit segments are fitted to their actual highlight/view windows. Caption timing is measured from audio, not estimated by character count. Gaps remain blank rather than showing the next phrase early. `EmbeddedCaption` uses the same cues for Studio/video; the web player presents them at native CSS sizes.
+
+## Xiaomi 15 Pro deployment
+
+Existing SSH authorization and the verified `xiaomi-server` alias are required. Commit and push to `origin/main` before publishing.
 
 ```bash
-cd remotion/player
-../node_modules/.bin/vite build   # output in player/dist/
+./scripts/deploy-ep3.sh --dry-run  # verify/build and inspect the release locally
+./scripts/deploy-ep3.sh            # verify/build/upload/check/switch
+python3 scripts/rollback-phone.py # return to the previous release
 ```
 
-Note: on a headless VM without a GPU, Remotion needs software WebGL — see `remotion.config.ts` (`swangle` + `enable-unsafe-swiftshader`).
+The deployment checks that `HEAD` equals remote `main`, uploads only the built site, compares all SHA-256 hashes, retains content-addressed assets and switches the entry through an atomic symlink. Releases live in `~/server/apps/head-exploded/releases/<commit>/`; `current`, `previous` and shared `assets/` belong only to this site. `version.json` identifies the served commit. Existing legacy WAV URLs remain available to already-open pages.
 
-## Data & license
+Only the `/head-exploded/` Nginx locations receive the CSP required for Remotion style injection and silent `data:` audio. Scripts remain restricted to `'self'`; shared site routes and their policies are unchanged. The existing Nginx/runit/tunnel startup chain serves the static site; no extra background service is introduced. The first route installation validates and gracefully reloads Nginx, subsequent releases only switch the symlink.
 
-- The skull meshes come from **BodyParts3D** (Database Center for Life Science), licensed **CC BY-SA 2.1 JP**. Attribution is in the player footer.
-- The code in this repository is **MIT**. See `LICENSE`.
-- Known limitation: the BodyParts3D meshes are surface-only, so the paranasal sinuses (hollow cavities) and fontanelles (adult skull — already closed) cannot be shown. In Episode 2, the foramen ovale and foramen spinosum markers are approximate region labels — the mesh has no clear opening there.
+## Source layout
+
+- `remotion/src/skullMath*.ts` — pure frame math: bone separation, highlighting, cameras and clinical overlays.
+- `remotion/src/SkullVideo*.tsx`, `Overlay*.tsx`, `LearningOverlay.tsx` — 3D scenes, projected annotations and shared embedded captions.
+- `remotion/src/lessons.ts` — chapter titles, numbered annotation metadata, cue lookup and lazy scene loaders.
+- `remotion/src/lesson-copy.json`, `captions.json`, `timeline*.json` — bilingual source, measured cue timing and visual staging.
+- `remotion/public/skull.json` — 22 bone meshes; `narration*.mp3` — compressed narration, imported once into the player with hashed URLs.
+- `remotion/player/` — responsive standalone learning interface.
+- `scripts/verify-lessons.mjs` — continuous timelines, complete bilingual phrase coverage, ordered cue intervals, visual beat alignment and actual audio duration checks.
+- `.github/workflows/verify.yml` — checks and web build for pushes and PRs.
+- `docs/ep*-script*.md` — historical research drafts, superseded by the current source and medical revision record.
+
+## Data and accuracy
+
+Meshes are from **BodyParts3D**, © Database Center for Life Science, under **CC BY-SA 2.1 JP**; code is MIT. See [LICENSE](LICENSE). Local Kokoro synthesis uses the public `hexgrad/Kokoro-82M` model and `bm_george` voice.
+
+The surface mesh does not display internal sinus cavities, nerves, vessels, a TMJ disc or soft tissue. Custom foramen markers are approximate regions, particularly foramen ovale/spinosum. Le Fort lines are anterior-view schematics and do not display the complete posterior pterygoid path. These limits are shown beside the player. The medical revision record documents reference-based corrections; a clinical expert has not signed off this version.

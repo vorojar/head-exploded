@@ -1,0 +1,652 @@
+{
+  "1": {
+    "intro": [
+      {
+        "text": "The adult human skull has twenty-two bones:",
+        "zh": "成人颅骨由 22 块骨组成："
+      },
+      {
+        "text": "eight cranial bones enclose the brain, and fourteen facial bones form the face.",
+        "zh": "8 块脑颅骨保护脑，14 块面颅骨构成面部。"
+      }
+    ],
+    "frontal": [
+      {
+        "text": "Frontal bone. It forms the forehead and brow ridges,",
+        "zh": "额骨构成前额和眉弓，"
+      },
+      {
+        "text": "and much of the anterior cranial fossa and orbital roofs.",
+        "zh": "也参与构成颅前窝和眶顶。"
+      }
+    ],
+    "parietal": [
+      {
+        "text": "Parietal bones, left and right.",
+        "zh": "顶骨，左右各一块。"
+      },
+      {
+        "text": "Together they form the roof and much of the side walls of the cranium.",
+        "zh": "它们共同构成颅顶及大部分颅侧壁。"
+      }
+    ],
+    "temporal": [
+      {
+        "text": "Temporal bones, left and right.",
+        "zh": "颞骨，左右各一块。"
+      },
+      {
+        "text": "Their petrous parts contain the inner ear, with organs of hearing and balance.",
+        "zh": "其岩部容纳内耳，与听觉和平衡有关。"
+      }
+    ],
+    "occipital": [
+      {
+        "text": "Occipital bone. It forms the back and part of the base of the cranium.",
+        "zh": "枕骨构成颅的后部及部分颅底。"
+      },
+      {
+        "text": "At the foramen magnum, the medulla continues as the spinal cord.",
+        "zh": "延髓在枕骨大孔处与脊髓相续。"
+      }
+    ],
+    "sphenoid": [
+      {
+        "text": "Sphenoid bone. Shaped like a butterfly,",
+        "zh": "蝶骨形似蝴蝶，"
+      },
+      {
+        "text": "it sits centrally in the cranial base and contributes to both orbits.",
+        "zh": "位于颅底中央，也参与构成两侧眼眶。"
+      }
+    ],
+    "ethmoid": [
+      {
+        "text": "Ethmoid bone. Light and delicate, it lies between the two orbits.",
+        "zh": "筛骨轻而薄，位于两侧眼眶之间。"
+      },
+      {
+        "text": "It forms parts of the nasal cavity and the medial orbital walls.",
+        "zh": "它参与构成鼻腔和眶内侧壁。"
+      }
+    ],
+    "nasal": [
+      {
+        "text": "Nasal bones, left and right.",
+        "zh": "鼻骨，左右各一块。"
+      },
+      {
+        "text": "Together they form the bony bridge of the nose.",
+        "zh": "共同构成鼻梁的骨性部分。"
+      }
+    ],
+    "lacrimal": [
+      {
+        "text": "Lacrimal bones, left and right, are small bones in the medial orbital walls.",
+        "zh": "泪骨是位于眶内侧壁的小骨，左右各一块。"
+      },
+      {
+        "text": "They contribute to the fossa for the lacrimal sac.",
+        "zh": "它们参与构成泪囊窝。"
+      }
+    ],
+    "maxilla": [
+      {
+        "text": "Maxillae, left and right, form much of the upper jaw.",
+        "zh": "上颌骨，左右各一块，构成上颌的主体。"
+      },
+      {
+        "text": "They hold the upper teeth and contain the maxillary sinuses.",
+        "zh": "它们承托上牙，并容纳上颌窦。"
+      }
+    ],
+    "zygomatic": [
+      {
+        "text": "Zygomatic bones, left and right, form the cheek prominences.",
+        "zh": "颧骨，左右各一块，形成颊部隆起。"
+      },
+      {
+        "text": "They also contribute to the orbital walls and zygomatic arches.",
+        "zh": "它们也参与构成眶壁和颧弓。"
+      }
+    ],
+    "palatine": [
+      {
+        "text": "Palatine bones, left and right, form the posterior hard palate.",
+        "zh": "腭骨，左右各一块，构成硬腭后部。"
+      },
+      {
+        "text": "They also contribute to the nasal cavity and a small part of each orbit.",
+        "zh": "它们也参与构成鼻腔及一小部分眶底。"
+      }
+    ],
+    "concha": [
+      {
+        "text": "Inferior nasal conchae, left and right, are scroll-shaped bones on the lateral nasal walls.",
+        "zh": "下鼻甲是鼻腔外侧壁上卷曲的骨，左右各一块。"
+      },
+      {
+        "text": "Their mucosal covering helps warm and humidify inspired air.",
+        "zh": "其表面的黏膜帮助温暖、湿润吸入的空气。"
+      }
+    ],
+    "vomer": [
+      {
+        "text": "Vomer. A single midline bone,",
+        "zh": "犁骨是位于正中线的单块骨，"
+      },
+      {
+        "text": "it forms the posteroinferior part of the bony nasal septum.",
+        "zh": "构成骨性鼻中隔的后下部。"
+      }
+    ],
+    "mandible": [
+      {
+        "text": "Mandible. The largest and strongest facial bone,",
+        "zh": "下颌骨是最大、最坚固的面颅骨，"
+      },
+      {
+        "text": "it moves at the temporomandibular joints during chewing and speech.",
+        "zh": "通过颞下颌关节运动，参与咀嚼和发音。"
+      }
+    ],
+    "allout": [
+      {
+        "text": "Separated, all twenty-two bones are shown in this teaching model.",
+        "zh": "分离后，可在教学模型中看到全部 22 块骨。"
+      }
+    ],
+    "back": [
+      {
+        "text": "And back together: a complete bony skull.",
+        "zh": "重新组合，构成完整的骨性颅。"
+      }
+    ],
+    "end": [
+      {
+        "text": "Apart, the individual bones are easier to identify.",
+        "zh": "分离时，更容易辨认每一块骨。"
+      },
+      {
+        "text": "Together, they protect the brain and support the face.",
+        "zh": "组合后，它们保护脑并支撑面部。"
+      }
+    ]
+  },
+  "2": {
+    "intro": [
+      {
+        "text": "The skull is not one bone. Most cranial bones meet at sutures.",
+        "zh": "颅并非一块骨；多数脑颅骨通过颅缝相接。"
+      },
+      {
+        "text": "Foramina and fissures provide routes for nerves and vessels.",
+        "zh": "孔和裂为神经、血管提供通道。"
+      }
+    ],
+    "coronal": [
+      {
+        "text": "The coronal suture joins the frontal bone to the two parietal bones.",
+        "zh": "冠状缝连接额骨与两侧顶骨。"
+      },
+      {
+        "text": "It runs across the top of the skull.",
+        "zh": "它横行于颅顶。"
+      },
+      {
+        "text": "Its junction with the sagittal suture is the bregma.",
+        "zh": "它与矢状缝的交点称前囟点。"
+      }
+    ],
+    "sagittal": [
+      {
+        "text": "The sagittal suture runs along the midline between the parietal bones.",
+        "zh": "矢状缝沿正中线走行，连接两侧顶骨。"
+      },
+      {
+        "text": "It meets the coronal suture at the bregma,",
+        "zh": "其与冠状缝相交于前囟点，"
+      },
+      {
+        "text": "and the lambdoid suture at the lambda.",
+        "zh": "与人字缝相交于人字点。"
+      }
+    ],
+    "lambdoid": [
+      {
+        "text": "The lambdoid suture joins the parietal bones to the occipital bone.",
+        "zh": "人字缝连接顶骨与枕骨。"
+      },
+      {
+        "text": "It runs across the posterior skull.",
+        "zh": "它位于颅的后部。"
+      },
+      {
+        "text": "Its junction with the sagittal suture is the lambda.",
+        "zh": "它与矢状缝的交点称人字点。"
+      }
+    ],
+    "squamous": [
+      {
+        "text": "The squamous suture joins the parietal and temporal bones on each side.",
+        "zh": "鳞状缝位于颅侧面，连接顶骨与颞骨。"
+      },
+      {
+        "text": "Its name refers to their overlapping, scale-like edges.",
+        "zh": "其名称描述骨缘呈鳞片状重叠。"
+      }
+    ],
+    "pterion": [
+      {
+        "text": "The pterion is where frontal, parietal, temporal, and sphenoid bones meet.",
+        "zh": "翼点是额骨、顶骨、颞骨与蝶骨的交汇处。"
+      },
+      {
+        "text": "This is a thin, vulnerable region of the lateral skull.",
+        "zh": "它是颅侧壁较薄、易受损的区域。"
+      },
+      {
+        "text": "A fracture may tear the underlying middle meningeal artery and cause an epidural hematoma.",
+        "zh": "此处骨折可能撕裂深面的脑膜中动脉，引起硬膜外血肿。"
+      }
+    ],
+    "cranial-base": [
+      {
+        "text": "Now the cranial vault moves away to expose the cranial base.",
+        "zh": "移开颅盖，显露颅底。"
+      },
+      {
+        "text": "The floor has three fossae: anterior, middle, and posterior.",
+        "zh": "颅底内面分为颅前窝、颅中窝与颅后窝。"
+      },
+      {
+        "text": "The following markers indicate selected openings and their approximate regions.",
+        "zh": "接下来的标记指示部分开口及其大致区域。"
+      }
+    ],
+    "cribriform": [
+      {
+        "text": "The cribriform plate of the ethmoid forms part of the nasal roof.",
+        "zh": "筛骨筛板参与构成鼻腔顶。"
+      },
+      {
+        "text": "Olfactory nerve filaments pass through its small openings.",
+        "zh": "嗅神经丝穿过筛板的小孔。"
+      },
+      {
+        "text": "A fracture may cause loss of smell or a cerebrospinal fluid leak from the nose.",
+        "zh": "此处骨折可能引起嗅觉丧失或脑脊液鼻漏。"
+      }
+    ],
+    "optic-canal": [
+      {
+        "text": "The optic canal lies in the lesser wing of the sphenoid.",
+        "zh": "视神经管位于蝶骨小翼。"
+      },
+      {
+        "text": "It transmits the optic nerve and ophthalmic artery.",
+        "zh": "它传导视神经和眼动脉。"
+      },
+      {
+        "text": "The optic nerve carries visual signals from the retina toward the brain.",
+        "zh": "视神经将视觉信号从视网膜传向脑。"
+      }
+    ],
+    "sof": [
+      {
+        "text": "The superior orbital fissure lies between the sphenoid wings.",
+        "zh": "眶上裂位于蝶骨大、小翼之间。"
+      },
+      {
+        "text": "It transmits cranial nerves three, four, and six,",
+        "zh": "动眼神经、滑车神经和展神经经过此裂，"
+      },
+      {
+        "text": "the ophthalmic division of nerve five, and the superior ophthalmic vein.",
+        "zh": "还有三叉神经眼支和眼上静脉。"
+      }
+    ],
+    "sphenoid-trio": [
+      {
+        "text": "Three important openings in the greater wing of the sphenoid.",
+        "zh": "蝶骨大翼上的三个重要开口。"
+      },
+      {
+        "text": "The foramen rotundum transmits the maxillary nerve, the second trigeminal division.",
+        "zh": "圆孔传导三叉神经第二支：上颌神经。"
+      },
+      {
+        "text": "The foramen ovale transmits the mandibular division.",
+        "zh": "卵圆孔传导下颌神经。"
+      },
+      {
+        "text": "The foramen spinosum transmits the middle meningeal artery. These markers are schematic.",
+        "zh": "棘孔传导脑膜中动脉；这里的标记为示意定位。"
+      }
+    ],
+    "iam": [
+      {
+        "text": "The internal acoustic meatus opens on the petrous temporal bone.",
+        "zh": "内耳门位于颞骨岩部。"
+      },
+      {
+        "text": "It carries the facial and vestibulocochlear nerves and the labyrinthine artery.",
+        "zh": "内耳道传导面神经、前庭蜗神经及迷路动脉。"
+      },
+      {
+        "text": "The facial nerve continues into the facial canal.",
+        "zh": "面神经随后进入面神经管。"
+      },
+      {
+        "text": "Temporal bone trauma may cause facial weakness, hearing loss, or vertigo.",
+        "zh": "颞骨外伤可能导致面肌无力、听力下降或眩晕。"
+      }
+    ],
+    "posterior-base": [
+      {
+        "text": "The foramen magnum transmits the brainstem continuing as the spinal cord,",
+        "zh": "枕骨大孔容纳脑干与脊髓的移行部，"
+      },
+      {
+        "text": "the vertebral arteries, and spinal roots of the accessory nerve.",
+        "zh": "也有椎动脉和副神经脊髓根通过。"
+      },
+      {
+        "text": "The jugular foramen carries nerves nine, ten, and eleven and venous drainage.",
+        "zh": "颈静脉孔传导第九、十、十一脑神经及静脉回流。"
+      },
+      {
+        "text": "The hypoglossal canal transmits the twelfth nerve.",
+        "zh": "舌下神经管传导第十二脑神经。"
+      }
+    ],
+    "facial-cluster": [
+      {
+        "text": "The small facial bones include lacrimal, palatine, inferior nasal concha, vomer, and nasal bones.",
+        "zh": "小面颅骨包括泪骨、腭骨、下鼻甲、犁骨和鼻骨。"
+      },
+      {
+        "text": "They contribute to the orbits, nasal cavity, nasal septum, and palate.",
+        "zh": "它们参与构成眼眶、鼻腔、鼻中隔和腭。"
+      },
+      {
+        "text": "Each has a different role; they do not all form the same wall.",
+        "zh": "它们分工不同，并非都构成同一面壁。"
+      }
+    ],
+    "recap": [
+      {
+        "text": "Sutures join bones. Foramina and fissures let nerves and vessels pass.",
+        "zh": "颅缝连接骨，孔和裂供神经与血管通过。"
+      },
+      {
+        "text": "Relate each opening to its contents, then confirm its position in an anatomical atlas.",
+        "zh": "将开口与穿行结构联系起来，再结合解剖图谱确认位置。"
+      }
+    ]
+  },
+  "3": {
+    "intro": [
+      {
+        "text": "Episodes one and two introduced the bones, sutures, and openings.",
+        "zh": "前两集介绍了骨、颅缝及开口。"
+      },
+      {
+        "text": "Now we connect these landmarks to the cranial nerves, orbit, and jaw.",
+        "zh": "这一集将它们与脑神经、眼眶和下颌联系起来。"
+      },
+      {
+        "text": "We then review selected facial fractures and signs of skull-base injury.",
+        "zh": "最后学习部分面部骨折及颅底损伤体征。"
+      }
+    ],
+    "cn-front": [
+      {
+        "text": "Twelve cranial nerves use several routes through the skull.",
+        "zh": "十二对脑神经经不同通道穿行于颅。"
+      },
+      {
+        "text": "Olfactory filaments cross the cribriform plate; the optic nerve uses the optic canal.",
+        "zh": "嗅神经丝经过筛板；视神经经过视神经管。"
+      },
+      {
+        "text": "Nerves three, four, and six, with the ophthalmic division of five,",
+        "zh": "第三、四、六脑神经及第五脑神经的眼支，"
+      },
+      {
+        "text": "pass through the superior orbital fissure.",
+        "zh": "经眶上裂通过。"
+      }
+    ],
+    "cn-middle": [
+      {
+        "text": "The maxillary division of nerve five passes through the foramen rotundum.",
+        "zh": "三叉神经上颌支经过圆孔。"
+      },
+      {
+        "text": "The mandibular division passes through the foramen ovale.",
+        "zh": "下颌支经过卵圆孔。"
+      },
+      {
+        "text": "The internal carotid artery enters through the carotid canal,",
+        "zh": "颈内动脉经颈动脉管进入颅内，"
+      },
+      {
+        "text": "then passes over the cartilage-filled foramen lacerum, not through its full depth.",
+        "zh": "随后经过充填软骨的破裂孔上方，而非纵贯该孔。"
+      }
+    ],
+    "cn-back": [
+      {
+        "text": "The facial and vestibulocochlear nerves enter the internal acoustic meatus together.",
+        "zh": "面神经与前庭蜗神经一同进入内耳道。"
+      },
+      {
+        "text": "The facial nerve then follows the facial canal.",
+        "zh": "面神经随后沿面神经管走行。"
+      },
+      {
+        "text": "It exits through the stylomastoid foramen.",
+        "zh": "面神经经茎乳孔出颅。"
+      },
+      {
+        "text": "Nerves nine, ten, and eleven use the jugular foramen; twelve uses the hypoglossal canal.",
+        "zh": "第九、十、十一脑神经经过颈静脉孔；第十二经舌下神经管。"
+      }
+    ],
+    "cn-table": [
+      {
+        "text": "This overview groups ten selected routes used by cranial nerves.",
+        "zh": "此总表归纳了脑神经使用的十处通道。"
+      },
+      {
+        "text": "Use it to organize your anatomy study, alongside an atlas and cross-sectional images.",
+        "zh": "请结合解剖图谱和断层影像学习这些对应关系。"
+      }
+    ],
+    "orbit-room": [
+      {
+        "text": "The orbit is a cavity built from seven bones.",
+        "zh": "眼眶是由七块骨参与构成的腔隙。"
+      },
+      {
+        "text": "Its broad opening faces forward and its apex points backward.",
+        "zh": "宽大的眶口朝前，眶尖朝后。"
+      },
+      {
+        "text": "It contains the eye, extraocular muscles, nerves, vessels, fat, and lacrimal structures.",
+        "zh": "眶内容物包括眼球、眼外肌、神经、血管、脂肪及泪器结构。"
+      }
+    ],
+    "orbit-walls": [
+      {
+        "text": "The roof: frontal bone and lesser wing of the sphenoid.",
+        "zh": "眶顶：额骨与蝶骨小翼。"
+      },
+      {
+        "text": "The floor: maxilla, zygomatic, and a small contribution from palatine.",
+        "zh": "眶底：上颌骨、颧骨及少量腭骨。"
+      },
+      {
+        "text": "The medial wall: ethmoid, lacrimal, maxilla, and sphenoid.",
+        "zh": "眶内侧壁：筛骨、泪骨、上颌骨和蝶骨。"
+      },
+      {
+        "text": "The lateral wall: zygomatic and greater wing of the sphenoid.",
+        "zh": "眶外侧壁：颧骨与蝶骨大翼。"
+      }
+    ],
+    "orbit-apex": [
+      {
+        "text": "The optic canal transmits the optic nerve and ophthalmic artery.",
+        "zh": "视神经管传导视神经和眼动脉。"
+      },
+      {
+        "text": "The superior orbital fissure transmits nerves three, four, six, and the ophthalmic division of five.",
+        "zh": "眶上裂传导第三、四、六脑神经及三叉神经眼支。"
+      },
+      {
+        "text": "The inferior orbital fissure transmits infraorbital and zygomatic branches of the maxillary nerve,",
+        "zh": "眶下裂传导上颌神经的眶下支和颧支，"
+      },
+      {
+        "text": "with vessels connecting the orbit to adjacent spaces.",
+        "zh": "也有血管经过，连通眼眶与邻近间隙。"
+      }
+    ],
+    "tmj": [
+      {
+        "text": "The temporomandibular joint connects the mandible to the temporal bone.",
+        "zh": "颞下颌关节连接下颌骨与颞骨。"
+      },
+      {
+        "text": "A fibrocartilaginous disc separates its joint spaces.",
+        "zh": "纤维软骨性关节盘分隔关节腔。"
+      },
+      {
+        "text": "Rotation and translation allow opening, chewing, and speech.",
+        "zh": "转动与滑动共同实现张口、咀嚼和发音。"
+      }
+    ],
+    "tmj-dislocation": [
+      {
+        "text": "In an anterior dislocation, the mandibular condyle moves beyond the articular eminence.",
+        "zh": "前脱位时，下颌髁突移至关节结节前方。"
+      },
+      {
+        "text": "The mouth may lock open.",
+        "zh": "患者可能张口后无法闭合。"
+      },
+      {
+        "text": "A blow to the chin can instead fracture the condylar region.",
+        "zh": "颏部受撞击则可能造成髁突区骨折。"
+      }
+    ],
+    "tmj-nerve": [
+      {
+        "text": "The inferior alveolar nerve enters the mandibular foramen and supplies the lower teeth.",
+        "zh": "下牙槽神经经下颌孔进入，支配下牙感觉。"
+      },
+      {
+        "text": "Its mental branch exits through the mental foramen to the lower lip and chin.",
+        "zh": "其颏支经颏孔穿出，支配下唇与颏部感觉。"
+      },
+      {
+        "text": "A mental nerve block numbs these soft tissues, not the teeth.",
+        "zh": "颏神经阻滞麻醉这些软组织，不麻醉牙齿。"
+      }
+    ],
+    "lefort-1": [
+      {
+        "text": "Le Fort one is a horizontal maxillary fracture above the teeth.",
+        "zh": "Le Fort I 型为牙列上方的水平上颌骨骨折。"
+      },
+      {
+        "text": "It separates the tooth-bearing maxilla and hard palate from the upper face.",
+        "zh": "它使含牙上颌骨及硬腭与上方面部结构分离。"
+      },
+      {
+        "text": "All classic Le Fort patterns involve the pterygoid plates, beyond this front-view schematic.",
+        "zh": "经典 Le Fort 骨折均累及翼突板，正面示意线未完整展示。"
+      }
+    ],
+    "lefort-2": [
+      {
+        "text": "Le Fort two is a pyramidal midface fracture.",
+        "zh": "Le Fort II 型是锥形的面中部骨折。"
+      },
+      {
+        "text": "It crosses the nasal bridge, medial orbits, and inferior orbital rims,",
+        "zh": "骨折线经过鼻梁、眶内侧及眶下缘，"
+      },
+      {
+        "text": "and extends through the maxilla toward the pterygoid plates.",
+        "zh": "并经上颌骨延伸至翼突板。"
+      }
+    ],
+    "lefort-3": [
+      {
+        "text": "Le Fort three causes craniofacial disjunction.",
+        "zh": "Le Fort III 型可造成颅面分离。"
+      },
+      {
+        "text": "Fractures cross the nasofrontal region, orbital walls, and zygomatic arches,",
+        "zh": "骨折线经过鼻额区、眶壁和颧弓，"
+      },
+      {
+        "text": "with pterygoid plate involvement. Actual trauma patterns may be asymmetric or mixed.",
+        "zh": "并累及翼突板；实际损伤可不对称或呈混合类型。"
+      }
+    ],
+    "battle-raccoon": [
+      {
+        "text": "Battle's sign is bruising over the mastoid, suggesting skull-base injury.",
+        "zh": "Battle 征为乳突区瘀斑，提示颅底损伤。"
+      },
+      {
+        "text": "Bilateral raccoon eyes raise concern for an anterior skull-base fracture.",
+        "zh": "双侧熊猫眼征提示警惕前颅底骨折。"
+      },
+      {
+        "text": "These signs may be delayed and do not establish the diagnosis alone.",
+        "zh": "这些体征可能延迟出现，不能单独确诊。"
+      },
+      {
+        "text": "Their absence does not exclude a fracture.",
+        "zh": "未出现这些体征，也不能排除骨折。"
+      }
+    ],
+    "csf-leak": [
+      {
+        "text": "A confirmed cerebrospinal fluid leak indicates a dural defect.",
+        "zh": "经确认的脑脊液漏提示硬脑膜缺损。"
+      },
+      {
+        "text": "Clear fluid from the nose or ear after trauma is suspicious, but not diagnostic.",
+        "zh": "外伤后鼻或耳流清液应怀疑脑脊液漏，但不能仅凭外观确诊。"
+      },
+      {
+        "text": "Urgent assessment is needed because a persistent leak can increase meningitis risk.",
+        "zh": "应及时评估，持续漏液会增加脑膜炎风险。"
+      },
+      {
+        "text": "Leakage may start hours or days after injury.",
+        "zh": "漏液可能在伤后数小时或数日才出现。"
+      }
+    ],
+    "recap": [
+      {
+        "text": "Twenty-two bones, selected nerve pathways, the orbit, and the jaw.",
+        "zh": "22 块骨、部分神经通道、眼眶与下颌。"
+      },
+      {
+        "text": "These models help build a spatial map.",
+        "zh": "这些模型帮助建立空间概念。"
+      },
+      {
+        "text": "Use them alongside anatomical references; schematic markers are not diagnostic imaging.",
+        "zh": "请结合解剖资料学习；示意标记不能替代诊断影像。"
+      }
+    ]
+  }
+}

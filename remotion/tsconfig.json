@@ -1,1 +1,26 @@
-{"compilerOptions":{"allowSyntheticDefaultImports":true,"esModuleInterop":true,"forceConsistentCasingInFileNames":true,"isolatedModules":true,"jsx":"react-jsx","lib":["ES2020","DOM","DOM.Iterable"],"module":"ESNext","moduleResolution":"bundler","noEmit":true,"resolveJsonModule":true,"skipLibCheck":true,"strict":true,"target":"ES2020"},"include":["src","remotion.config.ts"]}
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2020"
+  },
+  "include": [
+    "src",
+    "player",
+    "remotion.config.ts"
+  ]
+}

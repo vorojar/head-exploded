@@ -1,12 +1,10 @@
-import {defineConfig} from 'vite';
-import react from '@vitejs/plugin-react';
-
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { fileURLToPath } from "node:url";
 export default defineConfig({
-  // Relative asset URLs so the page works at any subpath (/head-exploded/).
-  base: './',
+  root: fileURLToPath(new URL(".", import.meta.url)),
+  base: "./",
+  publicDir: false,
   plugins: [react()],
-  build: {
-    outDir: 'dist',
-    emptyOutDir: true,
-  },
+  build: { outDir: "dist", emptyOutDir: true, chunkSizeWarningLimit: 650 },
 });

@@ -1,0 +1,19 @@
+name: Verify lessons and player
+on:
+  push:
+  pull_request:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: remotion/package-lock.json
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: npm ci --no-audit --no-fund
+        working-directory: remotion
+      - run: npm run verify && npm run build
+        working-directory: remotion

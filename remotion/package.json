@@ -1,1 +1,33 @@
-{"dependencies":{"@react-three/fiber":"^8.17.10","@remotion/cli":"^4.0.347","@remotion/player":"^4.0.543","@remotion/three":"^4.0.347","react":"^18.3.1","react-dom":"^18.3.1","remotion":"^4.0.347","three":"^0.170.0"},"devDependencies":{"@types/react":"^18.3.12","@types/react-dom":"^18.3.1","@types/three":"^0.170.0","@vitejs/plugin-react":"^4.7.0","typescript":"^5.6.3","vite":"^6.4.6"},"name":"head-exploded-remotion","private":true,"scripts":{"render":"remotion render HeadExploded out/head-exploded-22-bones-code.mp4 --codec=h264 --audio-codec=aac","start":"remotion studio","still":"remotion still HeadExploded"},"version":"1.0.0"}
+{
+  "dependencies": {
+    "@react-three/fiber": "^8.17.10",
+    "@remotion/cli": "4.0.543",
+    "@remotion/player": "4.0.543",
+    "@remotion/three": "4.0.543",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "4.0.543",
+    "three": "^0.170.0",
+    "@remotion/captions": "4.0.543"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/three": "^0.170.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "typescript": "^5.6.3",
+    "vite": "^6.4.6"
+  },
+  "name": "head-exploded-remotion",
+  "private": true,
+  "scripts": {
+    "render": "remotion render HeadExploded out/head-exploded-22-bones-code.mp4 --codec=h264 --audio-codec=aac",
+    "start": "remotion studio",
+    "still": "remotion still HeadExploded",
+    "build": "vite build --config player/vite.config.ts",
+    "typecheck": "tsc --noEmit",
+    "verify": "npm run typecheck && node ../scripts/verify-lessons.mjs",
+    "player:dev": "vite --config player/vite.config.ts --host 127.0.0.1"
+  },
+  "version": "1.0.0"
+}

@@ -1,3 +1,5 @@
+> Historical research draft / 历史研究草稿。2026-11-15 修订后的当前内容以 `remotion/src/lesson-copy.json` 和 [医学审校记录](medical-review.md) 为准。不要使用本草稿重新生成旁白。
+
 # Episode 3 — Systems & Clinical （系统与临床）
 
 **Series:** 3D Skull Anatomy (Remotion + Three.js, real BodyParts3D meshes)
