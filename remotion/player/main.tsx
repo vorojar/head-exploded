@@ -85,7 +85,11 @@ function LessonPlayer({ episode }: { episode: number }) {
   const revealControls=()=>{
     setControlsVisible(true);
     clearTimeout(hideTimer.current);
-    if(playing)hideTimer.current=setTimeout(()=>setControlsVisible(false),2500);
+    if(playing)hideTimer.current=setTimeout(()=>setControlsVisible(false),900);
+  };
+  const toggleControls=()=>{
+    if(controlsVisible&&playing){clearTimeout(hideTimer.current);setControlsVisible(false);}
+    else revealControls();
   };
   useEffect(()=>{revealControls();return ()=>clearTimeout(hideTimer.current);},[playing]);
   const lesson = lessons[episode]!;
@@ -176,7 +180,7 @@ function LessonPlayer({ episode }: { episode: number }) {
           onPointerDownCapture={e=>{if(!(e.target instanceof Element)||!e.target.closest('.scene-wrap'))revealControls();}}
           onFocusCapture={revealControls}>
           <div className="video-stage">
-          <div className="scene-wrap" onClick={revealControls}>
+          <div className="scene-wrap" onClick={toggleControls}>
             <Player
               ref={player}
               lazyComponent={lesson.load}
