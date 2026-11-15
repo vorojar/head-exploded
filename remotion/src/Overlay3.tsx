@@ -92,7 +92,7 @@ function PillLayer({ placements: movingPlacements }: { placements: Placement[] }
               y1={p.by}
               x2={p.lx}
               y2={p.ly}
-              stroke={GREY}
+              stroke={`var(--annotation-leader, ${GREY})`}
               strokeWidth={2}
             />
             <circle cx={p.bx} cy={p.by} r={4} fill={RED} />
@@ -205,7 +205,7 @@ function CnTableLegend({ frameState }: { frameState: FrameState3 }) {
       >
         {dots.map((d, i) => (
           <g key={i}>
-            <line x1={d.anchor[0]} y1={d.anchor[1]} x2={d.x} y2={d.y} stroke={GREY} strokeWidth={2}/>
+            <line x1={d.anchor[0]} y1={d.anchor[1]} x2={d.x} y2={d.y} stroke={`var(--annotation-leader, ${GREY})`} strokeWidth={2}/>
             <circle cx={d.x} cy={d.y} r={11} fill={RED} />
             <text
               x={d.x}

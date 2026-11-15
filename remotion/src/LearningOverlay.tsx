@@ -109,7 +109,7 @@ export function CompactMarkers({
             y1={anchor[1]}
             x2={x}
             y2={y}
-            stroke="#156f68"
+            stroke="var(--annotation-leader, #156f68)"
             strokeWidth={4}
           />
           <circle

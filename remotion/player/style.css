@@ -562,7 +562,7 @@ footer p {
 @media(max-width:700px){.annotation-panel[data-empty="true"]{display:none}}
 
 /* The stage is the actual picture rectangle; all overlays are clipped to it. */
-.video-stage{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;isolation:isolate}
+.video-stage{--annotation-leader:rgba(255,255,255,.85);position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;isolation:isolate}
 .video-stage .scene-wrap{width:100%;height:100%;aspect-ratio:16/9}
 .playback-shell[data-fullscreen="true"]{position:fixed;inset:0;z-index:9999;width:100vw;height:100dvh;max-width:none;display:grid;place-items:center;background:#000;border:0;border-radius:0;overflow:hidden}
 .playback-shell[data-fullscreen="true"] .video-stage{width:min(100vw,calc(100dvh * 16 / 9));max-height:100dvh;flex-shrink:0}

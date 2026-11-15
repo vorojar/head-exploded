@@ -115,7 +115,7 @@ function PillLayer({ placements: movingPlacements }: { placements: Placement[] }
               y1={p.by}
               x2={p.lx}
               y2={p.ly}
-              stroke={GREY}
+              stroke={`var(--annotation-leader, ${GREY})`}
               strokeWidth={2}
             />
             <circle cx={p.bx} cy={p.by} r={4} fill={RED} />

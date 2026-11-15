@@ -162,7 +162,7 @@ function FocusLabels({
               y1={p.by}
               x2={p.lx}
               y2={p.ly}
-              stroke={GREY}
+              stroke={`var(--annotation-leader, ${GREY})`}
               strokeWidth={2}
             />
             <circle cx={p.bx} cy={p.by} r={4} fill={RED} />
@@ -318,7 +318,7 @@ function AlloutLabels({
               y1={e.anchor[1]}
               x2={d[0]}
               y2={d[1]}
-              stroke={GREY}
+              stroke={`var(--annotation-leader, ${GREY})`}
               strokeWidth={1}
             />
           );
@@ -333,7 +333,7 @@ function AlloutLabels({
                 y1={y}
                 x2={t[0]}
                 y2={t[1]}
-                stroke={GREY}
+                stroke={`var(--annotation-leader, ${GREY})`}
                 strokeWidth={1}
               />
               <circle cx={t[0]} cy={t[1]} r={3} fill={RED} />
