@@ -532,7 +532,7 @@ footer p {
 .page-header h1{margin:0;font-size:clamp(25px,2.6vw,36px);line-height:1.35;letter-spacing:-.6px}
 .page-header h1 span{display:inline-block;margin-left:14px;font-size:.56em;letter-spacing:.2px;font-weight:450;color:#a5c3ba;vertical-align:middle}
 
-.knowledge-strip{position:absolute;top:12px;left:12px;right:12px;z-index:2;display:flex;align-items:center;gap:10px;min-height:40px;padding:7px 12px;overflow-x:auto;white-space:nowrap;overscroll-behavior-x:contain;scrollbar-width:none;background:rgba(245,249,248,.32);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);border:1px solid #ffffff80;border-radius:8px;color:#253f37;font-size:13px;line-height:1.5;box-shadow:0 1px 8px #183c2b08}
+.knowledge-strip{position:absolute;top:12px;left:12px;right:12px;z-index:2;display:flex;align-items:center;gap:10px;min-height:40px;padding:7px 12px;overflow-x:auto;white-space:nowrap;overscroll-behavior-x:contain;scrollbar-width:none;background:transparent;border:0;border-radius:8px;color:#253f37;font-size:13px;line-height:1.5}
 .knowledge-strip::-webkit-scrollbar{display:none}
 .knowledge-chapter{font-weight:650;padding-right:12px;border-right:1px solid #35554a26;flex-shrink:0}
 .knowledge-chapter:only-child{border-right:0;padding-right:0}
@@ -551,14 +551,11 @@ footer p {
 }
 
 .knowledge-strip{padding:5px 7px;gap:5px}
-.knowledge-chip{display:inline-flex;align-items:center;gap:7px;flex-shrink:0;min-height:30px;padding:5px 10px;border:1px solid transparent;border-radius:5px;background:transparent;color:#3e554c;font-size:12px;white-space:nowrap}
-.knowledge-chip time{font-size:10px;opacity:.7;font-variant-numeric:tabular-nums}
-.knowledge-chip.active{background:#315c4820;border-color:#315c4835;color:#173d2c;font-weight:650}
-@media(max-width:700px){.knowledge-chip{font-size:11px;min-height:28px;padding:4px 8px;gap:5px}.knowledge-chip time{font-size:9px}}
+.knowledge-chip{display:inline-flex;align-items:center;gap:7px;flex-shrink:0;min-height:30px;padding:5px 10px;border:1px solid transparent;border-radius:5px;background:transparent;color:#3e554c;font-size:12px;white-space:nowrap;text-shadow:0 1px 2px #fff,0 0 3px #fff}
+@media(max-width:700px){.knowledge-chip{font-size:11px;min-height:28px;padding:4px 8px;gap:5px}}
 
 /* Keep the spoken chapter visible and clearly selected in the scrolling row. */
-.knowledge-chip.active{background:rgba(37,92,73,.28);border-color:rgba(37,92,73,.45);color:#153f2c;box-shadow:none}
-.knowledge-chip.active time{opacity:.85}
+.knowledge-chip.active{background:rgba(37,92,73,.1);border-color:rgba(37,92,73,.2);color:#153f2c;font-weight:650;box-shadow:none}
 
 .episode-tab{justify-content:center;text-align:center}
 .annotation-panel[data-empty="true"]{visibility:hidden}

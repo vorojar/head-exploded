@@ -221,7 +221,7 @@ function LessonPlayer({ episode }: { episode: number }) {
           {!hasStarted && <BrandPoster ready={sceneReady} slow={loadingSlow}/>}
           <nav className="knowledge-strip" ref={knowledgeStrip} aria-label="知识点章节导航">
             {lesson.segments.map(s=><button className={s.id===segment.id?"knowledge-chip active":"knowledge-chip"} key={s.id} aria-current={s.id===segment.id?"step":undefined} disabled={!sceneReady} onClick={()=>seek(s.start)}>
-              <time>{formatTime(s.start)}</time><span>{chapterTitle(s)}</span>
+              <span>{chapterTitle(s)}</span>
             </button>)}
           </nav>
           {sceneReady && playing && cue && <div
