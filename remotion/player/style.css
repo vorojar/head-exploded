@@ -609,3 +609,11 @@ footer p {
 .brand-poster-status{position:absolute;top:100%;left:0;width:100%;margin:16px 0 0}
 .brand-poster-retry{position:absolute;top:calc(100% + 44px);left:50%;transform:translateX(-50%);white-space:nowrap}
 @media(max-width:700px){.brand-poster-status{margin-top:10px}.brand-poster-retry{top:calc(100% + 36px)}}
+
+/* A compact, shared bilingual caption card for portrait phone playback. */
+@media(max-width:700px) and (orientation:portrait){
+ .playback-shell:not([data-fullscreen="true"]) .subtitle-box{left:50%;width:max-content;max-width:94%;transform:translateX(-50%);padding:4px 8px;background:rgba(0,0,0,.68);border-radius:4px}
+ .playback-shell:not([data-fullscreen="true"]) .subtitle-box p{display:block;background:transparent;padding:0;border-radius:0}
+ .playback-shell:not([data-fullscreen="true"]) .subtitle-box .subtitle-zh{font-size:14px;line-height:1.22;font-weight:550}
+ .playback-shell:not([data-fullscreen="true"]) .subtitle-box .subtitle-en{font-size:11px;line-height:1.22;margin:1px auto 0!important}
+}
