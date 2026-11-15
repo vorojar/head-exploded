@@ -7,6 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {PageLayout} from './PageLayout';
 import {PlayerPlaceholder} from './PlayerPlaceholder';
 import {packedSkull} from './packed-skull';
+import poster from './poster-asset.json';
 
 const styles=()=>readFileSync(new URL('./style.css',import.meta.url),'utf8');
 // Use the exact same layout component before and after JS starts. Reserve the
@@ -17,9 +18,10 @@ export default defineConfig({
   base:'./',publicDir:false,
   plugins:[react(),packedSkull(),{
     name:'immediate-first-screen',
+    generateBundle(){this.emitFile({type:'asset',fileName:'assets/'+poster.fileName,source:readFileSync(new URL('./assets/'+poster.fileName,import.meta.url))});},
     transformIndexHtml(html){
       return html.replace('<div id="root"></div>',`<div id="root">${initialPage}</div>`)
-        .replace('</head>',`<style>${styles()}</style></head>`);
+        .replace('</head>',`<link rel="preload" as="image" href="${poster.src}" fetchpriority="high"><style>${styles()}</style></head>`);
     },
     handleHotUpdate(ctx){if(ctx.file.endsWith('/player/style.css'))ctx.server.ws.send({type:'full-reload'});},
   }],

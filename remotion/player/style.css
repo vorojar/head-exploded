@@ -589,3 +589,14 @@ footer p {
 
 /* Central playback actions sit above captions in the same picture context. */
 .video-stage>.start-overlay{z-index:4}
+
+/* Shared brand cover is visible in pre-rendered HTML, during loading, and
+   until the first play. It never returns over an intentionally paused frame. */
+.brand-poster{position:absolute;inset:0;z-index:3;display:grid;place-items:center;background:#fff;color:#27433b}
+.brand-poster-content{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;gap:16px;text-align:center}
+.brand-poster-logo{display:block;width:min(72%,500px);height:auto;max-height:48%;object-fit:contain}
+.brand-poster-status{font-size:14px;line-height:1.5;color:#6b7d75;margin:0}
+.brand-poster-play{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:8px 16px;border:1px solid #315b4933;border-radius:24px;background:#315b4910;color:#315b49;font-size:14px;cursor:pointer}
+@media(max-width:700px){.brand-poster-content{gap:10px}.brand-poster-logo{width:76%}.brand-poster-status,.brand-poster-play{font-size:12px}.brand-poster-play{min-height:34px;padding:5px 12px}}
+
+.playback-shell[data-has-started="false"] .transport{opacity:0;visibility:hidden;pointer-events:none}

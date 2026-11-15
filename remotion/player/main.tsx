@@ -16,6 +16,7 @@ import {
 } from "../src/lessons";
 import {PageLayout} from "./PageLayout";
 import {PlayerPlaceholder} from "./PlayerPlaceholder";
+import {BrandPoster} from "./BrandPoster";
 import audio1 from "../public/narration1.mp3?url";
 import audio2 from "../public/narration2.mp3?url";
 import audio3 from "../public/narration3.mp3?url";
@@ -51,6 +52,7 @@ function LessonPlayer({ episode }: { episode: number }) {
   const knowledgeStrip = useRef<HTMLElement>(null);
   const [frame, setFrame] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [hasStarted,setHasStarted]=useState(false);
   const [muted, setMuted] = useState(false);
   const [compact, setCompact] = useState(
     () => matchMedia("(max-width: 700px)").matches,
@@ -120,7 +122,7 @@ function LessonPlayer({ episode }: { episode: number }) {
     if (!p) return;
     const sync: CallbackListener<"frameupdate"> = (e) =>
       setFrame(e.detail.frame);
-    const play = () => {if(!sceneReadyRef.current){p.pause();return;}setPlaying(true);},
+    const play = () => {if(!sceneReadyRef.current){p.pause();return;}setHasStarted(true);setPlaying(true);},
       pause = () => setPlaying(false);
     const mute: CallbackListener<"mutechange"> = (e) => setMuted(e.detail.isMuted);
     const fail: CallbackListener<"error"> = (e) =>
@@ -163,7 +165,7 @@ function LessonPlayer({ episode }: { episode: number }) {
     <>
       <div className="learning-layout">
         <div className="playback-shell" ref={shell} tabIndex={0} aria-label="视频播放器"
-          data-controls-visible={controlsVisible} data-caption-mode={captionMode} data-fullscreen={full} data-rotated={rotated} data-scene-ready={sceneReady}
+          data-controls-visible={controlsVisible} data-caption-mode={captionMode} data-fullscreen={full} data-rotated={rotated} data-scene-ready={sceneReady} data-has-started={hasStarted}
           onPointerMove={e=>{if(e.pointerType==='mouse')revealControls();}}
           onPointerDownCapture={e=>{if(!(e.target instanceof Element)||!e.target.closest('.scene-wrap'))revealControls();}}
           onFocusCapture={revealControls}>
@@ -190,9 +192,7 @@ function LessonPlayer({ episode }: { episode: number }) {
                 background: "#fff",
               }}
               renderLoading={() => (
-                <div className="loading" role="status">
-                  正在加载三维颅骨…
-                </div>
+                <div className="loading" aria-hidden="true"/>
               )}
               errorFallback={({ error: e }) => (
                 <div className="player-error" role="alert">
@@ -202,7 +202,7 @@ function LessonPlayer({ episode }: { episode: number }) {
             />
 
           </div>
-            {(!sceneReady || !playing || controlsVisible) && (
+            {hasStarted && (!playing || controlsVisible) && (
               <button
                 className="start-overlay"
                 disabled={!sceneReady}
@@ -212,6 +212,7 @@ function LessonPlayer({ episode }: { episode: number }) {
                 {sceneReady?<Icon name={playing?"pause":"play"}/>:<span className="scene-spinner" aria-hidden="true"/>}
               </button>
             )}
+          {!hasStarted && <BrandPoster ready={sceneReady} onPlay={()=>{if(sceneReady)player.current?.play();}}/>}
           <nav className="knowledge-strip" ref={knowledgeStrip} aria-label="知识点章节导航">
             {lesson.segments.map(s=><button className={s.id===segment.id?"knowledge-chip active":"knowledge-chip"} key={s.id} aria-current={s.id===segment.id?"step":undefined} disabled={!sceneReady} onClick={()=>seek(s.start)}>
               <time>{formatTime(s.start)}</time><span>{chapterTitle(s)}</span>
