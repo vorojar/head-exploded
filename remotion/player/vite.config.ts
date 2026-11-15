@@ -18,7 +18,7 @@ export default defineConfig({
   base:'./',publicDir:false,
   plugins:[react(),packedSkull(),{
     name:'immediate-first-screen',
-    generateBundle(){this.emitFile({type:'asset',fileName:'assets/'+poster.fileName,source:readFileSync(new URL('./assets/'+poster.fileName,import.meta.url))});},
+    generateBundle(){for(const fileName of [poster.fileName,'og-classroom-7dd4fa292777.jpg'])this.emitFile({type:'asset',fileName:'assets/'+fileName,source:readFileSync(new URL('./assets/'+fileName,import.meta.url))});},
     transformIndexHtml(html){
       return html.replace('<div id="root"></div>',`<div id="root">${initialPage}</div>`)
         .replace('</head>',`<link rel="preload" as="image" href="${poster.src}" fetchpriority="high"><style>${styles()}</style></head>`);
