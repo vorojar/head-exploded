@@ -520,7 +520,6 @@ footer p {
  .playback-shell[data-controls-visible="true"] .subtitle-box{bottom:66px}
  .subtitle-box .subtitle-zh,.playback-shell:fullscreen .subtitle-zh{font-size:16px;line-height:1.35}
  .subtitle-box .subtitle-en{font-size:12px;line-height:1.25;margin-top:3px!important}
- .playback-shell[data-caption-mode="auto"] .subtitle-en{display:none}
  .transport,.playback-shell:fullscreen .transport{padding:18px 6px 2px}
  .transport-main{gap:0}
  .transport button{min-width:36px;width:36px;min-height:36px;height:36px;padding:7px}

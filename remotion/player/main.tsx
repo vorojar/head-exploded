@@ -72,7 +72,7 @@ function LessonPlayer({ episode }: { episode: number }) {
   const [speed, setSpeed] = useState(1);
   const [error, setError] = useState("");
   const [controlsVisible,setControlsVisible]=useState(true);
-  const [captionMode,setCaptionMode]=useState<"auto"|"both"|"off">("auto");
+  const [captionMode,setCaptionMode]=useState<"both"|"off">("both");
   const hideTimer=useRef<ReturnType<typeof setTimeout>>();
   const revealControls=()=>{
     setControlsVisible(true);
@@ -164,9 +164,11 @@ function LessonPlayer({ episode }: { episode: number }) {
       <div className="learning-layout">
         <div className="playback-shell" ref={shell} tabIndex={0} aria-label="视频播放器"
           data-controls-visible={controlsVisible} data-caption-mode={captionMode} data-fullscreen={full} data-rotated={rotated} data-scene-ready={sceneReady}
-          onPointerMove={revealControls} onPointerDownCapture={revealControls} onFocusCapture={revealControls}>
+          onPointerMove={e=>{if(e.pointerType==='mouse')revealControls();}}
+          onPointerDownCapture={e=>{if(!(e.target instanceof Element)||!e.target.closest('.scene-wrap'))revealControls();}}
+          onFocusCapture={revealControls}>
           <div className="video-stage">
-          <div className="scene-wrap">
+          <div className="scene-wrap" onClick={revealControls}>
             <Player
               ref={player}
               lazyComponent={lesson.load}
@@ -176,7 +178,7 @@ function LessonPlayer({ episode }: { episode: number }) {
               compositionWidth={1280}
               compositionHeight={720}
               controls={false}
-              clickToPlay={sceneReady}
+              clickToPlay={false}
               spaceKeyToPlayOrPause={sceneReady}
               acknowledgeRemotionLicense
               numberOfSharedAudioTags={1}
@@ -198,14 +200,14 @@ function LessonPlayer({ episode }: { episode: number }) {
                 </div>
               )}
             />
-            {!playing && frame === 0 && (
+            {(!sceneReady || !playing || controlsVisible) && (
               <button
                 className="start-overlay"
                 disabled={!sceneReady}
-                onClick={() => {if(sceneReady)player.current?.play();}}
-                aria-label={sceneReady?"开始播放":"三维画面加载中"}
+                onClick={e => {e.stopPropagation();if(sceneReady)player.current?.toggle();}}
+                aria-label={sceneReady?(playing?"暂停":"播放"):"三维画面加载中"}
               >
-                {sceneReady?<Icon name="play"/>:<span className="scene-spinner" aria-hidden="true"/>}
+                {sceneReady?<Icon name={playing?"pause":"play"}/>:<span className="scene-spinner" aria-hidden="true"/>}
               </button>
             )}
           </div>
@@ -242,9 +244,9 @@ function LessonPlayer({ episode }: { episode: number }) {
               </button>
               <output aria-label="播放时间" aria-live="off">{formatTime(frame)} / {formatTime(lesson.total)}</output>
               <div className="control-spacer"/>
-              <button className="cc-control" title={captionMode==="off"?"字幕已关闭":captionMode==="both"?"中英双语字幕":compact?"中文字幕":"中英双语字幕"}
-                aria-label={captionMode==="off"?"开启字幕":captionMode==="both"?"关闭字幕":"切换中英双语字幕"}
-                aria-pressed={captionMode!=="off"} onClick={()=>setCaptionMode(captionMode==="auto"?"both":captionMode==="both"?"off":"auto")}>
+              <button className="cc-control" title={captionMode==="off"?"字幕已关闭":"中英双语字幕"}
+                aria-label={captionMode==="off"?"开启双语字幕":"关闭字幕"}
+                aria-pressed={captionMode!=="off"} onClick={()=>setCaptionMode(captionMode==="both"?"off":"both")}>
                 <Icon name="captions"/>
               </button>
               <label className="rate-control" title="播放速度">
