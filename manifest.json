@@ -1,19 +1,19 @@
 {
-  "commit": "c7a800cdc5e85cc0cde68afc7aa00beb564b42c3",
-  "archive": "head-exploded-c7a800cdc5e85cc0cde68afc7aa00beb564b42c3.tar.gz",
+  "commit": "a22f4e1b8e15bd9076e04b40c86841e0d1a18566",
+  "archive": "head-exploded-a22f4e1b8e15bd9076e04b40c86841e0d1a18566.tar.gz",
   "files": {
-    "assets/SkullVideo-BXgF9b_w.js": "d4accf52a80238ebd11bcb995014fc4472f9a485bf623a893d8663f3eccd9f3b",
-    "assets/SkullVideo2-BK-vwGlI.js": "1adc7108f1e88f177bd70825b99ce1368b4d5b436d66ea697794b2c2ee6ae8dc",
-    "assets/SkullVideo3-BpZgLRJU.js": "720a8893121b2aeb4e7a8957813837c628254c79a4986f56581708806ab36222",
+    "assets/SkullVideo-ClWG9E4k.js": "eeaec82941b13030bdef45a0e53620c97e8629e4485e95af28fd5bbe2e223d72",
+    "assets/SkullVideo2-BS5wHhpk.js": "6aa1ae8fce3ab93e8d096703cbcd168e47a106c2293d70c275620588927153ee",
+    "assets/SkullVideo3-BRAVE7aJ.js": "e958a9b2efc7726bfb4a152ec2ffc5cdfed3d32f1f5fb1740df56911be90ba1d",
     "assets/ehafo-logo-b7f15db925cf.webp": "b7f15db925cfa84356565f0dacc12578d29784e21f8000224d0477dce89103be",
     "assets/favicon-ijFA0Qr4.svg": "78886b2ee0dffc51e5d14ae7d4cb59f4632cb17867f3797c8985911d42ed7023",
-    "assets/index-Carz94Th.js": "3b5817c765a32e504822c2a4ece899955d18527a796e124f06bb4269ba4de5d2",
+    "assets/index-D8aX6bBk.js": "36c44c1cc3a65e371de9f00d16c6819300831103b90024eda7c500ce9d369ab2",
     "assets/narration1-BHGIL9t4.mp3": "efd9158520f6d95d4a8b87b3b5af70559be7257c6c7d1e0828541ae284f9180c",
     "assets/narration2-D06J3snX.mp3": "e8a9801f54dba3810da67770493f069f31d997f4fb1526b7580bc46b7d8ca4cf",
     "assets/narration3-BsYqrDtr.mp3": "711ee0ab636890afada248862ffb41f0d69ad38036ba6e8805545967ff0656f3",
-    "assets/skullMath-DYAcFTUb.js": "a1891012663cf16854297c476c618945daa9b4df71121dc5a1af8cf6fc6aafa3",
-    "index.html": "34cc9a180c0004fbae15b083e2878c730a641f8d01e1457489f7f5e42fd74a96",
-    "version.json": "cd7c6fb6c6be835d360a4e4381fc789a8ea75b116a5833a1a8c2d9e0083fcda5"
+    "assets/skullMath-BzwOQTDB.js": "5da0f37733b62d5b81bd297b91d1e414dc51f441d4cb25e51f25e73380cb004e",
+    "index.html": "53bf87758229dcde8b2d097234adf20decffd028bc2d1d7d7e9742dac534409d",
+    "version.json": "dd0087f4fac485fee227588d2ba982e765177a647fc6e2d87fe55864dd5d0833"
   },
-  "archiveSha256": "5328d35b7356801330d938212be7ff4148bd44265b41b1eeb1188f2909a60324"
+  "archiveSha256": "9119632242a2e360a9ca812a0bc0270f546f873fd2e1ef16c8a6c09278d24bf9"
 }
