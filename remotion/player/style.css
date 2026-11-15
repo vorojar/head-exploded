@@ -139,7 +139,7 @@ main {
 .playback-shell>.player-error{position:absolute;inset:0;z-index:5}
 .subtitle-box{position:absolute;bottom:20px;left:4%;width:92%;padding:0;min-height:0!important;text-align:center;pointer-events:none;z-index:2;transition:bottom .18s ease;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
 .playback-shell[data-controls-visible="true"] .subtitle-box{bottom:78px}
-.subtitle-box p{display:table;max-width:100%;margin:0 auto;overflow-wrap:anywhere;background:#000b;border-radius:3px;padding:2px 8px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#fff;text-shadow:0 1px 3px #000,0 0 2px #000}
+.subtitle-box p{display:table;max-width:100%;margin:0 auto;overflow-wrap:anywhere;background:transparent;padding:0;color:#fff;text-shadow:0 1px 3px #000,0 0 2px #000}
 .subtitle-box .subtitle-zh{font-size:clamp(16px,1.55vw,22px);line-height:1.45;font-weight:600}
 .subtitle-box .subtitle-en{font-size:clamp(13px,1.15vw,17px);line-height:1.4;margin:4px auto 0!important;color:#f3f4f6}
 .playback-shell[data-caption-mode="off"] .subtitle-box{display:none}
@@ -610,9 +610,9 @@ footer p {
 .brand-poster-retry{position:absolute;top:calc(100% + 44px);left:50%;transform:translateX(-50%);white-space:nowrap}
 @media(max-width:700px){.brand-poster-status{margin-top:10px}.brand-poster-retry{top:calc(100% + 36px)}}
 
-/* A compact, shared bilingual caption card for portrait phone playback. */
+/* Compact bilingual captions without a backdrop for portrait phone playback. */
 @media(max-width:700px) and (orientation:portrait){
- .playback-shell:not([data-fullscreen="true"]) .subtitle-box{left:50%;width:max-content;max-width:94%;transform:translateX(-50%);padding:4px 8px;background:rgba(0,0,0,.68);border-radius:4px}
+ .playback-shell:not([data-fullscreen="true"]) .subtitle-box{left:50%;width:max-content;max-width:94%;transform:translateX(-50%);padding:0;background:transparent}
  .playback-shell:not([data-fullscreen="true"]) .subtitle-box p{display:block;background:transparent;padding:0;border-radius:0}
  .playback-shell:not([data-fullscreen="true"]) .subtitle-box .subtitle-zh{font-size:14px;line-height:1.22;font-weight:550}
  .playback-shell:not([data-fullscreen="true"]) .subtitle-box .subtitle-en{font-size:11px;line-height:1.22;margin:1px auto 0!important}
