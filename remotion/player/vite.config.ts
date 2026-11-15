@@ -8,7 +8,7 @@ import {PageLayout} from './PageLayout';
 import {PlayerPlaceholder} from './PlayerPlaceholder';
 import {packedSkull} from './packed-skull';
 
-const styles=readFileSync(new URL('./style.css',import.meta.url),'utf8');
+const styles=()=>readFileSync(new URL('./style.css',import.meta.url),'utf8');
 // Use the exact same layout component before and after JS starts. Reserve the
 // player rectangle so loading the live scene does not move surrounding content.
 const initialPage=renderToString(React.createElement(PageLayout,{children:React.createElement(PlayerPlaceholder)}));
@@ -19,7 +19,7 @@ export default defineConfig({
     name:'immediate-first-screen',
     transformIndexHtml(html){
       return html.replace('<div id="root"></div>',`<div id="root">${initialPage}</div>`)
-        .replace('</head>',`<style>${styles}</style></head>`);
+        .replace('</head>',`<style>${styles()}</style></head>`);
     },
     handleHotUpdate(ctx){if(ctx.file.endsWith('/player/style.css'))ctx.server.ws.send({type:'full-reload'});},
   }],

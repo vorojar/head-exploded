@@ -216,7 +216,7 @@ function LessonPlayer({ episode }: { episode: number }) {
               <time>{formatTime(s.start)}</time><span>{chapterTitle(s)}</span>
             </button>)}
           </nav>
-          {sceneReady && cue && <div
+          {sceneReady && playing && cue && <div
             className="subtitle-box" aria-live="off"
             data-testid="subtitle"
             data-start-ms={cue?.startMs}

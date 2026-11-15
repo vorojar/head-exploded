@@ -147,7 +147,6 @@ main {
 .playback-shell[data-controls-visible="false"] .transport{opacity:0;visibility:hidden;pointer-events:none}
 .transport-main{display:flex;align-items:center;gap:4px;flex-wrap:nowrap}
 .transport button,.rate-control{display:flex;align-items:center;justify-content:center;color:#fff;background:transparent;border:0;border-radius:6px;min-width:40px;width:40px;min-height:40px;height:40px;padding:8px;flex-shrink:0}
-.transport button:hover,.rate-control:hover{background:#ffffff25}
 .transport button[aria-pressed="true"]::after{content:"";position:absolute;bottom:3px;width:16px;height:2px;background:#9ddfc7}
 .cc-control{position:relative}
 .transport output{font-size:12px;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums;margin-left:6px}
@@ -156,7 +155,6 @@ main {
 .rate-control svg{width:18px;height:18px}
 .rate-value{font-size:10px;white-space:nowrap}
 .rate-control select{position:absolute;inset:0;opacity:0;width:100%;height:100%;min-height:0;padding:0;cursor:pointer;color:#fff;background:#172125}
-.rate-control:focus-within{outline:2px solid #86e0cd}
 .seek-label{display:block;padding:0 0 2px}
 .seek-label input{display:block;width:100%;height:12px;min-height:12px;margin:0;accent-color:#fff;cursor:pointer}
 .annotation-panel {
@@ -556,7 +554,6 @@ footer p {
 .knowledge-chip{display:inline-flex;align-items:center;gap:7px;flex-shrink:0;min-height:30px;padding:5px 10px;border:1px solid transparent;border-radius:5px;background:transparent;color:#3e554c;font-size:12px;white-space:nowrap}
 .knowledge-chip time{font-size:10px;opacity:.7;font-variant-numeric:tabular-nums}
 .knowledge-chip.active{background:#315c4820;border-color:#315c4835;color:#173d2c;font-weight:650}
-.knowledge-chip:hover{background:#315c4815}
 @media(max-width:700px){.knowledge-chip{font-size:11px;min-height:28px;padding:4px 8px;gap:5px}.knowledge-chip time{font-size:9px}}
 
 /* Keep the spoken chapter visible and clearly selected in the scrolling row. */
@@ -585,3 +582,7 @@ footer p {
 @keyframes scene-spin{to{transform:rotate(360deg)}}
 @media(max-width:700px){.knowledge-strip{max-width:calc(100% - 16px)}}
 @media(prefers-reduced-motion:reduce){.scene-spinner{animation:none}}
+
+/* Suppress native touch flashes and sticky tap-hover backgrounds. Keyboard
+   focus-visible outlines remain available for keyboard navigation. */
+*{-webkit-tap-highlight-color:transparent}
