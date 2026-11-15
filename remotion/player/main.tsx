@@ -6,6 +6,7 @@ import {
   type PlayerRef,
 } from "@remotion/player";
 import {
+  WEB_PLAYER_BACKGROUND,
   annotationsAt,
   captionAt,
   captionText,
@@ -198,7 +199,7 @@ function LessonPlayer({ episode }: { episode: number }) {
               style={{
                 width: "100%",
                 aspectRatio: "16 / 9",
-                background: "#fff",
+                background: WEB_PLAYER_BACKGROUND,
               }}
               renderLoading={() => (
                 <div className="loading" aria-hidden="true"/>

@@ -1,6 +1,6 @@
 import {SceneReady} from './SceneReady';
 import { CompactMarkers } from "./LearningOverlay";
-import type { SceneProps } from "./lessons";
+import { WEB_PLAYER_BACKGROUND, type SceneProps } from "./lessons";
 /** Episode 3 video component. Same 3D scene and studio lighting as
  * Episode 1, but driven by skullMath3 (new staging: vault-away, below
  * view, facial group explosion) and Overlay3 (custom anchor labels).
@@ -84,13 +84,14 @@ export const SkullVideo3: React.FC<SceneProps> = ({
   onSceneReady,
 }) => {
   const frame = useCurrentFrame();
+  const background = webPlayer ? WEB_PLAYER_BACKGROUND : "white";
   const frameState = useMemo(() => computeFrame3(frame), [frame]);
   const fade =
     !webPlayer && frame < 24
       ? 1 - (frame / 24) * (frame / 24) * (3 - 2 * (frame / 24))
       : 0;
   return (
-    <AbsoluteFill style={{ width: W, height: H, backgroundColor: "white" }}>
+    <AbsoluteFill style={{ width: W, height: H, backgroundColor: background }}>
       <ThreeCanvas
         width={W}
         height={H}
@@ -102,7 +103,7 @@ export const SkullVideo3: React.FC<SceneProps> = ({
           position: frameState.camPos,
         }}
       >
-        <color attach="background" args={["white"]} />
+        <color attach="background" args={[background]} />
         <CameraRig
           position={frameState.camPos}
           target={frameState.camTarget}

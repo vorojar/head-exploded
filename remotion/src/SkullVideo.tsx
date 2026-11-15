@@ -1,6 +1,6 @@
 import {SceneReady} from './SceneReady';
 import { CompactMarkers } from "./LearningOverlay";
-import type { SceneProps } from "./lessons";
+import { WEB_PLAYER_BACKGROUND, type SceneProps } from "./lessons";
 import React, { useEffect, useLayoutEffect, useMemo } from "react";
 import { AbsoluteFill, Audio, staticFile, useCurrentFrame } from "remotion";
 import { ThreeCanvas } from "@remotion/three";
@@ -81,13 +81,14 @@ export const SkullVideo: React.FC<SceneProps> = ({
   onSceneReady,
 }) => {
   const frame = useCurrentFrame();
+  const background = webPlayer ? WEB_PLAYER_BACKGROUND : "white";
   const frameState = useMemo(() => computeFrame(frame), [frame]);
   const fade =
     !webPlayer && frame < 24
       ? 1 - (frame / 24) * (frame / 24) * (3 - 2 * (frame / 24))
       : 0;
   return (
-    <AbsoluteFill style={{ width: W, height: H, backgroundColor: "white" }}>
+    <AbsoluteFill style={{ width: W, height: H, backgroundColor: background }}>
       <ThreeCanvas
         width={W}
         height={H}
@@ -99,7 +100,7 @@ export const SkullVideo: React.FC<SceneProps> = ({
           position: frameState.camPos,
         }}
       >
-        <color attach="background" args={["white"]} />
+        <color attach="background" args={[background]} />
         <CameraRig position={frameState.camPos} target={frameState.camTarget} />
         <StudioEnvironment />
         {webPlayer && <SceneReady onReady={onSceneReady}/>}
