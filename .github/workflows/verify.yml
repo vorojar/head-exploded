@@ -19,7 +19,7 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: remotion/package-lock.json
-      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: command -v ffprobe || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - run: npm ci --no-audit --no-fund
         working-directory: remotion
       - run: npm run verify && npm run build

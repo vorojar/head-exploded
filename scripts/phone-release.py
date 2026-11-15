@@ -97,8 +97,14 @@ try:
         time.sleep(0.2)
     else:raise RuntimeError('Served version did not switch')
     for name,expected in payload['files'].items():
-        with urlopen('http://127.0.0.1:8900/head-exploded/'+name,timeout=15) as response:
-            if hashlib.sha256(response.read()).hexdigest()!=expected:raise RuntimeError('HTTP checksum mismatch: '+name)
+        for attempt in range(10):
+            try:
+                with urlopen('http://127.0.0.1:8900/head-exploded/'+name,timeout=15) as response:
+                    if hashlib.sha256(response.read()).hexdigest()!=expected:raise RuntimeError('HTTP checksum mismatch: '+name)
+                break
+            except Exception as exc:
+                if attempt==9:raise RuntimeError('HTTP verification failed for '+name) from exc
+                time.sleep(0.2)
 except Exception:
     if config_changed:
         config.write_text(original)
