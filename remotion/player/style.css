@@ -616,4 +616,4 @@ footer p {
 }
 
 /* Soft overhead light and a floor glow, without downloading a backdrop image. */
-.video-stage .scene-wrap,.brand-poster{background-color:#444;background-image:radial-gradient(ellipse 44% 10% at 50% 82%,rgba(185,185,185,.28),rgba(130,130,130,.14) 45%,transparent 100%),radial-gradient(ellipse 85% 140% at 50% 0%,#808080 0%,#626262 42%,#444 82%)}
+.video-stage .scene-wrap,.brand-poster{background-color:#303030;background-image:radial-gradient(ellipse 44% 10% at 50% 82%,rgba(155,155,155,.12),rgba(110,110,110,.06) 45%,transparent 100%),radial-gradient(ellipse 85% 140% at 50% 0%,#505050 0%,#3d3d3d 42%,#303030 82%)}
