@@ -229,8 +229,11 @@ export function cameraAt(frame: number): {pos: Vec3; lookAt: Vec3} {
 /** Frame-driven orbit: ±5 degrees in 48 seconds; labels use this same camera. */
 export function gentleOrbit<T extends {pos: Vec3; lookAt: Vec3; up?: Vec3}>(camera: T, frame: number, enabled: boolean): T {
   if (!enabled) return camera;
-  const fade = smooth(frame / (FPS * 2));
-  const angle = Math.sin(frame / FPS * Math.PI * 2 / 48) * Math.PI / 36 * fade;
+  const seconds = frame / FPS;
+  const u = Math.max(0, Math.min(seconds / 2, 1));
+  // Ease the clock instead of amplitude, keeping startup below cruising speed.
+  const time = seconds < 2 ? 2 * (u ** 3 - u ** 4 / 2) : seconds - 1;
+  const angle = Math.sin(time * Math.PI * 2 / 48) * Math.PI / 36;
   const offset = new THREE.Vector3(...camera.pos).sub(new THREE.Vector3(...camera.lookAt));
   offset.applyAxisAngle(new THREE.Vector3(...(camera.up ?? [0, 1, 0] as Vec3)).normalize(), angle);
   const pos: Vec3 = [camera.lookAt[0] + offset.x, camera.lookAt[1] + offset.y, camera.lookAt[2] + offset.z];
