@@ -65,3 +65,9 @@
 编辑 `remotion/src/lesson-copy.json` → 运行 `scripts/generate-narration.py` → `captions.json` 与 `narration*.mp3` → `npm run verify` → `npm run build` → `scripts/deploy-ep3.sh`。
 
 旧 `docs/ep*-script*.md` 保留为历史研究草稿；当前文案以 `lesson-copy.json` 和 [医学审校记录](docs/medical-review.md) 为准。
+
+## 2026-11-15 — 颅骨网格无损压缩
+
+- 网页构建将原始四位小数网格改为整数差分、ZigZag 和变长编码，原始 JSON 继续保留。
+- 全部 22 块骨的顶点、法线、索引及负零逐项做完整往返校验；不删顶点、不减面、不更改数值。
+- 浏览器解码后得到与原模型相同的数值数组，场景、材质、镜头、音轨和播放器保持不变。Remotion Studio 沿用原始数据。

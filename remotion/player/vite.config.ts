@@ -6,6 +6,7 @@ import {readFileSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import {PageLayout} from './PageLayout';
 import {PlayerPlaceholder} from './PlayerPlaceholder';
+import {packedSkull} from './packed-skull';
 
 const styles=readFileSync(new URL('./style.css',import.meta.url),'utf8');
 // Use the exact same layout component before and after JS starts. Reserve the
@@ -14,7 +15,7 @@ const initialPage=renderToString(React.createElement(PageLayout,{children:React.
 export default defineConfig({
   root:fileURLToPath(new URL('.',import.meta.url)),
   base:'./',publicDir:false,
-  plugins:[react(),{
+  plugins:[react(),packedSkull(),{
     name:'immediate-first-screen',
     transformIndexHtml(html){
       return html.replace('<div id="root"></div>',`<div id="root">${initialPage}</div>`)
