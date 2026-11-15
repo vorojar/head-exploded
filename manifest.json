@@ -1,6 +1,6 @@
 {
-  "commit": "64c514614840c0c81cb5dcb599746bcd825867b9",
-  "archive": "head-exploded-64c514614840c0c81cb5dcb599746bcd825867b9.tar.gz",
+  "commit": "707e5d4989d3cdce5af01c9d07f735e13e3f2ebd",
+  "archive": "head-exploded-707e5d4989d3cdce5af01c9d07f735e13e3f2ebd.tar.gz",
   "files": {
     "assets/SkullVideo-DgSWsLiI.js": "ed1805ef817c1dd542dd0f36335dbf104e4b0fb8f5330e3dbf1c0b18478fd9bb",
     "assets/SkullVideo2-ZbAFBeIm.js": "391727676b52fd5540afa42f02885fb68928281c4d0f2a95d2efe6e53ef516cb",
@@ -12,8 +12,8 @@
     "assets/narration2-D06J3snX.mp3": "e8a9801f54dba3810da67770493f069f31d997f4fb1526b7580bc46b7d8ca4cf",
     "assets/narration3-BsYqrDtr.mp3": "711ee0ab636890afada248862ffb41f0d69ad38036ba6e8805545967ff0656f3",
     "assets/skullMath-Bx1Yc8Vm.js": "6576c884cbf642b50fcfdb8bf8210d9fb5ea253d242586514393a674ec8385fd",
-    "index.html": "6ba94fb4d538489b83455df9f0dc5d8e8ed8e2e49c2de28d0786ed30bfa5f6a4",
-    "version.json": "ce4437fbaa1af1daf8f567a60de2c3bd79d079618967f976f06a2210d89b504e"
+    "index.html": "d3e203ef184154c2eaf818297b72dbf1c165a417586e6090ef02fc0f0b5c5578",
+    "version.json": "c2d3f98eb85c0592e88406324b7736a730dc046f1ebd8d6ba56dc2bb472f5ffa"
   },
-  "archiveSha256": "bd53e53f66969d219fb7651fa122397904bf2dc67436b289dae97028fd630522"
+  "archiveSha256": "457c6d90191679739ca01fab404f010b78ec77198d65acce878d2d627a86814c"
 }
