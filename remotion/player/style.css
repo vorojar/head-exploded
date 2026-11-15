@@ -130,11 +130,11 @@ main {
   align-items: start;
 }
 /* Captions and chrome share the scene rectangle, just like a video player. */
-.playback-shell{position:relative;background:#3a3a3a;border:0;border-radius:14px;overflow:hidden;min-width:0;color:#fff;isolation:isolate}
-.scene-wrap{position:relative;background:#3a3a3a;aspect-ratio:16/9;overflow:hidden}
+.playback-shell{position:relative;background:#242424;border:0;border-radius:14px;overflow:hidden;min-width:0;color:#fff;isolation:isolate}
+.scene-wrap{position:relative;background:#242424;aspect-ratio:16/9;overflow:hidden}
 .start-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:64px;height:64px;border-radius:50%;border:1px solid #ffffff66;background:#0009;color:white;box-shadow:0 4px 20px #0003;cursor:pointer}
 .start-overlay svg{width:32px;height:32px}
-.loading,.player-error{padding:24px;font-size:16px;color:#bce4d9;background:#3a3a3a;line-height:1.6}
+.loading,.player-error{padding:24px;font-size:16px;color:#bce4d9;background:#242424;line-height:1.6}
 .loading{height:100%;display:grid;place-items:center}
 .playback-shell>.player-error{position:absolute;inset:0;z-index:5}
 .subtitle-box{position:absolute;bottom:20px;left:4%;width:92%;padding:0;min-height:0!important;text-align:center;pointer-events:none;z-index:2;transition:bottom .18s ease;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
@@ -589,7 +589,7 @@ footer p {
 
 /* Shared brand cover is visible in pre-rendered HTML, during loading, and
    until the first play. It never returns over an intentionally paused frame. */
-.brand-poster{position:absolute;inset:0;z-index:3;display:grid;place-items:center;background:#3a3a3a;color:#e0e5e3}
+.brand-poster{position:absolute;inset:0;z-index:3;display:grid;place-items:center;background:#242424;color:#e0e5e3}
 .brand-poster-content{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;gap:16px;text-align:center}
 .brand-poster-logo{display:block;width:min(36%,250px);height:auto;max-height:48%;object-fit:contain}
 .brand-poster-status{font-size:14px;line-height:1.5;color:#d1d6d3;margin:0}

@@ -5,7 +5,7 @@ import third from "./timeline3.json";
 import captionData from "./captions.json";
 
 export type LessonCaption = Caption & { zh: string; segmentId: string };
-export const WEB_PLAYER_BACKGROUND = "#3a3a3a";
+export const WEB_PLAYER_BACKGROUND = "#242424";
 export type SceneProps = { webPlayer?: boolean; compactLabels?: boolean; onSceneReady?:()=>void };
 export type Point = { label: string; latin: string; beat?: number };
 export type LessonSegment = {
