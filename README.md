@@ -50,7 +50,11 @@ The four orbit-wall phrases and two-view nerve/orbit segments are fitted to thei
 
 ## Xiaomi 15 Pro deployment
 
-Existing SSH authorization and the verified `xiaomi-server` alias are required. Commit and push to `origin/main` before publishing.
+**Automatic deployment is enabled for `main`.** GitHub Actions verifies and builds each update, then publishes a checksum manifest and static package to the `deploy-phone` branch. A runit service on the phone checks once per minute, downloads only a build matching the latest `main`, verifies it and switches the served release. Build/download/health-check failures retain the previous site. No GitHub SSH secrets or incoming management endpoint is needed.
+
+The workflow is [Verify and publish phone build](https://github.com/vorojar/head-exploded/actions/workflows/verify.yml). Phone status is `~/server/apps/head-exploded/auto-status.json`; logs are `$PREFIX/var/log/hub-app-head-exploded-auto/`. The worker joins the existing `hub-app-*` boot recovery list.
+
+For manual publishing, existing SSH authorization and the verified `xiaomi-server` alias are required. Commit and push to `origin/main` first.
 
 ```bash
 ./scripts/deploy-ep3.sh --dry-run  # verify/build and inspect the release locally
