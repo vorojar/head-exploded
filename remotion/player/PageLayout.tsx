@@ -5,7 +5,7 @@ export function PageLayout({episode=0,onEpisodeChange,children}:{episode?:number
   return (
     <main>
       <header className="page-header">
-        <h1>易哈佛解剖课堂 <span lang="en">EHAFO Anatomy Classroom</span></h1>
+        <h1>易哈佛解剖课堂</h1>
       </header>
       <nav className="episode-tabs" aria-label="选择课程">
         {lessons.map((l, i) => (

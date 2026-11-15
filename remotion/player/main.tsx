@@ -200,6 +200,8 @@ function LessonPlayer({ episode }: { episode: number }) {
                 </div>
               )}
             />
+
+          </div>
             {(!sceneReady || !playing || controlsVisible) && (
               <button
                 className="start-overlay"
@@ -210,7 +212,6 @@ function LessonPlayer({ episode }: { episode: number }) {
                 {sceneReady?<Icon name={playing?"pause":"play"}/>:<span className="scene-spinner" aria-hidden="true"/>}
               </button>
             )}
-          </div>
           <nav className="knowledge-strip" ref={knowledgeStrip} aria-label="知识点章节导航">
             {lesson.segments.map(s=><button className={s.id===segment.id?"knowledge-chip active":"knowledge-chip"} key={s.id} aria-current={s.id===segment.id?"step":undefined} disabled={!sceneReady} onClick={()=>seek(s.start)}>
               <time>{formatTime(s.start)}</time><span>{chapterTitle(s)}</span>

@@ -586,3 +586,6 @@ footer p {
 /* Suppress native touch flashes and sticky tap-hover backgrounds. Keyboard
    focus-visible outlines remain available for keyboard navigation. */
 *{-webkit-tap-highlight-color:transparent}
+
+/* Central playback actions sit above captions in the same picture context. */
+.video-stage>.start-overlay{z-index:4}
