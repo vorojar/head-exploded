@@ -186,6 +186,8 @@ export type Annotation = {
 };
 export function annotationsAt(episode: number, frame: number): Annotation[] {
   const seg = segmentAt(episode, frame);
+  // Keep the overview clear; individual chapters already teach each bone.
+  if (episode === 0 && seg.id === "allout") return [];
   if (episode === 0 || seg.mode === "facial") {
     const nums =
       seg.labels === "all" ? BONE_NAMES.map((_, i) => i + 1) : seg.bones;

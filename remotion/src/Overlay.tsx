@@ -409,7 +409,8 @@ export function Overlay({
 
   const bandTop = embeddedCaptions ? H - 116 : H - 36;
   const showLabels =
-    seg.id !== "intro" && seg.id !== "back" && seg.id !== "end";
+    seg.id !== "intro" && seg.id !== "back" && seg.id !== "end" &&
+    (embeddedCaptions || seg.id !== "allout");
   return (
     <>
       {!compactLabels &&
