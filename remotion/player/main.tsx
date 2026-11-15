@@ -6,7 +6,6 @@ import {
   type PlayerRef,
 } from "@remotion/player";
 import {
-  accuracyNote,
   annotationsAt,
   captionAt,
   captionText,
@@ -300,7 +299,6 @@ function LessonPlayer({ episode }: { episode: number }) {
               ))}
             </ol>
           )}
-          <p className="accuracy-note">{accuracyNote(episode, frame)}</p>
           </>}
         </aside>
       </div>
