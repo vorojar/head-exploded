@@ -250,3 +250,8 @@ export function accuracyNote(episode: number, frame: number): string {
     return "圆点表示大致解剖区域。表面网格不能清晰显示所有孔道，尤其卵圆孔和棘孔。";
   return "模型用于认识骨性结构；不显示神经、血管、关节盘或其他软组织。";
 }
+
+/** Caption typography only; keep punctuation in the narration source. */
+export function captionText(text: string): string {
+  return text.replace(/['’]/gu, "").replace(/\p{P}+/gu, " ").replace(/\s+/gu, " ").trim();
+}

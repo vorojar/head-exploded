@@ -529,3 +529,26 @@ footer p {
  .rate-control select{padding:0;min-height:0}
  .start-overlay{width:52px;height:52px}
 }
+
+/* One bilingual title; anatomy terms live in the picture instead of a side card. */
+.page-header{margin-bottom:22px}
+.page-header h1{margin:0;font-size:clamp(25px,2.6vw,36px);line-height:1.35;letter-spacing:-.6px}
+.page-header h1 span{display:inline-block;margin-left:14px;font-size:.56em;letter-spacing:.2px;font-weight:450;color:#a5c3ba;vertical-align:middle}
+.learning-layout{display:block}
+.knowledge-strip{position:absolute;top:12px;left:12px;right:12px;z-index:2;display:flex;align-items:center;gap:10px;min-height:40px;padding:7px 12px;overflow-x:auto;white-space:nowrap;overscroll-behavior-x:contain;scrollbar-width:none;background:rgba(245,249,248,.67);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid #ffffff80;border-radius:8px;color:#253f37;font-size:13px;line-height:1.5;box-shadow:0 1px 8px #183c2b08}
+.knowledge-strip::-webkit-scrollbar{display:none}
+.knowledge-chapter{font-weight:650;padding-right:12px;border-right:1px solid #35554a26;flex-shrink:0}
+.knowledge-chapter:only-child{border-right:0;padding-right:0}
+.knowledge-item{display:inline-flex;align-items:center;gap:5px;flex-shrink:0}
+.knowledge-item small{color:#4a6259;font-size:11px}
+.knowledge-number{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:50%;background:#274c4020;color:#23483b;font-size:10px}
+.learning-accuracy{font-size:11px;color:#8da39c;line-height:1.6;margin:8px 2px 0}
+@media(max-width:700px){
+ .page-header{margin-bottom:18px}
+ .page-header h1{font-size:27px;margin:0}
+ .page-header h1 span{display:block;font-size:15px;margin:7px 0 0;letter-spacing:.4px}
+ .knowledge-strip{top:8px;left:8px;right:8px;padding:5px 8px;min-height:31px;gap:8px;font-size:11px;border-radius:6px}
+ .knowledge-item small{font-size:10px}
+ .knowledge-chapter{padding-right:8px}
+ .knowledge-number{width:16px;height:16px;font-size:9px}
+}

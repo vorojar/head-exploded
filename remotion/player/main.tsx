@@ -9,6 +9,7 @@ import {
   accuracyNote,
   annotationsAt,
   captionAt,
+  captionText,
   chapterTitle,
   lessons,
   segmentAt,
@@ -162,19 +163,25 @@ function LessonPlayer({ episode }: { episode: number }) {
               </button>
             )}
           </div>
-          <div
+          <div className="knowledge-strip" aria-label="当前画面知识点" tabIndex={0}>
+            <strong className="knowledge-chapter">{chapterTitle(segment)}</strong>
+            {annotations.map(a=><span className="knowledge-item" key={`${segment.id}-${a.number}`} title={`${a.name} · ${a.latin}`}>
+              <span className="knowledge-number">{a.number}</span><span>{a.zh}</span><small lang="en">{a.name}</small>
+            </span>)}
+          </div>
+          {cue && <div
             className="subtitle-box" aria-live="off"
             data-testid="subtitle"
             data-start-ms={cue?.startMs}
             data-end-ms={cue?.endMs}
           >
             <p className="subtitle-zh" lang="zh-CN">
-              {cue?.zh ?? "\u00a0"}
+              {captionText(cue.zh)}
             </p>
             <p className="subtitle-en" lang="en">
-              {cue?.text ?? "\u00a0"}
+              {captionText(cue.text)}
             </p>
-          </div>
+          </div>}
           <div className="transport" aria-label="播放控制">
             <label className="seek-label">
               <span className="sr-only">播放进度</span>
@@ -212,32 +219,9 @@ function LessonPlayer({ episode }: { episode: number }) {
             </p>
           )}
         </div>
-        <aside className="annotation-panel" aria-label="当前画面标注">
-          <div className="panel-heading">
-            <span className="eyebrow">当前讲解</span>
-            <h2>{chapterTitle(segment)}</h2>
-          </div>
-          {annotations.length > 0 ? (
-            <ol className="annotation-list">
-              {annotations.map((a) => (
-                <li key={`${segment.id}-${a.number}`}>
-                  <span className="marker-number">{a.number}</span>
-                  <div>
-                    <strong>{a.zh}</strong>
-                    <span lang="en">{a.name}</span>
-                    <small lang="la">{a.latin}</small>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          ) : (
-            <p className="annotation-empty">
-              结合模型与字幕，认识本节结构及其空间关系。
-            </p>
-          )}
-          <p className="accuracy-note">{accuracyNote(episode, frame)}</p>
-        </aside>
+
       </div>
+      <p className="learning-accuracy">{accuracyNote(episode, frame)}</p>
       <section className="chapters" aria-label="章节导航">
         <div className="section-heading">
           <h2>按知识点学习</h2>
@@ -266,12 +250,7 @@ function App() {
   return (
     <main>
       <header className="page-header">
-        <a className="brand" href="./">
-          ANATOMY / 颅骨课堂
-        </a>
-        <span className="edition">医学内容修订 · 2026.11</span>
-        <h1>把颅骨，逐层看明白。</h1>
-        <p>22 块骨，从空间结构到临床联系。三维讲解 · 中英双语字幕</p>
+        <h1>易哈佛解剖课堂 <span lang="en">EHAFO Anatomy Classroom</span></h1>
       </header>
       <nav className="episode-tabs" aria-label="选择课程">
         {lessons.map((l, i) => (

@@ -1,9 +1,10 @@
 import { useCurrentFrame } from "remotion";
-import { annotationsAt, captionAt } from "./lessons";
+import { annotationsAt, captionAt, captionText } from "./lessons";
 
 export function EmbeddedCaption({ episode }: { episode: number }) {
   const frame = useCurrentFrame();
   const cue = captionAt(episode, frame);
+  if (!cue) return null;
   return (
     <div
       style={{
@@ -20,9 +21,9 @@ export function EmbeddedCaption({ episode }: { episode: number }) {
         fontFamily: "sans-serif",
       }}
     >
-      <div style={{ fontSize: 28, lineHeight: "38px" }}>{cue?.zh ?? ""}</div>
+      <div style={{ fontSize: 28, lineHeight: "38px" }}>{captionText(cue.zh)}</div>
       <div style={{ fontSize: 24, lineHeight: "32px", color: "#d8e0e9" }}>
-        {cue?.text ?? ""}
+        {captionText(cue.text)}
       </div>
     </div>
   );
