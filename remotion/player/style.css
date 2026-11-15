@@ -615,5 +615,5 @@ footer p {
  .playback-shell:not([data-fullscreen="true"]) .subtitle-box .subtitle-en{font-size:11px;line-height:1.22;margin:1px auto 0!important}
 }
 
-/* The supplied studio backdrop is shared by the cover and transparent canvas. */
-.video-stage .scene-wrap,.brand-poster{background:#444 url("./assets/studio-background-7f7c76cf96bf.jpg") center center/cover no-repeat}
+/* Soft overhead light and a floor glow, without downloading a backdrop image. */
+.video-stage .scene-wrap,.brand-poster{background-color:#444;background-image:radial-gradient(ellipse 44% 10% at 50% 82%,rgba(185,185,185,.28),rgba(130,130,130,.14) 45%,transparent 100%),radial-gradient(ellipse 85% 140% at 50% 0%,#808080 0%,#626262 42%,#444 82%)}

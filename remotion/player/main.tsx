@@ -85,7 +85,7 @@ function LessonPlayer({ episode }: { episode: number }) {
   const revealControls=()=>{
     setControlsVisible(true);
     clearTimeout(hideTimer.current);
-    if(playing)hideTimer.current=setTimeout(()=>setControlsVisible(false),900);
+    if(playing)hideTimer.current=setTimeout(()=>setControlsVisible(false),2500);
   };
   const toggleControls=()=>{
     if(controlsVisible&&playing){clearTimeout(hideTimer.current);setControlsVisible(false);}
