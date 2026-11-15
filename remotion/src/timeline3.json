@@ -1,0 +1,897 @@
+{
+ "fps": 24,
+ "total": 5499,
+ "segments": [
+  {
+   "mode": "intro",
+   "camDir": [
+    -0.55,
+    0.39,
+    0.74
+   ],
+   "lookAt": [
+    0,
+    0,
+    0
+   ],
+   "dist": 6.5,
+   "distEnd": 8.4,
+   "points": [],
+   "bones": [],
+   "id": "intro",
+   "start": 0,
+   "end": 324,
+   "text": "Episodes one and two gave you the parts and the doorways. This episode puts them to work. The nerves as one map, the orbit as one room, the jaw as one joint \u2014 and what happens when the face breaks."
+  },
+  {
+   "mode": "vault",
+   "camDir": [
+    0,
+    1,
+    0.3
+   ],
+   "lookAt": [
+    0,
+    0,
+    0.3
+   ],
+   "dist": 4.5,
+   "points": [
+    {
+     "x": 0,
+     "y": 0.05,
+     "z": 0.69,
+     "label": "Cribriform plate",
+     "latin": "Lamina cribrosa (CN I)"
+    },
+    {
+     "x": 0.2,
+     "y": 0.02,
+     "z": 0.52,
+     "label": "Optic canal",
+     "latin": "Canalis opticus (CN II)"
+    },
+    {
+     "x": 0.35,
+     "y": -0.05,
+     "z": 0.45,
+     "label": "Superior orbital fissure",
+     "latin": "Fissura orbitalis superior (CN III, IV, V1, VI)"
+    }
+   ],
+   "bones": [],
+   "id": "cn-front",
+   "start": 324,
+   "end": 730,
+   "text": "Twelve nerves, ten doorways \u2014 here is the whole map. The first nerve threads through the cribriform plate; the second takes the optic canal. The third, fourth, and sixth, with the first division of the fifth, all leave through one cleft \u2014 the superior orbital fissure."
+  },
+  {
+   "mode": "vault",
+   "camDir": [
+    0.2,
+    1,
+    0.25
+   ],
+   "lookAt": [
+    0.4,
+    0,
+    0.1
+   ],
+   "dist": 3.5,
+   "points": [
+    {
+     "x": 0.25,
+     "y": 0.05,
+     "z": 0.3,
+     "label": "Foramen rotundum",
+     "latin": "Foramen rotundum (CN V2)"
+    },
+    {
+     "x": 0.32,
+     "y": 0.02,
+     "z": 0.15,
+     "label": "Foramen ovale",
+     "latin": "Foramen ovale (CN V3)"
+    },
+    {
+     "x": 0.35,
+     "y": 0.0,
+     "z": 0.0,
+     "label": "Carotid canal",
+     "latin": "Canalis caroticus"
+    },
+    {
+     "x": 0.2,
+     "y": 0.0,
+     "z": 0.25,
+     "label": "Foramen lacerum",
+     "latin": "Foramen lacerum"
+    }
+   ],
+   "bones": [],
+   "id": "cn-middle",
+   "start": 730,
+   "end": 1086,
+   "text": "In the middle, the second division of the fifth nerve leaves through the foramen rotundum; the third, through the foramen ovale. The internal carotid artery has its own road: in through the carotid canal, across the foramen lacerum, and on to the brain."
+  },
+  {
+   "mode": "vault-below",
+   "camDir": [
+    0.85,
+    0.35,
+    -0.3
+   ],
+   "lookAt": [
+    0.34,
+    -0.25,
+    -0.16
+   ],
+   "dist": 3.5,
+   "camDir2": [
+    0,
+    -1,
+    0.35
+   ],
+   "lookAt2": [
+    0.1,
+    -0.45,
+    -0.2
+   ],
+   "dist2": 4.5,
+   "points": [
+    {
+     "x": 0.34,
+     "y": -0.25,
+     "z": -0.16,
+     "label": "Internal acoustic meatus",
+     "latin": "Meatus acusticus internus (CN VII, VIII)",
+     "beat": 0
+    },
+    {
+     "x": 0.45,
+     "y": -0.45,
+     "z": -0.35,
+     "label": "Stylomastoid foramen",
+     "latin": "Foramen stylomastoideum (CN VII)",
+     "beat": 1
+    },
+    {
+     "x": 0.5,
+     "y": -0.4,
+     "z": -0.35,
+     "label": "Jugular foramen",
+     "latin": "Foramen jugulare (CN IX, X, XI)",
+     "beat": 1
+    },
+    {
+     "x": 0.15,
+     "y": -0.4,
+     "z": -0.3,
+     "label": "Hypoglossal canal",
+     "latin": "Canalis hypoglossalis (CN XII)",
+     "beat": 1
+    }
+   ],
+   "bones": [],
+   "id": "cn-back",
+   "start": 1086,
+   "end": 1482,
+   "text": "The seventh and eighth nerves enter the internal acoustic meatus together \u2014 but only the eighth stays. The seventh winds through the temporal bone and leaves by the stylomastoid foramen. Nerves nine, ten, and eleven share the jugular foramen; the twelfth takes the hypoglossal canal."
+  },
+  {
+   "mode": "vault",
+   "camDir": [
+    0,
+    1,
+    0.3
+   ],
+   "lookAt": [
+    0,
+    -0.1,
+    0.1
+   ],
+   "dist": 5.0,
+   "points": [
+    {
+     "x": 0,
+     "y": 0.05,
+     "z": 0.69,
+     "label": "1  Cribriform plate",
+     "latin": "CN I"
+    },
+    {
+     "x": 0.2,
+     "y": 0.02,
+     "z": 0.52,
+     "label": "2  Optic canal",
+     "latin": "CN II"
+    },
+    {
+     "x": 0.35,
+     "y": -0.05,
+     "z": 0.45,
+     "label": "3  Superior orbital fissure",
+     "latin": "CN III, IV, V1, VI"
+    },
+    {
+     "x": 0.25,
+     "y": 0.05,
+     "z": 0.3,
+     "label": "4  Foramen rotundum",
+     "latin": "CN V2"
+    },
+    {
+     "x": 0.32,
+     "y": 0.02,
+     "z": 0.15,
+     "label": "5  Foramen ovale",
+     "latin": "CN V3"
+    },
+    {
+     "x": 0.34,
+     "y": -0.25,
+     "z": -0.16,
+     "label": "6  Internal acoustic meatus",
+     "latin": "CN VII, VIII"
+    },
+    {
+     "x": 0.45,
+     "y": -0.45,
+     "z": -0.35,
+     "label": "7  Stylomastoid foramen",
+     "latin": "CN VII"
+    },
+    {
+     "x": 0.5,
+     "y": -0.4,
+     "z": -0.35,
+     "label": "8  Jugular foramen",
+     "latin": "CN IX, X, XI"
+    },
+    {
+     "x": 0.15,
+     "y": -0.4,
+     "z": -0.3,
+     "label": "9  Hypoglossal canal",
+     "latin": "CN XII"
+    },
+    {
+     "x": 0.077,
+     "y": -0.534,
+     "z": -0.076,
+     "label": "10  Foramen magnum",
+     "latin": "CN XI spinal roots"
+    }
+   ],
+   "bones": [],
+   "id": "cn-table",
+   "start": 1482,
+   "end": 1691,
+   "text": "Twelve nerves, ten doorways. Learn this map and you can read any skull-base scan: find the hole, and you know the nerve."
+  },
+  {
+   "mode": "assembled",
+   "camDir": [
+    0,
+    0.1,
+    1
+   ],
+   "lookAt": [
+    0.15,
+    -0.1,
+    0.85
+   ],
+   "dist": 3.0,
+   "points": [
+    {
+     "x": 0.2,
+     "y": -0.1,
+     "z": 0.9,
+     "label": "Orbit",
+     "latin": "Orbita"
+    },
+    {
+     "x": 0.25,
+     "y": 0.0,
+     "z": 0.5,
+     "label": "Orbital apex",
+     "latin": "Apex orbitae"
+    }
+   ],
+   "bones": [
+    1,
+    7,
+    8,
+    11,
+    13,
+    16,
+    18
+   ],
+   "id": "orbit-room",
+   "start": 1691,
+   "end": 1966,
+   "text": "One room built from seven bones: the orbit. A pyramid with its base open to the face and its apex pointing back into the skull \u2014 a socket that holds the eye, and nothing else."
+  },
+  {
+   "mode": "walls",
+   "camDir": [
+    0.3,
+    0.2,
+    0.9
+   ],
+   "lookAt": [
+    0.15,
+    -0.1,
+    0.8
+   ],
+   "dist": 3.5,
+   "points": [],
+   "bones": [],
+   "walls": [
+    {
+     "bones": [
+      1,
+      7
+     ],
+     "label": "Roof",
+     "latin": "Paries superior"
+    },
+    {
+     "bones": [
+      11,
+      13,
+      18
+     ],
+     "label": "Floor",
+     "latin": "Paries inferior"
+    },
+    {
+     "bones": [
+      8,
+      16,
+      11,
+      7
+     ],
+     "label": "Medial wall",
+     "latin": "Paries medialis"
+    },
+    {
+     "bones": [
+      13,
+      7
+     ],
+     "label": "Lateral wall",
+     "latin": "Paries lateralis"
+    }
+   ],
+   "id": "orbit-walls",
+   "start": 1966,
+   "end": 2404,
+   "text": "Four walls. The roof: frontal bone and lesser wing of the sphenoid. The floor: maxilla, zygomatic, and palatine. The medial wall: ethmoid, lacrimal, maxilla, and sphenoid. The lateral wall: zygomatic and greater wing of the sphenoid."
+  },
+  {
+   "mode": "vault-front",
+   "camDir": [
+    0.2,
+    1,
+    0.4
+   ],
+   "lookAt": [
+    0.2,
+    0,
+    0.52
+   ],
+   "dist": 3.0,
+   "camDir2": [
+    0,
+    0.1,
+    1
+   ],
+   "lookAt2": [
+    0.2,
+    -0.2,
+    0.85
+   ],
+   "dist2": 3.0,
+   "points": [
+    {
+     "x": 0.2,
+     "y": 0.02,
+     "z": 0.52,
+     "label": "Optic canal",
+     "latin": "Canalis opticus (CN II)",
+     "beat": 0
+    },
+    {
+     "x": 0.35,
+     "y": -0.05,
+     "z": 0.45,
+     "label": "Superior orbital fissure",
+     "latin": "Fissura orbitalis superior (CN III, IV, V1, VI)",
+     "beat": 0
+    },
+    {
+     "x": 0.4,
+     "y": -0.15,
+     "z": 0.75,
+     "label": "Inferior orbital fissure",
+     "latin": "Fissura orbitalis inferior (V2)",
+     "beat": 1
+    },
+    {
+     "x": 0.15,
+     "y": 0.35,
+     "z": 0.95,
+     "label": "Supraorbital foramen",
+     "latin": "Foramen supraorbitale (CN V1)",
+     "beat": 1
+    },
+    {
+     "x": 0.25,
+     "y": -0.5,
+     "z": 0.95,
+     "label": "Infraorbital foramen",
+     "latin": "Foramen infraorbitale (CN V2)",
+     "beat": 1
+    }
+   ],
+   "bones": [],
+   "id": "orbit-apex",
+   "start": 2404,
+   "end": 2808,
+   "text": "The apex \u2014 two doorways you already know. The optic canal carries the second nerve; the superior orbital fissure carries the third, fourth, sixth, and the first division of the fifth. Below them, the inferior orbital fissure carries the second division's zygomatic branch out to the cheek."
+  },
+  {
+   "mode": "assembled",
+   "camDir": [
+    1,
+    0.1,
+    0.2
+   ],
+   "lookAt": [
+    0.5,
+    -0.2,
+    0.2
+   ],
+   "dist": 3.5,
+   "points": [
+    {
+     "x": 0.5,
+     "y": -0.2,
+     "z": 0.15,
+     "label": "Temporomandibular joint",
+     "latin": "Articulatio temporomandibularis"
+    },
+    {
+     "x": 0.5,
+     "y": -0.25,
+     "z": 0.1,
+     "label": "Mandibular condyle",
+     "latin": "Condylus mandibulae"
+    },
+    {
+     "x": 0.52,
+     "y": -0.15,
+     "z": 0.05,
+     "label": "Mandibular fossa",
+     "latin": "Fossa mandibularis"
+    }
+   ],
+   "bones": [
+    15,
+    4
+   ],
+   "id": "tmj",
+   "start": 2808,
+   "end": 3067,
+   "text": "The temporomandibular joint. The condyle of the mandible sits in the mandibular fossa of the temporal bone, with a fibrocartilage disc between them \u2014 the most used joint in the body."
+  },
+  {
+   "mode": "dislocate",
+   "camDir": [
+    1,
+    0.1,
+    0.2
+   ],
+   "lookAt": [
+    0.5,
+    -0.2,
+    0.2
+   ],
+   "dist": 3.5,
+   "points": [
+    {
+     "x": 0.55,
+     "y": -0.15,
+     "z": 0.15,
+     "label": "Articular eminence",
+     "latin": "Tuberculum articulare"
+    },
+    {
+     "x": 0.5,
+     "y": -0.35,
+     "z": 0.15,
+     "label": "Condylar neck",
+     "latin": "Collum mandibulae"
+    }
+   ],
+   "bones": [
+    15,
+    4
+   ],
+   "id": "tmj-dislocation",
+   "start": 3067,
+   "end": 3325,
+   "text": "Yawn too wide, and the condyle slips in front of the articular eminence and locks the jaw open. A blow to the chin can break the condylar neck instead \u2014 the mandible's weak point."
+  },
+  {
+   "mode": "assembled",
+   "camDir": [
+    0.7,
+    0.1,
+    0.7
+   ],
+   "lookAt": [
+    0.2,
+    -0.5,
+    0.7
+   ],
+   "dist": 3.0,
+   "points": [
+    {
+     "x": 0.3,
+     "y": -0.45,
+     "z": 0.6,
+     "label": "Mandibular canal",
+     "latin": "Canalis mandibulae"
+    },
+    {
+     "x": 0.28,
+     "y": -0.55,
+     "z": 0.88,
+     "label": "Mental foramen",
+     "latin": "Foramen mentale"
+    }
+   ],
+   "bones": [
+    15
+   ],
+   "id": "tmj-nerve",
+   "start": 3325,
+   "end": 3633,
+   "text": "The mandibular canal. The inferior alveolar nerve enters at the mandibular foramen, runs inside the bone to the teeth, and leaves through the mental foramen as the mental nerve. Block it there, and the jaw goes numb."
+  },
+  {
+   "mode": "fracture",
+   "camDir": [
+    0,
+    0.1,
+    1
+   ],
+   "lookAt": [
+    0,
+    -0.2,
+    0.8
+   ],
+   "dist": 4.5,
+   "points": [
+    {
+     "x": 0,
+     "y": -0.5,
+     "z": 0.95,
+     "label": "Le Fort I fracture",
+     "latin": "Fractura Le Fort I"
+    }
+   ],
+   "bones": [],
+   "fracture": [
+    [
+     -0.65,
+     -0.45,
+     0.7
+    ],
+    [
+     -0.4,
+     -0.5,
+     0.85
+    ],
+    [
+     -0.15,
+     -0.52,
+     0.9
+    ],
+    [
+     0,
+     -0.52,
+     0.92
+    ],
+    [
+     0.15,
+     -0.52,
+     0.9
+    ],
+    [
+     0.4,
+     -0.5,
+     0.85
+    ],
+    [
+     0.65,
+     -0.45,
+     0.7
+    ]
+   ],
+   "id": "lefort-1",
+   "start": 3633,
+   "end": 3905,
+   "text": "Le Fort one. A horizontal fracture across the maxilla, just above the teeth and below the orbits. It separates the hard palate and the upper teeth from the rest of the face \u2014 a floating palate."
+  },
+  {
+   "mode": "fracture",
+   "camDir": [
+    0,
+    0.1,
+    1
+   ],
+   "lookAt": [
+    0,
+    -0.1,
+    0.85
+   ],
+   "dist": 4.5,
+   "points": [
+    {
+     "x": 0,
+     "y": 0.0,
+     "z": 1.0,
+     "label": "Le Fort II fracture",
+     "latin": "Fractura Le Fort II"
+    }
+   ],
+   "bones": [],
+   "fracture": [
+    [
+     0.6,
+     -0.55,
+     0.75
+    ],
+    [
+     0.45,
+     -0.3,
+     0.9
+    ],
+    [
+     0.25,
+     -0.1,
+     1.0
+    ],
+    [
+     0,
+     0.15,
+     1.05
+    ],
+    [
+     -0.25,
+     -0.1,
+     1.0
+    ],
+    [
+     -0.45,
+     -0.3,
+     0.9
+    ],
+    [
+     -0.6,
+     -0.55,
+     0.75
+    ],
+    [
+     0.6,
+     -0.55,
+     0.75
+    ]
+   ],
+   "id": "lefort-2",
+   "start": 3905,
+   "end": 4193,
+   "text": "Le Fort two. A pyramid \u2014 apex at the nose, base at the teeth. The line runs from the nasal bones, across the inferior orbital rim, and down the maxilla on both sides."
+  },
+  {
+   "mode": "fracture",
+   "camDir": [
+    0,
+    0.15,
+    1
+   ],
+   "lookAt": [
+    0,
+    0.1,
+    0.8
+   ],
+   "dist": 5.0,
+   "points": [
+    {
+     "x": 0,
+     "y": 0.15,
+     "z": 1.0,
+     "label": "Le Fort III fracture",
+     "latin": "Fractura Le Fort III"
+    }
+   ],
+   "bones": [],
+   "fracture": [
+    [
+     -0.75,
+     0.0,
+     0.5
+    ],
+    [
+     -0.6,
+     0.1,
+     0.75
+    ],
+    [
+     -0.2,
+     0.15,
+     1.0
+    ],
+    [
+     0,
+     0.18,
+     1.05
+    ],
+    [
+     0.2,
+     0.15,
+     1.0
+    ],
+    [
+     0.6,
+     0.1,
+     0.75
+    ],
+    [
+     0.75,
+     0.0,
+     0.5
+    ]
+   ],
+   "id": "lefort-3",
+   "start": 4193,
+   "end": 4504,
+   "text": "Le Fort three. A transverse fracture that detaches the whole midface from the skull. The line runs through the zygomatic arches, across both orbits, and through the nasal bones \u2014 craniofacial disjunction."
+  },
+  {
+   "mode": "signs",
+   "camDir": [
+    0.5,
+    0.2,
+    0.8
+   ],
+   "lookAt": [
+    0.1,
+    -0.1,
+    0.6
+   ],
+   "dist": 4.0,
+   "points": [
+    {
+     "x": 0.55,
+     "y": -0.15,
+     "z": 0.0,
+     "label": "Battle's sign",
+     "latin": "Ecchymosis retroauricularis"
+    },
+    {
+     "x": 0.3,
+     "y": 0.0,
+     "z": 0.9,
+     "label": "Raccoon eyes",
+     "latin": "Ecchymosis periorbitalis"
+    }
+   ],
+   "bones": [],
+   "bruises": [
+    [
+     0.55,
+     -0.15,
+     0.0,
+     90,
+     60
+    ],
+    [
+     0.35,
+     0.0,
+     0.9,
+     80,
+     50
+    ],
+    [
+     -0.35,
+     0.0,
+     0.9,
+     80,
+     50
+    ]
+   ],
+   "id": "battle-raccoon",
+   "start": 4504,
+   "end": 4854,
+   "text": "Battle's sign and raccoon eyes. Bruising behind the ear, over the mastoid, means a middle cranial fossa fracture. Bruising around both eyes means the anterior fossa. Both appear a day or two later \u2014 not at once."
+  },
+  {
+   "mode": "vault",
+   "camDir": [
+    0,
+    1,
+    0.3
+   ],
+   "lookAt": [
+    0,
+    0,
+    0.3
+   ],
+   "dist": 4.5,
+   "points": [
+    {
+     "x": 0,
+     "y": 0.05,
+     "z": 0.69,
+     "label": "Cribriform plate",
+     "latin": "Lamina cribrosa"
+    },
+    {
+     "x": 0.4,
+     "y": -0.2,
+     "z": 0.0,
+     "label": "Petrous temporal bone",
+     "latin": "Os temporale"
+    }
+   ],
+   "bones": [],
+   "drips": [
+    [
+     0,
+     0.05,
+     0.69,
+     0,
+     0.05,
+     1.0
+    ],
+    [
+     0.4,
+     -0.2,
+     0.0,
+     0.7,
+     -0.2,
+     0.0
+    ]
+   ],
+   "id": "csf-leak",
+   "start": 4854,
+   "end": 5188,
+   "text": "Cerebrospinal fluid leaking from the nose or the ear means the dura is torn. Clear fluid after trauma is a leak until proven otherwise, an open doorway for meningitis. It can start hours or days after the injury."
+  },
+  {
+   "mode": "intro",
+   "camDir": [
+    -0.55,
+    0.39,
+    0.74
+   ],
+   "lookAt": [
+    0,
+    0,
+    0
+   ],
+   "dist": 6.5,
+   "distEnd": 8.4,
+   "points": [],
+   "bones": [],
+   "id": "recap",
+   "start": 5188,
+   "end": 5499,
+   "text": "Three episodes. Twenty-two bones. Ten doorways. One map of the nerves, one room for the eye, one joint for the jaw \u2014 and the lines the face breaks along. That is the whole skull."
+  }
+ ]
+}
