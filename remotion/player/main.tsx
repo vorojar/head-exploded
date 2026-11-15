@@ -89,6 +89,8 @@ function LessonPlayer({ episode }: { episode: number }) {
   }, [segment.id]);
   const cue = captionAt(episode, frame);
   const annotations = annotationsAt(episode, frame);
+  // Overview and transition chapters have no concise list of teaching points.
+  const showAnnotations = annotations.length > 0 && annotations.length <= 6;
   useEffect(() => {
     const media = matchMedia("(max-width: 700px)");
     const update = () => setCompact(media.matches);
@@ -239,12 +241,13 @@ function LessonPlayer({ episode }: { episode: number }) {
           )}
         </div>
 
-        <aside className="annotation-panel" aria-label="当前画面标注">
+        <aside className="annotation-panel" aria-label="当前画面标注" data-empty={!showAnnotations} aria-hidden={!showAnnotations}>
+          {showAnnotations && <>
           <div className="panel-heading">
             <span className="eyebrow">当前讲解</span>
             <h2>{chapterTitle(segment)}</h2>
           </div>
-          {annotations.length > 0 ? (
+          {(
             <ol className="annotation-list">
               {annotations.map((a) => (
                 <li key={`${segment.id}-${a.number}`}>
@@ -257,12 +260,9 @@ function LessonPlayer({ episode }: { episode: number }) {
                 </li>
               ))}
             </ol>
-          ) : (
-            <p className="annotation-empty">
-              结合模型与字幕，认识本节结构及其空间关系。
-            </p>
           )}
           <p className="accuracy-note">{accuracyNote(episode, frame)}</p>
+          </>}
         </aside>
       </div>
 
@@ -285,9 +285,7 @@ function App() {
             aria-pressed={i === episode}
             className={i === episode ? "episode-tab selected" : "episode-tab"}
           >
-            <span>0{i + 1}</span>
             {l.title}
-            <small>{formatTime(l.total)}</small>
           </button>
         ))}
       </nav>
@@ -299,34 +297,7 @@ function App() {
         <LessonPlayer key={lesson.id} episode={episode} />
       </section>
       <footer>
-        <p>
-          骨模型：BodyParts3D / © Database Center for Life Science ·{" "}
-          <a
-            href="https://creativecommons.org/licenses/by-sa/2.1/jp/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            CC BY-SA 2.1 JP
-          </a>
-        </p>
-        <p>
-          模型与标记用于解剖学习。
-          <a
-            href="https://github.com/vorojar/head-exploded/blob/main/docs/medical-review.md"
-            target="_blank"
-            rel="noreferrer"
-          >
-            查看修订依据
-          </a>{" "}
-          ·{" "}
-          <a
-            href="https://github.com/vorojar/head-exploded/blob/main/CHANGELOG.md"
-            target="_blank"
-            rel="noreferrer"
-          >
-            版本变更
-          </a>
-        </p>
+        <p>© {new Date().getFullYear()} 易哈佛医疗 <a href="https://www.ehafo.com" target="_blank" rel="noreferrer">Ehafo.com</a></p>
       </footer>
     </main>
   );

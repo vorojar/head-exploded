@@ -563,3 +563,7 @@ footer p {
 /* Keep the spoken chapter visible and clearly selected in the scrolling row. */
 .knowledge-chip.active{background:rgba(37,92,73,.28);border-color:rgba(37,92,73,.45);color:#153f2c;box-shadow:none}
 .knowledge-chip.active time{opacity:.85}
+
+.episode-tab{justify-content:center;text-align:center}
+.annotation-panel[data-empty="true"]{visibility:hidden}
+@media(max-width:700px){.annotation-panel[data-empty="true"]{display:none}}
