@@ -1,19 +1,19 @@
 {
-  "commit": "f8a958b28bd2b27e4fb590f69e0f92e552f4ca4c",
-  "archive": "head-exploded-f8a958b28bd2b27e4fb590f69e0f92e552f4ca4c.tar.gz",
+  "commit": "3bfd50ded61d490dd656a0d459a2c291f8895bd7",
+  "archive": "head-exploded-3bfd50ded61d490dd656a0d459a2c291f8895bd7.tar.gz",
   "files": {
-    "assets/SkullVideo-DgSWsLiI.js": "ed1805ef817c1dd542dd0f36335dbf104e4b0fb8f5330e3dbf1c0b18478fd9bb",
-    "assets/SkullVideo2-ZbAFBeIm.js": "391727676b52fd5540afa42f02885fb68928281c4d0f2a95d2efe6e53ef516cb",
-    "assets/SkullVideo3-Bu3LAR7q.js": "3d82a60dbf710fce74492a2037ca67322819f8943558c09377a54b2438c20978",
+    "assets/SkullVideo-CdN8gxB3.js": "0cb989528b2467821cb0e3183fe2a68b4bb32204001d586fe0ce4d5f35db2946",
+    "assets/SkullVideo2-D9zZAK5T.js": "97d4cafd043622b59910e198cd97752999df38cb118e5ce4b0703c18c97f3ef3",
+    "assets/SkullVideo3-D_7scMX0.js": "a08968f7b87601e7ef730d4ecf6491fc7124d37014c3ff92592099a606021056",
     "assets/ehafo-logo-e0e6eab6211c.webp": "e0e6eab6211ca2c3b0b439f099e40435f16cd1c44f5b1afb452dcdec7d47e8c8",
     "assets/favicon-ijFA0Qr4.svg": "78886b2ee0dffc51e5d14ae7d4cb59f4632cb17867f3797c8985911d42ed7023",
-    "assets/index-PlWliOOh.js": "c7bb5701fad003b6fc63637d28df5a74388e6045245874af284a829b2f5b86b0",
+    "assets/index-DeISZT-T.js": "8c882a10d61540f530ceeba406b8d9aec6feccebd527f9111b5a12e45d1befa3",
     "assets/narration1-BHGIL9t4.mp3": "efd9158520f6d95d4a8b87b3b5af70559be7257c6c7d1e0828541ae284f9180c",
     "assets/narration2-D06J3snX.mp3": "e8a9801f54dba3810da67770493f069f31d997f4fb1526b7580bc46b7d8ca4cf",
     "assets/narration3-BsYqrDtr.mp3": "711ee0ab636890afada248862ffb41f0d69ad38036ba6e8805545967ff0656f3",
-    "assets/skullMath-Bx1Yc8Vm.js": "6576c884cbf642b50fcfdb8bf8210d9fb5ea253d242586514393a674ec8385fd",
-    "index.html": "35d9f1bfce07396d188b28767e28e7e0646d45a9ce22e810dcdb70616ed973d6",
-    "version.json": "4b843266fc3baad6abf60418254cfdfdb244e718fc32cc82fb5c67bacd98596e"
+    "assets/skullMath-DP5UCYkQ.js": "5375d23660ccb5418aa85653bc303087c84f2c96aec7c65c25b77dea56147244",
+    "index.html": "0ba6b8068596b8792e93ed9acdf899d809e129e81686021388757f048f2fa1d5",
+    "version.json": "17816e98c59fae90d479619439a4ed0003f8aec964dd9c9dc8aef6898c3724d9"
   },
-  "archiveSha256": "5d2bc9da191199d719e712e2610ab833c56ec253702d22aecb5dde003a47360f"
+  "archiveSha256": "4ef33c51fc80f3144c346f4161027320d5ea18317752939271f641080677882d"
 }
