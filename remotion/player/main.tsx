@@ -28,6 +28,21 @@ import audio3 from "../public/narration3.mp3?url";
 const formatTime = (frames: number) =>
   `${Math.floor(frames / 24 / 60)}:${String(Math.floor(frames / 24) % 60).padStart(2, "0")}`;
 
+type IconName = "play" | "pause" | "volume" | "mute" | "speed" | "fullscreen" | "exit" | "captions";
+function Icon({name}:{name:IconName}) {
+  const paths:Record<IconName,React.ReactNode>={
+    play:<path d="m8 5 11 7-11 7z" fill="currentColor" stroke="none"/>,
+    pause:<><path d="M8 5v14M16 5v14" strokeWidth={4}/></>,
+    volume:<><path d="M11 4 6 8H3v8h3l5 4z"/><path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></>,
+    mute:<><path d="M11 4 6 8H3v8h3l5 4zM16 9l6 6m0-6-6 6"/></>,
+    speed:<><path d="M4 18a9 9 0 1 1 16 0M12 13l5-6"/><circle cx="12" cy="13" r="2"/></>,
+    fullscreen:<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/>,
+    exit:<path d="M3 8h5V3m13 5h-5V3M8 21v-5H3m13 5v-5h5"/>,
+    captions:<><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M10 9H7v6h3m8-6h-3v6h3"/></>,
+  };
+  return <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>;
+}
+
 function LessonPlayer({ episode }: { episode: number }) {
   const player = useRef<PlayerRef>(null);
   const shell = useRef<HTMLDivElement>(null);
@@ -40,6 +55,15 @@ function LessonPlayer({ episode }: { episode: number }) {
   const [full, setFull] = useState(false);
   const [speed, setSpeed] = useState(1);
   const [error, setError] = useState("");
+  const [controlsVisible,setControlsVisible]=useState(true);
+  const [captionMode,setCaptionMode]=useState<"auto"|"both"|"off">("auto");
+  const hideTimer=useRef<ReturnType<typeof setTimeout>>();
+  const revealControls=()=>{
+    setControlsVisible(true);
+    clearTimeout(hideTimer.current);
+    if(playing)hideTimer.current=setTimeout(()=>setControlsVisible(false),2500);
+  };
+  useEffect(()=>{revealControls();return ()=>clearTimeout(hideTimer.current);},[playing]);
   const lesson = lessons[episode]!;
   const segment = segmentAt(episode, frame);
   const cue = captionAt(episode, frame);
@@ -93,7 +117,9 @@ function LessonPlayer({ episode }: { episode: number }) {
   return (
     <>
       <div className="learning-layout">
-        <div className="playback-shell" ref={shell}>
+        <div className="playback-shell" ref={shell} tabIndex={0} aria-label="视频播放器"
+          data-controls-visible={controlsVisible} data-caption-mode={captionMode}
+          onPointerMove={revealControls} onPointerDownCapture={revealControls} onFocusCapture={revealControls}>
           <div className="scene-wrap">
             <Player
               ref={player}
@@ -132,12 +158,12 @@ function LessonPlayer({ episode }: { episode: number }) {
                 onClick={() => player.current?.play()}
                 aria-label="开始播放"
               >
-                ▶ 开始学习
+                <Icon name="play"/>
               </button>
             )}
           </div>
           <div
-            className="subtitle-box"
+            className="subtitle-box" aria-live="off"
             data-testid="subtitle"
             data-start-ms={cue?.startMs}
             data-end-ms={cue?.endMs}
@@ -149,56 +175,36 @@ function LessonPlayer({ episode }: { episode: number }) {
               {cue?.text ?? "\u00a0"}
             </p>
           </div>
-          <div className="transport">
-            <div className="transport-main">
-              <button
-                onClick={() => player.current?.toggle()}
-                aria-label={playing ? "暂停" : "播放"}
-              >
-                {playing ? "Ⅱ 暂停" : "▶ 播放"}
-              </button>
-              <output aria-label="播放时间" aria-live="off">
-                {formatTime(frame)} / {formatTime(lesson.total)}
-              </output>
-              <button aria-label={muted ? "取消静音" : "静音"} onClick={() => { const p=player.current; if(p) { if(p.isMuted())p.unmute();else p.mute(); } }}>{muted ? "开声" : "静音"}</button>
-          <label className="rate-control">
-                语速{" "}
-                <select
-                  aria-label="播放速度"
-                  value={speed}
-                  onChange={(e) => setSpeed(Number(e.target.value))}
-                >
-                  {[0.75, 1, 1.25, 1.5].map((v) => (
-                    <option key={v} value={v}>
-                      {v}×
-                    </option>
-                  ))}
-                </select>
-              </label>
-              {document.fullscreenEnabled && (
-                <button
-                  onClick={() => {
-                    void toggleFull();
-                  }}
-                  aria-label={full ? "退出全屏" : "全屏学习"}
-                >
-                  {full ? "退出全屏" : "全屏"}
-                </button>
-              )}
-            </div>
+          <div className="transport" aria-label="播放控制">
             <label className="seek-label">
               <span className="sr-only">播放进度</span>
-              <input
-                aria-label="播放进度"
-                type="range"
-                min={0}
-                max={lesson.total - 1}
-                step={1}
-                value={frame}
-                aria-valuetext={formatTime(frame)}
-                onChange={(e) => seek(Number(e.target.value))}
-              />
+              <input aria-label="播放进度" type="range" min={0} max={lesson.total-1} step={1} value={frame}
+                aria-valuetext={formatTime(frame)} onChange={e=>seek(Number(e.target.value))}/>
             </label>
+            <div className="transport-main">
+              <button title={playing?"暂停":"播放"} onClick={()=>player.current?.toggle()} aria-label={playing?"暂停":"播放"}>
+                <Icon name={playing?"pause":"play"}/>
+              </button>
+              <button title={muted?"取消静音":"静音"} aria-label={muted?"取消静音":"静音"} onClick={()=>{const p=player.current;if(p){if(p.isMuted())p.unmute();else p.mute();}}}>
+                <Icon name={muted?"mute":"volume"}/>
+              </button>
+              <output aria-label="播放时间" aria-live="off">{formatTime(frame)} / {formatTime(lesson.total)}</output>
+              <div className="control-spacer"/>
+              <button className="cc-control" title={captionMode==="off"?"字幕已关闭":captionMode==="both"?"中英双语字幕":compact?"中文字幕":"中英双语字幕"}
+                aria-label={captionMode==="off"?"开启字幕":captionMode==="both"?"关闭字幕":"切换中英双语字幕"}
+                aria-pressed={captionMode!=="off"} onClick={()=>setCaptionMode(captionMode==="auto"?"both":captionMode==="both"?"off":"auto")}>
+                <Icon name="captions"/>
+              </button>
+              <label className="rate-control" title="播放速度">
+                <Icon name="speed"/><span className="rate-value" aria-hidden="true">{speed}×</span>
+                <select aria-label="播放速度" value={speed} onChange={e=>{setSpeed(Number(e.target.value));revealControls();}}>
+                  {[0.75,1,1.25,1.5].map(v=><option key={v} value={v}>{v}×</option>)}
+                </select>
+              </label>
+              {document.fullscreenEnabled&&<button title={full?"退出全屏":"全屏"} onClick={()=>{void toggleFull();}} aria-label={full?"退出全屏":"全屏学习"}>
+                <Icon name={full?"exit":"fullscreen"}/>
+              </button>}
+            </div>
           </div>
           {error && (
             <p className="player-error" role="alert">

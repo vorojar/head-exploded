@@ -129,115 +129,36 @@ main {
   gap: 20px;
   align-items: start;
 }
-.playback-shell {
-  background: #172125;
-  border: 1px solid #34454a;
-  border-radius: 14px;
-  overflow: hidden;
-  min-width: 0;
-}
-.scene-wrap {
-  position: relative;
-  background: #fff;
-  aspect-ratio: 16/9;
-  overflow: hidden;
-}
-.start-overlay {
-  position: absolute;
-  bottom: 18px;
-  left: 18px;
-  background: #113d38;
-  color: white;
-  border: 1px solid #92cdbf;
-  min-height: 44px;
-  padding: 10px 20px;
-  border-radius: 99px;
-  font-weight: 600;
-  box-shadow: 0 4px 18px #0003;
-}
-.loading,
-.player-error {
-  padding: 24px;
-  font-size: 16px;
-  color: #bce4d9;
-  background: #172125;
-  line-height: 1.6;
-}
-.loading {
-  height: 100%;
-  display: grid;
-  place-items: center;
-}
-.subtitle-box {
-  padding: 18px 24px 10px;
-  min-height: 140px;
-}
-.subtitle-box p {
-  margin: 0;
-  overflow-wrap: anywhere;
-}
-.subtitle-zh {
-  font-size: 19px;
-  line-height: 1.6;
-  font-weight: 550;
-}
-.subtitle-en {
-  font-size: 15px;
-  line-height: 1.6;
-  color: #b5c8c9;
-  margin-top: 8px !important;
-}
-.transport {
-  padding: 10px 16px 12px;
-  border-top: 1px solid #304147;
-}
-.transport-main {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-.transport button {
-  background: #25423e;
-  border: 1px solid #3d655b;
-  border-radius: 8px;
-  padding: 8px 12px;
-  min-height: 44px;
-  font-size: 14px;
-}
-.transport output {
-  font-variant-numeric: tabular-nums;
-  font-size: 12px;
-  color: #aac1be;
-}
-.rate-control {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  margin-left: auto;
-  color: #aac1be;
-}
-.rate-control select {
-  min-height: 44px;
-  border: 1px solid #405857;
-  border-radius: 8px;
-  background: #172125;
-  color: #d7e9e5;
-  padding: 6px;
-}
-.seek-label {
-  display: block;
-  padding: 12px 0 0;
-}
-.seek-label input {
-  display: block;
-  width: 100%;
-  min-height: 28px;
-  margin: 0;
-  accent-color: #9ddfc7;
-  cursor: pointer;
-}
+/* Captions and chrome share the scene rectangle, just like a video player. */
+.playback-shell{position:relative;background:#000;border:1px solid #34454a;border-radius:14px;overflow:hidden;min-width:0;color:#fff;isolation:isolate}
+.scene-wrap{position:relative;background:#fff;aspect-ratio:16/9;overflow:hidden}
+.start-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:64px;height:64px;border-radius:50%;border:1px solid #ffffff66;background:#0009;color:white;box-shadow:0 4px 20px #0003;cursor:pointer}
+.start-overlay svg{width:32px;height:32px}
+.loading,.player-error{padding:24px;font-size:16px;color:#bce4d9;background:#172125;line-height:1.6}
+.loading{height:100%;display:grid;place-items:center}
+.playback-shell>.player-error{position:absolute;inset:0;z-index:5}
+.subtitle-box{position:absolute;bottom:20px;left:4%;width:92%;padding:0;min-height:0!important;text-align:center;pointer-events:none;z-index:2;transition:bottom .18s ease;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
+.playback-shell[data-controls-visible="true"] .subtitle-box{bottom:78px}
+.subtitle-box p{display:table;max-width:100%;margin:0 auto;overflow-wrap:anywhere;background:#000b;border-radius:3px;padding:2px 8px;box-decoration-break:clone;-webkit-box-decoration-break:clone;color:#fff;text-shadow:0 1px 3px #000,0 0 2px #000}
+.subtitle-box .subtitle-zh{font-size:clamp(16px,1.55vw,22px);line-height:1.45;font-weight:600}
+.subtitle-box .subtitle-en{font-size:clamp(13px,1.15vw,17px);line-height:1.4;margin:4px auto 0!important;color:#f3f4f6}
+.playback-shell[data-caption-mode="off"] .subtitle-box{display:none}
+.transport{position:absolute;bottom:0;left:0;width:100%;padding:26px 12px 6px;border:0;background:linear-gradient(transparent,#000b 45%,#000e);z-index:3;transition:opacity .18s ease,visibility .18s ease}
+.playback-shell[data-controls-visible="false"] .transport{opacity:0;visibility:hidden;pointer-events:none}
+.transport-main{display:flex;align-items:center;gap:4px;flex-wrap:nowrap}
+.transport button,.rate-control{display:flex;align-items:center;justify-content:center;color:#fff;background:transparent;border:0;border-radius:6px;min-width:40px;width:40px;min-height:40px;height:40px;padding:8px;flex-shrink:0}
+.transport button:hover,.rate-control:hover{background:#ffffff25}
+.transport button[aria-pressed="true"]::after{content:"";position:absolute;bottom:3px;width:16px;height:2px;background:#9ddfc7}
+.cc-control{position:relative}
+.transport output{font-size:12px;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums;margin-left:6px}
+.control-spacer{flex:1}
+.rate-control{position:relative;margin-left:0;width:54px;gap:3px;cursor:pointer}
+.rate-control svg{width:18px;height:18px}
+.rate-value{font-size:10px;white-space:nowrap}
+.rate-control select{position:absolute;inset:0;opacity:0;width:100%;height:100%;min-height:0;padding:0;cursor:pointer;color:#fff;background:#172125}
+.rate-control:focus-within{outline:2px solid #86e0cd}
+.seek-label{display:block;padding:0 0 2px}
+.seek-label input{display:block;width:100%;height:12px;min-height:12px;margin:0;accent-color:#fff;cursor:pointer}
 .annotation-panel {
   background: #141e22;
   border: 1px solid #2c3d43;
@@ -585,4 +506,26 @@ footer p {
   .playback-shell:fullscreen .scene-wrap {
     width: min(100%, calc((100dvh - 210px) * 16 / 9));
   }
+}
+
+/* Overlay placement remains relative to the picture at every viewport size. */
+.playback-shell:fullscreen{display:block;border:0;border-radius:0;background:#000;overflow:hidden}
+.playback-shell:fullscreen .scene-wrap{width:100%;height:100%;aspect-ratio:auto;display:grid;place-items:center;background:#000}
+.playback-shell:fullscreen .scene-wrap>div{width:min(100vw,calc(100dvh * 16 / 9))!important;max-height:100dvh}
+.playback-shell:fullscreen .subtitle-box{width:92%;min-height:0;max-width:none;left:4%;padding:0}
+.playback-shell:fullscreen .transport{position:absolute;width:100%;max-width:none;bottom:0;padding:26px 14px 6px}
+@media(max-width:1000px){.subtitle-box{padding:0;min-height:0}.transport-main{gap:2px}.transport button{padding:8px}.rate-control{margin-left:0}}
+@media(max-width:700px){
+ .subtitle-box{left:3%;width:94%;padding:0;bottom:12px;min-height:0}
+ .playback-shell[data-controls-visible="true"] .subtitle-box{bottom:66px}
+ .subtitle-box .subtitle-zh,.playback-shell:fullscreen .subtitle-zh{font-size:16px;line-height:1.35}
+ .subtitle-box .subtitle-en{font-size:12px;line-height:1.25;margin-top:3px!important}
+ .playback-shell[data-caption-mode="auto"] .subtitle-en{display:none}
+ .transport,.playback-shell:fullscreen .transport{padding:18px 6px 2px}
+ .transport-main{gap:0}
+ .transport button{min-width:36px;width:36px;min-height:36px;height:36px;padding:7px}
+ .transport output{font-size:10px;margin-left:3px}
+ .rate-control{width:48px;min-width:48px;min-height:36px;height:36px;padding:5px;gap:2px;margin-left:0}
+ .rate-control select{padding:0;min-height:0}
+ .start-overlay{width:52px;height:52px}
 }

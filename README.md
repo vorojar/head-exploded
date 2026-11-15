@@ -13,7 +13,7 @@ A code-generated 3D anatomy teaching series built with **Remotion + Three.js** a
 | 2 | Sutures, selected foramina, nerves and vessels | 3:07 |
 | 3 | Cranial nerve routes, orbit, TMJ, Le Fort patterns and skull-base injury signs | 3:49 |
 
-The three episodes contain **50 chapters and 136 bilingual caption cues**. Narration is English; captions are Chinese and English. The mobile player places readable subtitles and annotation legends outside the scaled scene. Small screens use numbered anchors instead of tiny text labels. Chapters, a seek slider, pause/play, playback speed and fullscreen all follow the same Remotion frame clock.
+The three episodes contain **50 chapters and 136 bilingual caption cues**. Narration is English; captions are Chinese and English. The player overlays readable subtitles and icon controls inside the scene rectangle; mobile defaults to Chinese captions with a bilingual toggle. Annotation legends remain outside the scaled scene. Small screens use numbered anchors instead of tiny text labels. Chapters, a seek slider, pause/play, playback speed and fullscreen all follow the same Remotion frame clock.
 
 ## Run and check
 
