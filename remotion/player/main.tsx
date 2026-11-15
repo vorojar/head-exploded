@@ -202,17 +202,17 @@ function LessonPlayer({ episode }: { episode: number }) {
             />
 
           </div>
-            {hasStarted && (!playing || controlsVisible) && (
+            {sceneReady && (!hasStarted || !playing || controlsVisible) && (
               <button
                 className="start-overlay"
                 disabled={!sceneReady}
                 onClick={e => {e.stopPropagation();if(sceneReady)player.current?.toggle();}}
-                aria-label={sceneReady?(playing?"暂停":"播放"):"三维画面加载中"}
+                aria-label={sceneReady?(playing?"暂停":"播放"):"正在加载中"}
               >
                 {sceneReady?<Icon name={playing?"pause":"play"}/>:<span className="scene-spinner" aria-hidden="true"/>}
               </button>
             )}
-          {!hasStarted && <BrandPoster ready={sceneReady} onPlay={()=>{if(sceneReady)player.current?.play();}}/>}
+          {!hasStarted && <BrandPoster ready={sceneReady}/>}
           <nav className="knowledge-strip" ref={knowledgeStrip} aria-label="知识点章节导航">
             {lesson.segments.map(s=><button className={s.id===segment.id?"knowledge-chip active":"knowledge-chip"} key={s.id} aria-current={s.id===segment.id?"step":undefined} disabled={!sceneReady} onClick={()=>seek(s.start)}>
               <time>{formatTime(s.start)}</time><span>{chapterTitle(s)}</span>
@@ -238,7 +238,7 @@ function LessonPlayer({ episode }: { episode: number }) {
                 aria-valuetext={formatTime(frame)} onChange={e=>seek(Number(e.target.value))}/>
             </label>
             <div className="transport-main">
-              <button title={sceneReady?(playing?"暂停":"播放"):"三维画面加载中"} disabled={!sceneReady} onClick={()=>player.current?.toggle()} aria-label={playing?"暂停":"播放"}>
+              <button title={sceneReady?(playing?"暂停":"播放"):"正在加载中"} disabled={!sceneReady} onClick={()=>player.current?.toggle()} aria-label={playing?"暂停":"播放"}>
                 <Icon name={playing?"pause":"play"}/>
               </button>
               <button title={muted?"取消静音":"静音"} aria-label={muted?"取消静音":"静音"} onClick={()=>{const p=player.current;if(p){if(p.isMuted())p.unmute();else p.mute();}}}>
