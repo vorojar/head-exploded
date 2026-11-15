@@ -1,18 +1,18 @@
 {
-  "commit": "4c30fb200f00560a929abd52803bc2fd44bad9a4",
-  "archive": "head-exploded-4c30fb200f00560a929abd52803bc2fd44bad9a4.tar.gz",
+  "commit": "fcbd464e82de48a7a4e2b650a1b21618211d7dce",
+  "archive": "head-exploded-fcbd464e82de48a7a4e2b650a1b21618211d7dce.tar.gz",
   "files": {
-    "assets/SkullVideo-DdG44Rjt.js": "9c6e832b043886aca4671780d2b606fd8efe52feedb61f230723774171c0288d",
-    "assets/SkullVideo2-CGMHOhaC.js": "e1c2308d73751e5b994332ec0585dc2a31e87e650343d02135a799c4d4cfcbf8",
-    "assets/SkullVideo3-DZzSkOLE.js": "7a26e53ccfce603808eda948561eb8b3caa6fdc6be64bb87fca3ecfee8ef0cc4",
+    "assets/SkullVideo-Bxyli5ls.js": "a84dde75aa6c412037440f37d22cbebd0e2935f31d2304e1259c80b2565a5120",
+    "assets/SkullVideo2-BVJF3ViA.js": "434e2286f841169d1724043d4f72a0053c15148f7a670d8ba268c8f96039aabe",
+    "assets/SkullVideo3-DTvX-kDN.js": "dc5df20d8b79138b127516840cecb2f3e00b05fd2ffe5830c52042eeca76c880",
     "assets/favicon-ijFA0Qr4.svg": "78886b2ee0dffc51e5d14ae7d4cb59f4632cb17867f3797c8985911d42ed7023",
-    "assets/index-D7l1-hFx.js": "71f705bb70c47e3dc244d6e9e8e6efec7ed08aec5f9feaed6bb3747354e879ca",
+    "assets/index-CyfZ_fUD.js": "cfcc322c228b8592fb465dbeff4694b235a6164e5aca9d9e56bd0be1b8214530",
     "assets/narration1-BHGIL9t4.mp3": "efd9158520f6d95d4a8b87b3b5af70559be7257c6c7d1e0828541ae284f9180c",
     "assets/narration2-D06J3snX.mp3": "e8a9801f54dba3810da67770493f069f31d997f4fb1526b7580bc46b7d8ca4cf",
     "assets/narration3-BsYqrDtr.mp3": "711ee0ab636890afada248862ffb41f0d69ad38036ba6e8805545967ff0656f3",
-    "assets/skullMath-UpCx-HO5.js": "5921e071f08cc84b9708957acf1f64e1082973739ba5ef70942a33f0a471d6e7",
-    "index.html": "bf3465ed6bb7db96eb99d505b65440d90464e4d2d8d47b24e6eae1f2b71a2ae2",
-    "version.json": "e359a91607b67ed723b85c13e3c1ebe720ff8b52dc94c439c550ae929b43b70f"
+    "assets/skullMath-B_IwMky8.js": "9f3fb18f4c81929710bd16a2f3feb30fbef4fe37a0c0b4e5c278dd1e4a879042",
+    "index.html": "f4597cabbb1b34c31f35dc770ba85021094c6ec9fd289c7b5b73de6c51594f6c",
+    "version.json": "962ba66c8d926091df6b310aed5d2ff1a23f8e7fcf84517c4adeedcc1e84c576"
   },
-  "archiveSha256": "fe42ba2652256c83ef2e254824d5bea695fddf1211e29d4dfe634cb15b07a0c7"
+  "archiveSha256": "134c2463e9ba712409f27707dcdcac852e98e15e1c29d807bba44f994949a0e6"
 }
