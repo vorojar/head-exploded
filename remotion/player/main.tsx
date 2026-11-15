@@ -283,7 +283,6 @@ function LessonPlayer({ episode }: { episode: number }) {
         <aside className="annotation-panel" aria-label="当前画面标注" data-empty={!showAnnotations} aria-hidden={!showAnnotations}>
           {showAnnotations && <>
           <div className="panel-heading">
-            <span className="eyebrow">当前讲解</span>
             <h2>{chapterTitle(segment)}</h2>
           </div>
           {(
