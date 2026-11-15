@@ -62,6 +62,7 @@ routes=f'''{start}
     location = /head-exploded {{ return 301 /head-exploded/; }}
     location ^~ /head-exploded/assets/ {{
       alias {assets}/;
+      gzip_comp_level 9;
 {headers}
       add_header Cache-Control "public, max-age=31536000, immutable, no-transform" always;
     }}

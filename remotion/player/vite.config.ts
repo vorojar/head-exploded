@@ -25,5 +25,9 @@ export default defineConfig({
     },
     handleHotUpdate(ctx){if(ctx.file.endsWith('/player/style.css'))ctx.server.ws.send({type:'full-reload'});},
   }],
-  build:{outDir:'dist',emptyOutDir:true,chunkSizeWarningLimit:650},
+  build:{outDir:'dist',emptyOutDir:true,chunkSizeWarningLimit:650,
+    // A new immutable URL is needed so CDN caches negotiate the improved
+    // compression instead of reusing the previous gzip-level-1 response.
+    rollupOptions:{output:{entryFileNames:'assets/[name]-gz9-[hash].js',chunkFileNames:'assets/[name]-gz9-[hash].js'}},
+  },
 });
