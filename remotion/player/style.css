@@ -614,3 +614,6 @@ footer p {
  .playback-shell:not([data-fullscreen="true"]) .subtitle-box .subtitle-zh{font-size:14px;line-height:1.22;font-weight:550}
  .playback-shell:not([data-fullscreen="true"]) .subtitle-box .subtitle-en{font-size:11px;line-height:1.22;margin:1px auto 0!important}
 }
+
+/* The supplied studio backdrop is shared by the cover and transparent canvas. */
+.video-stage .scene-wrap,.brand-poster{background:#444 url("./assets/studio-background-7f7c76cf96bf.jpg") center center/cover no-repeat}

@@ -93,6 +93,7 @@ export const SkullVideo3: React.FC<SceneProps> = ({
   return (
     <AbsoluteFill style={{ width: W, height: H, backgroundColor: background }}>
       <ThreeCanvas
+        gl={{alpha:true}}
         width={W}
         height={H}
         shadows
@@ -103,7 +104,7 @@ export const SkullVideo3: React.FC<SceneProps> = ({
           position: frameState.camPos,
         }}
       >
-        <color attach="background" args={[background]} />
+        {!webPlayer && <color attach="background" args={[background]} />}
         <CameraRig
           position={frameState.camPos}
           target={frameState.camTarget}
