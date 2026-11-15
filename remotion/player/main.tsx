@@ -163,12 +163,11 @@ function LessonPlayer({ episode }: { episode: number }) {
               </button>
             )}
           </div>
-          <div className="knowledge-strip" aria-label="当前画面知识点" tabIndex={0}>
-            <strong className="knowledge-chapter">{chapterTitle(segment)}</strong>
-            {annotations.map(a=><span className="knowledge-item" key={`${segment.id}-${a.number}`} title={`${a.name} · ${a.latin}`}>
-              <span className="knowledge-number">{a.number}</span><span>{a.zh}</span><small lang="en">{a.name}</small>
-            </span>)}
-          </div>
+          <nav className="knowledge-strip" aria-label="知识点章节导航">
+            {lesson.segments.map(s=><button className={s.id===segment.id?"knowledge-chip active":"knowledge-chip"} key={s.id} aria-current={s.id===segment.id?"step":undefined} onClick={()=>seek(s.start)}>
+              <time>{formatTime(s.start)}</time><span>{chapterTitle(s)}</span>
+            </button>)}
+          </nav>
           {cue && <div
             className="subtitle-box" aria-live="off"
             data-testid="subtitle"
@@ -220,27 +219,33 @@ function LessonPlayer({ episode }: { episode: number }) {
           )}
         </div>
 
+        <aside className="annotation-panel" aria-label="当前画面标注">
+          <div className="panel-heading">
+            <span className="eyebrow">当前讲解</span>
+            <h2>{chapterTitle(segment)}</h2>
+          </div>
+          {annotations.length > 0 ? (
+            <ol className="annotation-list">
+              {annotations.map((a) => (
+                <li key={`${segment.id}-${a.number}`}>
+                  <span className="marker-number">{a.number}</span>
+                  <div>
+                    <strong>{a.zh}</strong>
+                    <span lang="en">{a.name}</span>
+                    <small lang="la">{a.latin}</small>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <p className="annotation-empty">
+              结合模型与字幕，认识本节结构及其空间关系。
+            </p>
+          )}
+          <p className="accuracy-note">{accuracyNote(episode, frame)}</p>
+        </aside>
       </div>
-      <p className="learning-accuracy">{accuracyNote(episode, frame)}</p>
-      <section className="chapters" aria-label="章节导航">
-        <div className="section-heading">
-          <h2>按知识点学习</h2>
-          <span>{lesson.segments.length} 节 · 可直接跳转</span>
-        </div>
-        <div className="chapter-grid">
-          {lesson.segments.map((s) => (
-            <button
-              key={s.id}
-              className={s.id === segment.id ? "chapter active" : "chapter"}
-              aria-current={s.id === segment.id ? "step" : undefined}
-              onClick={() => seek(s.start)}
-            >
-              <time>{formatTime(s.start)}</time>
-              <span>{chapterTitle(s)}</span>
-            </button>
-          ))}
-        </div>
-      </section>
+
     </>
   );
 }
