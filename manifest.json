@@ -1,19 +1,20 @@
 {
-  "commit": "452165cafecec302a82056a650a7fa149a1613fe",
-  "archive": "head-exploded-452165cafecec302a82056a650a7fa149a1613fe.tar.gz",
+  "commit": "49d0566b73f1536e94bcde1bd1bacdc857d1f6c8",
+  "archive": "head-exploded-49d0566b73f1536e94bcde1bd1bacdc857d1f6c8.tar.gz",
   "files": {
-    "assets/SkullVideo-CoKkV2Cp.js": "401d516053f699e1ba278cb16c48469fc7d8a0de76d497d87869175751956cb9",
-    "assets/SkullVideo2-Dbk-Up0X.js": "37be4a146b4e459a91846420c6d027cdf7e6473693f51baae0cd481452086f48",
-    "assets/SkullVideo3-LN8qwJqD.js": "d3f3fd0cc73ea0774a69c1a1cef229a1398b818406d350bb3c86df4fd3065e5b",
+    "assets/SkullVideo-C8YBSQNT.js": "c82e1370646f5339c95e78741889ce297f9670d06425378864c01bdf1339842f",
+    "assets/SkullVideo2-CVoJ5LBp.js": "de62e77bb2d8ee965b5ecbb8388b0c6642829a3fe919bab921732b9fddb3ddcd",
+    "assets/SkullVideo3-8prtM7Nr.js": "9e50ba1e6baff8dd16ceee9276f20f454ebda3d61c165d892c5a6b97e63efbf8",
     "assets/ehafo-logo-b7f15db925cf.webp": "b7f15db925cfa84356565f0dacc12578d29784e21f8000224d0477dce89103be",
     "assets/favicon-ijFA0Qr4.svg": "78886b2ee0dffc51e5d14ae7d4cb59f4632cb17867f3797c8985911d42ed7023",
-    "assets/index-D1FVHIeP.js": "3b6c505f22f97c6b2eb8ed8fac3b2097339bb46345b3308f897b710823dd9b80",
+    "assets/index-DE21BhNO.js": "59043dbcade9e42d6996e77f8f3bbdfbe33de7948b3ece6d042e9c81c2c5ea07",
     "assets/narration1-BHGIL9t4.mp3": "efd9158520f6d95d4a8b87b3b5af70559be7257c6c7d1e0828541ae284f9180c",
     "assets/narration2-D06J3snX.mp3": "e8a9801f54dba3810da67770493f069f31d997f4fb1526b7580bc46b7d8ca4cf",
     "assets/narration3-BsYqrDtr.mp3": "711ee0ab636890afada248862ffb41f0d69ad38036ba6e8805545967ff0656f3",
-    "assets/skullMath-BHnu4VBr.js": "bf1faa7d446b45e1eff417a03376a16e20b89489e242ab09cc8b939d0106bd1d",
-    "index.html": "adfabf6a14f3ad1cf59ad58556842563b825fed916891e0d8971cae1102b0434",
-    "version.json": "c9f62db079eb46b2e26250e4d47fd2e28d57fc6a15efaf8b46e6452d1ffd8df8"
+    "assets/skullMath-CIYqyVxW.js": "0d46dfaf817027c617ef44f9d1a9a9812af8a8ac332d40bbd903c17c635c95e8",
+    "assets/studio-background-7f7c76cf96bf.jpg": "7f7c76cf96bf49525b22e113eb31ce890c6ac6ab972cae37892eb2391d03f274",
+    "index.html": "0c25d4995916cc684395fcfa8db86a30189b1c063be9aae442b5b393385ec6c0",
+    "version.json": "422428047eefe1a5de928ea28b5b19bc555281fdc67f0840ba7cd3f373bef08c"
   },
-  "archiveSha256": "661411b55cd32432413abb19ce4151178f193809989ce1410ba1858b7d96ff7a"
+  "archiveSha256": "b599e690426f97ae89a6f88603d2255f5822e533bcab846edb01dc2940ef2599"
 }
