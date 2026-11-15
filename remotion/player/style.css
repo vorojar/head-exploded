@@ -602,3 +602,10 @@ footer p {
 .playback-shell[data-has-started="false"] .transport{opacity:0;visibility:hidden;pointer-events:none}
 
 .brand-poster-retry{font-size:12px;color:#526e60;background:transparent;border:1px solid #526e6033;border-radius:16px;padding:5px 12px;cursor:pointer}
+
+/* Only the logo determines the centered box; status text never moves it. */
+.brand-poster-content{position:relative;display:block}
+.brand-poster-logo{margin:0 auto}
+.brand-poster-status{position:absolute;top:100%;left:0;width:100%;margin:16px 0 0}
+.brand-poster-retry{position:absolute;top:calc(100% + 44px);left:50%;transform:translateX(-50%);white-space:nowrap}
+@media(max-width:700px){.brand-poster-status{margin-top:10px}.brand-poster-retry{top:calc(100% + 36px)}}
