@@ -1,19 +1,19 @@
 {
-  "commit": "126dfd476de7d1c863dd888701da3cba98aea91a",
-  "archive": "head-exploded-126dfd476de7d1c863dd888701da3cba98aea91a.tar.gz",
+  "commit": "42e51cf6040170906a62936c323a857b9a5cd386",
+  "archive": "head-exploded-42e51cf6040170906a62936c323a857b9a5cd386.tar.gz",
   "files": {
-    "assets/SkullVideo-BMe0Gm_g.js": "cb7807103d12d817f4fde274cc3093895fa59580b0687c400dc1dee4e983b262",
-    "assets/SkullVideo2-Bd8J2hQ9.js": "245fe09ad08c5f002da2b206824e72ad083d5c1852788abab73fbfab295fdecc",
-    "assets/SkullVideo3-_9WTI5kn.js": "3567cc4063dd74230d1025cf6bdc2040d8e564a05a780061231cea1c885023f2",
+    "assets/SkullVideo-DgSWsLiI.js": "ed1805ef817c1dd542dd0f36335dbf104e4b0fb8f5330e3dbf1c0b18478fd9bb",
+    "assets/SkullVideo2-ZbAFBeIm.js": "391727676b52fd5540afa42f02885fb68928281c4d0f2a95d2efe6e53ef516cb",
+    "assets/SkullVideo3-Bu3LAR7q.js": "3d82a60dbf710fce74492a2037ca67322819f8943558c09377a54b2438c20978",
     "assets/ehafo-logo-e0e6eab6211c.webp": "e0e6eab6211ca2c3b0b439f099e40435f16cd1c44f5b1afb452dcdec7d47e8c8",
     "assets/favicon-ijFA0Qr4.svg": "78886b2ee0dffc51e5d14ae7d4cb59f4632cb17867f3797c8985911d42ed7023",
-    "assets/index-CeLSh12A.js": "4d2c190758b2249e7274d1fed13824250da7f7ee61827c273d830280c0dbf92c",
+    "assets/index-PlWliOOh.js": "c7bb5701fad003b6fc63637d28df5a74388e6045245874af284a829b2f5b86b0",
     "assets/narration1-BHGIL9t4.mp3": "efd9158520f6d95d4a8b87b3b5af70559be7257c6c7d1e0828541ae284f9180c",
     "assets/narration2-D06J3snX.mp3": "e8a9801f54dba3810da67770493f069f31d997f4fb1526b7580bc46b7d8ca4cf",
     "assets/narration3-BsYqrDtr.mp3": "711ee0ab636890afada248862ffb41f0d69ad38036ba6e8805545967ff0656f3",
-    "assets/skullMath-DMRhsxvC.js": "f1a924d934ea58730ee727963fbc7247092e085f60ceb000c5f8cce268f3246a",
-    "index.html": "2d6a7bfc8f12e2f238121b79d6db54e2d36fd439ba2c493ae545300bfc19efa6",
-    "version.json": "94907aa7e6e83df71cd2398fa808a62c475e8b3e1767c17489c56692f1d8ab52"
+    "assets/skullMath-Bx1Yc8Vm.js": "6576c884cbf642b50fcfdb8bf8210d9fb5ea253d242586514393a674ec8385fd",
+    "index.html": "6c397ddcaf57bc272c964ece1b05fa2e912c918ed66c90a3aeb6087b7e9c0c4d",
+    "version.json": "3123db8026c4ebd85ad5fa252dda257d96980f581929eff7ec1e4852f89b0307"
   },
-  "archiveSha256": "1b95e0333bff210993e711ae9dd4db61e980a652a3ad9fd6a4fc97688d1b3dde"
+  "archiveSha256": "fd795dfbe3395578d281590237192cf9caad0207eecb9bc2a1181bedda74663b"
 }
