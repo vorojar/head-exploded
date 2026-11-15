@@ -226,9 +226,20 @@ export function cameraAt(frame: number): {pos: Vec3; lookAt: Vec3} {
   return {pos: add3(lookAt, scale3(dir, dist)), lookAt};
 }
 
-function makeCamera(frame: number): THREE.PerspectiveCamera {
+/** Frame-driven orbit: ±3 degrees in 28 seconds; labels use this same camera. */
+export function gentleOrbit<T extends {pos: Vec3; lookAt: Vec3; up?: Vec3}>(camera: T, frame: number, enabled: boolean): T {
+  if (!enabled) return camera;
+  const fade = smooth(frame / (FPS * 2));
+  const angle = Math.sin(frame / FPS * Math.PI * 2 / 28) * Math.PI / 60 * fade;
+  const offset = new THREE.Vector3(...camera.pos).sub(new THREE.Vector3(...camera.lookAt));
+  offset.applyAxisAngle(new THREE.Vector3(...(camera.up ?? [0, 1, 0] as Vec3)).normalize(), angle);
+  const pos: Vec3 = [camera.lookAt[0] + offset.x, camera.lookAt[1] + offset.y, camera.lookAt[2] + offset.z];
+  return {...camera, pos};
+}
+
+function makeCamera(frame: number, motion = false): THREE.PerspectiveCamera {
   const cam = new THREE.PerspectiveCamera(CAM_FOV, W / H, 0.1, 100);
-  const {pos, lookAt} = cameraAt(frame);
+  const {pos, lookAt} = gentleOrbit(cameraAt(frame), frame, motion);
   cam.position.set(pos[0], pos[1], pos[2]);
   cam.lookAt(lookAt[0], lookAt[1], lookAt[2]);
   cam.updateProjectionMatrix();
@@ -262,10 +273,10 @@ function dimAmount(num: number, seg: Segment, frame: number): number {
   return 1;
 }
 
-export function computeFrame(frame: number): FrameState {
+export function computeFrame(frame: number, motion = false): FrameState {
   const seg = segmentAt(frame);
-  const cam = makeCamera(frame);
-  const {pos, lookAt} = cameraAt(frame);
+  const cam = makeCamera(frame, motion);
+  const {pos, lookAt} = gentleOrbit(cameraAt(frame), frame, motion);
   const bones: BoneState[] = BONES.map((def) => {
     const t = boneOffset(def.num, frame);
     const position: Vec3 = [
@@ -289,8 +300,8 @@ export function computeFrame(frame: number): FrameState {
     const center2D: [number, number] | null =
       ndc.z < 1
         ? [
-            Math.round((ndc.x * 0.5 + 0.5) * W),
-            Math.round((-ndc.y * 0.5 + 0.5) * H),
+            (ndc.x * 0.5 + 0.5) * W,
+            (-ndc.y * 0.5 + 0.5) * H,
           ]
         : null;
     return {def, position, color, center2D};

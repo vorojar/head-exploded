@@ -6,7 +6,7 @@ import captionData from "./captions.json";
 
 export type LessonCaption = Caption & { zh: string; segmentId: string };
 export const WEB_PLAYER_BACKGROUND = "transparent";
-export type SceneProps = { webPlayer?: boolean; compactLabels?: boolean; onSceneReady?:()=>void };
+export type SceneProps = { gentleMotion?: boolean; webPlayer?: boolean; compactLabels?: boolean; onSceneReady?:()=>void };
 export type Point = { label: string; latin: string; beat?: number };
 export type LessonSegment = {
   id: string;

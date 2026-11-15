@@ -1,5 +1,5 @@
 import {SceneReady} from './SceneReady';
-import { CompactMarkers } from "./LearningOverlay";
+import { FixedLabels, CompactMarkers } from "./LearningOverlay";
 import { WEB_PLAYER_BACKGROUND, type SceneProps } from "./lessons";
 import React, { useEffect, useLayoutEffect, useMemo } from "react";
 import { AbsoluteFill, Audio, staticFile, useCurrentFrame } from "remotion";
@@ -79,10 +79,11 @@ export const SkullVideo: React.FC<SceneProps> = ({
   webPlayer = false,
   compactLabels = false,
   onSceneReady,
+  gentleMotion = false,
 }) => {
   const frame = useCurrentFrame();
   const background = webPlayer ? WEB_PLAYER_BACKGROUND : "white";
-  const frameState = useMemo(() => computeFrame(frame), [frame]);
+  const frameState = useMemo(() => computeFrame(frame, webPlayer && gentleMotion), [frame, webPlayer, gentleMotion]);
   const fade =
     !webPlayer && frame < 24
       ? 1 - (frame / 24) * (frame / 24) * (3 - 2 * (frame / 24))
@@ -127,12 +128,14 @@ export const SkullVideo: React.FC<SceneProps> = ({
           <BoneMesh key={b.def.num} bone={b} />
         ))}
       </ThreeCanvas>
+      <FixedLabels enabled={webPlayer && gentleMotion} layoutKey={frameState.segment.id}>
       <Overlay
         frameState={frameState}
         embeddedCaptions={!webPlayer}
         compactLabels={compactLabels}
       />
       {compactLabels && <CompactMarkers episode={0} frameState={frameState} />}
+      </FixedLabels>
       <Audio src={staticFile("narration1.mp3")} />
       {fade > 0 && (
         <div

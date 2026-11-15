@@ -184,7 +184,7 @@ function LessonPlayer({ episode }: { episode: number }) {
             <Player
               ref={player}
               lazyComponent={lesson.load}
-              inputProps={{ webPlayer: true, compactLabels: compact, onSceneReady:markSceneReady }}
+              inputProps={{ gentleMotion: !matchMedia("(prefers-reduced-motion: reduce)").matches, webPlayer: true, compactLabels: compact, onSceneReady:markSceneReady }}
               durationInFrames={lesson.total}
               fps={24}
               compositionWidth={1280}

@@ -1,4 +1,4 @@
-import { EmbeddedCaption } from "./LearningOverlay";
+import { useFixedLabels, EmbeddedCaption } from "./LearningOverlay";
 /** Overlay for Episode 2: subtitles + labels.
  * Two label kinds: custom 3D anchor points (sutures, foramina) and
  * bone-anchored pills (facial cluster). Same pill style as Episode 1
@@ -99,7 +99,8 @@ function placePills(
   return placements;
 }
 
-function PillLayer({ placements }: { placements: Placement[] }) {
+function PillLayer({ placements: movingPlacements }: { placements: Placement[] }) {
+  const placements = useFixedLabels(movingPlacements);
   return (
     <>
       <svg

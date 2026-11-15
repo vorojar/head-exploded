@@ -1,4 +1,4 @@
-import { EmbeddedCaption } from "./LearningOverlay";
+import { useFixedLabels, EmbeddedCaption } from "./LearningOverlay";
 /** Overlay for Episode 3: subtitles + labels + fracture lines + sign overlays.
  * Point pills (with beat filtering for two-part segments), wall pill for the
  * orbit-walls segment, animated fracture polylines for the Le Fort segments,
@@ -76,7 +76,8 @@ function placePills(
   return placements;
 }
 
-function PillLayer({ placements }: { placements: Placement[] }) {
+function PillLayer({ placements: movingPlacements }: { placements: Placement[] }) {
+  const placements = useFixedLabels(movingPlacements);
   return (
     <>
       <svg
@@ -159,13 +160,14 @@ function PointLabels({
 
 /** cn-table: ten numbered dots on the base + a side legend (Ep1 allout treatment). */
 function CnTableLegend({ frameState }: { frameState: FrameState3 }) {
-  const dots = useMemo(() => {
+  const movingDots = useMemo(() => {
     const pts = frameState.points
       .filter((p) => p.pos2D)
       .map((p) => ({
         x: (p.pos2D as [number, number])[0],
         y: (p.pos2D as [number, number])[1],
         num: p.label.split(" ")[0],
+        anchor:p.pos2D as [number, number],
       }));
     // Repel dots closer than 30px (Ep1 facial-cluster fix).
     for (let it = 0; it < 8; it++) {
@@ -188,6 +190,7 @@ function CnTableLegend({ frameState }: { frameState: FrameState3 }) {
     }
     return pts;
   }, [frameState]);
+  const dots = useFixedLabels(movingDots.map(p => ({...p, lx:p.x, ly:p.y}))).map(p => ({...p, x:p.lx, y:p.ly}));
   const legend = frameState.points.map((p) => {
     const num = p.label.split(" ")[0];
     const name = p.label.slice(num.length + 2);
@@ -202,6 +205,7 @@ function CnTableLegend({ frameState }: { frameState: FrameState3 }) {
       >
         {dots.map((d, i) => (
           <g key={i}>
+            <line x1={d.anchor[0]} y1={d.anchor[1]} x2={d.x} y2={d.y} stroke={GREY} strokeWidth={2}/>
             <circle cx={d.x} cy={d.y} r={11} fill={RED} />
             <text
               x={d.x}

@@ -12,7 +12,7 @@
  */
 import * as THREE from 'three';
 import timelineData from './timeline3.json';
-import {BONES, W, H, FPS, CAM_FOV, type BoneDef, type Vec3} from './skullMath';
+import {gentleOrbit, BONES, W, H, FPS, CAM_FOV, type BoneDef, type Vec3} from './skullMath';
 
 THREE.ColorManagement.enabled = false;
 
@@ -291,9 +291,9 @@ export function cameraAt3(frame: number): {pos: Vec3; lookAt: Vec3; up: Vec3} {
   return {pos, lookAt, up: upFor(pos, lookAt)};
 }
 
-function makeCamera3(frame: number): THREE.PerspectiveCamera {
+function makeCamera3(frame: number, motion = false): THREE.PerspectiveCamera {
   const cam = new THREE.PerspectiveCamera(CAM_FOV, W / H, 0.1, 100);
-  const {pos, lookAt, up} = cameraAt3(frame);
+  const {pos, lookAt, up} = gentleOrbit(cameraAt3(frame), frame, motion);
   cam.position.set(pos[0], pos[1], pos[2]);
   cam.up.set(up[0], up[1], up[2]);
   cam.lookAt(lookAt[0], lookAt[1], lookAt[2]);
@@ -307,15 +307,15 @@ function project(cam: THREE.PerspectiveCamera, p: Vec3): [number, number] | null
   const ndc = v.project(cam);
   if (ndc.z >= 1) return null;
   return [
-    Math.round((ndc.x * 0.5 + 0.5) * W),
-    Math.round((-ndc.y * 0.5 + 0.5) * H),
+    (ndc.x * 0.5 + 0.5) * W,
+    (-ndc.y * 0.5 + 0.5) * H,
   ];
 }
 
-export function computeFrame3(frame: number): FrameState3 {
+export function computeFrame3(frame: number, motion = false): FrameState3 {
   const seg = segmentAt3(frame);
-  const cam = makeCamera3(frame);
-  const {pos, lookAt, up} = cameraAt3(frame);
+  const cam = makeCamera3(frame, motion);
+  const {pos, lookAt, up} = gentleOrbit(cameraAt3(frame), frame, motion);
 
   const beat =
     (seg.mode === 'vault-below' || seg.mode === 'vault-front') &&

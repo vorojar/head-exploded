@@ -1,3 +1,22 @@
+import {createContext, useContext, useRef, type ReactNode} from "react";
+
+const FixedLabelsContext = createContext<string | null>(null);
+export function FixedLabels({layoutKey, enabled, children}: {layoutKey: string; enabled: boolean; children: ReactNode}) {
+  return <FixedLabelsContext.Provider value={enabled ? layoutKey : null}>{children}</FixedLabelsContext.Provider>;
+}
+/** Keep labels still within a teaching beat; only the leader's bone anchor moves. */
+export function useFixedLabels<T extends {lx: number; ly: number}>(positions: T[]): T[] {
+  const key = useContext(FixedLabelsContext);
+  const cache = useRef<{key: string | null; positions: Map<string, {lx: number; ly: number}>}>({key:null, positions:new Map()});
+  if (key === null) return positions;
+  if (cache.current.key !== key) cache.current = {key, positions:new Map()};
+  return positions.map((p, i) => {
+    const id = "labelKey" in p ? String(p.labelKey) : String(i);
+    if (!cache.current.positions.has(id)) cache.current.positions.set(id, {lx:p.lx, ly:p.ly});
+    return {...p, ...cache.current.positions.get(id)!};
+  });
+}
+
 import { useCurrentFrame } from "remotion";
 import { annotationsAt, captionAt, captionText } from "./lessons";
 
@@ -75,6 +94,7 @@ export function CompactMarkers({
           b.y = Math.max(40, Math.min(640, b.y + uy * push));
         }
       }
+  const fixed = useFixedLabels(placed.map(p => ({...p, lx:p.x, ly:p.y})));
   return (
     <svg
       width={1280}
@@ -82,7 +102,7 @@ export function CompactMarkers({
       style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
       aria-hidden="true"
     >
-      {placed.map(({ a, x, y, anchor }) => (
+      {fixed.map(({ a, lx: x, ly: y, anchor }) => (
         <g key={a.number}>
           <line
             x1={anchor[0]}

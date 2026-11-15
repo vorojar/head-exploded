@@ -1,5 +1,5 @@
 import {SceneReady} from './SceneReady';
-import { CompactMarkers } from "./LearningOverlay";
+import { FixedLabels, CompactMarkers } from "./LearningOverlay";
 import { WEB_PLAYER_BACKGROUND, type SceneProps } from "./lessons";
 /** Episode 3 video component. Same 3D scene and studio lighting as
  * Episode 1, but driven by skullMath3 (new staging: vault-away, below
@@ -82,10 +82,11 @@ export const SkullVideo3: React.FC<SceneProps> = ({
   webPlayer = false,
   compactLabels = false,
   onSceneReady,
+  gentleMotion = false,
 }) => {
   const frame = useCurrentFrame();
   const background = webPlayer ? WEB_PLAYER_BACKGROUND : "white";
-  const frameState = useMemo(() => computeFrame3(frame), [frame]);
+  const frameState = useMemo(() => computeFrame3(frame, webPlayer && gentleMotion), [frame, webPlayer, gentleMotion]);
   const fade =
     !webPlayer && frame < 24
       ? 1 - (frame / 24) * (frame / 24) * (3 - 2 * (frame / 24))
@@ -132,12 +133,14 @@ export const SkullVideo3: React.FC<SceneProps> = ({
           <BoneMesh key={b.def.num} bone={b} />
         ))}
       </ThreeCanvas>
+      <FixedLabels enabled={webPlayer && gentleMotion} layoutKey={`${frameState.segment.id}:${frameState.beat}:${frameState.wallIndex}`}>
       <Overlay3
         frameState={frameState}
         embeddedCaptions={!webPlayer}
         compactLabels={compactLabels}
       />
       {compactLabels && <CompactMarkers episode={2} frameState={frameState} />}
+      </FixedLabels>
       <Audio src={staticFile("narration3.mp3")} />
       {fade > 0 && (
         <div

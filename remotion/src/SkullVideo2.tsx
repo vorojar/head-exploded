@@ -1,5 +1,5 @@
 import {SceneReady} from './SceneReady';
-import { CompactMarkers } from "./LearningOverlay";
+import { FixedLabels, CompactMarkers } from "./LearningOverlay";
 import { WEB_PLAYER_BACKGROUND, type SceneProps } from "./lessons";
 /** Episode 2 video component. Same 3D scene and studio lighting as
  * Episode 1, but driven by skullMath2 (new staging: vault-away, below
@@ -82,10 +82,11 @@ export const SkullVideo2: React.FC<SceneProps> = ({
   webPlayer = false,
   compactLabels = false,
   onSceneReady,
+  gentleMotion = false,
 }) => {
   const frame = useCurrentFrame();
   const background = webPlayer ? WEB_PLAYER_BACKGROUND : "white";
-  const frameState = useMemo(() => computeFrame2(frame), [frame]);
+  const frameState = useMemo(() => computeFrame2(frame, webPlayer && gentleMotion), [frame, webPlayer, gentleMotion]);
   const fade =
     !webPlayer && frame < 24
       ? 1 - (frame / 24) * (frame / 24) * (3 - 2 * (frame / 24))
@@ -132,12 +133,14 @@ export const SkullVideo2: React.FC<SceneProps> = ({
           <BoneMesh key={b.def.num} bone={b} />
         ))}
       </ThreeCanvas>
+      <FixedLabels enabled={webPlayer && gentleMotion} layoutKey={frameState.segment.id}>
       <Overlay2
         frameState={frameState}
         embeddedCaptions={!webPlayer}
         compactLabels={compactLabels}
       />
       {compactLabels && <CompactMarkers episode={1} frameState={frameState} />}
+      </FixedLabels>
       <Audio src={staticFile("narration2.mp3")} />
       {fade > 0 && (
         <div

@@ -1,4 +1,4 @@
-import { EmbeddedCaption } from "./LearningOverlay";
+import { useFixedLabels, EmbeddedCaption } from "./LearningOverlay";
 import React, { useMemo } from "react";
 import type { BoneState, FrameState, Segment } from "./skullMath";
 import { H, W } from "./skullMath";
@@ -132,7 +132,7 @@ function FocusLabels({
   bones: BoneState[];
   bandTop: number;
 }) {
-  const placements = useMemo(() => {
+  const movingPlacements = useMemo(() => {
     const items: { bx: number; by: number; name: string; latin: string }[] = [];
     const labels = seg.labels as string[];
     seg.bones.forEach((num, i) => {
@@ -147,6 +147,7 @@ function FocusLabels({
     });
     return placePills(items, bandTop);
   }, [seg, bones, bandTop]);
+  const placements = useFixedLabels(movingPlacements);
   return (
     <>
       <svg
@@ -219,7 +220,7 @@ function AlloutLabels({
   bones: BoneState[];
   bandTop: number;
 }) {
-  const { dots, trueDots } = useMemo(() => {
+  const { dots: movingDots, trueDots } = useMemo(() => {
     const trueDots = new Map<number, [number, number]>();
     for (const b of bones) {
       if (b.center2D && b.center2D[1] < bandTop - 20) {
@@ -262,6 +263,7 @@ function AlloutLabels({
     }
     return { dots, trueDots };
   }, [bones, bandTop]);
+  const dots = new Map(useFixedLabels([...movingDots].map(([num, [lx, ly]]) => ({num, lx, ly, labelKey:num}))).map(p => [p.num, [p.lx, p.ly] as [number, number]]));
   const lineH = 40;
   const yTop = 170;
   const entries: {
