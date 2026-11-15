@@ -1,6 +1,6 @@
 {
-  "commit": "a22f4e1b8e15bd9076e04b40c86841e0d1a18566",
-  "archive": "head-exploded-a22f4e1b8e15bd9076e04b40c86841e0d1a18566.tar.gz",
+  "commit": "a4b0a302f444e509ea04b339b949d695db6656f6",
+  "archive": "head-exploded-a4b0a302f444e509ea04b339b949d695db6656f6.tar.gz",
   "files": {
     "assets/SkullVideo-ClWG9E4k.js": "eeaec82941b13030bdef45a0e53620c97e8629e4485e95af28fd5bbe2e223d72",
     "assets/SkullVideo2-BS5wHhpk.js": "6aa1ae8fce3ab93e8d096703cbcd168e47a106c2293d70c275620588927153ee",
@@ -11,9 +11,10 @@
     "assets/narration1-BHGIL9t4.mp3": "efd9158520f6d95d4a8b87b3b5af70559be7257c6c7d1e0828541ae284f9180c",
     "assets/narration2-D06J3snX.mp3": "e8a9801f54dba3810da67770493f069f31d997f4fb1526b7580bc46b7d8ca4cf",
     "assets/narration3-BsYqrDtr.mp3": "711ee0ab636890afada248862ffb41f0d69ad38036ba6e8805545967ff0656f3",
+    "assets/og-classroom-7dd4fa292777.jpg": "7dd4fa29277726b11b392811f0b03e7f4887c77ee82b90ad9c1863ce1a96baa8",
     "assets/skullMath-BzwOQTDB.js": "5da0f37733b62d5b81bd297b91d1e414dc51f441d4cb25e51f25e73380cb004e",
-    "index.html": "53bf87758229dcde8b2d097234adf20decffd028bc2d1d7d7e9742dac534409d",
-    "version.json": "dd0087f4fac485fee227588d2ba982e765177a647fc6e2d87fe55864dd5d0833"
+    "index.html": "81dfd9e960ab8e31ab44e48b61aa878e4cc7cb98a80d0b6f6a98af8f76cc04e3",
+    "version.json": "6009e73df1c56ed274fa3c643db4a3a6e14e18f42e988fc47979cffdcb49af81"
   },
-  "archiveSha256": "9119632242a2e360a9ca812a0bc0270f546f873fd2e1ef16c8a6c09278d24bf9"
+  "archiveSha256": "6613a8f02723f8dd8826c7677ecbb8f149b900d7f6a8f94a376c00049597f258"
 }
