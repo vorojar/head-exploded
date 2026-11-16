@@ -35,6 +35,7 @@ export async function openPictureInPicture(options: {
   const stream = composite.captureStream(24);
   const track = stream.getVideoTracks()[0] as CanvasCaptureMediaStreamTrack;
   const video = document.createElement('video') as WebKitVideo;
+  video.width = 960; video.height = 540;
   video.muted = true;
   video.playsInline = true;
   video.setAttribute('aria-hidden', 'true');
@@ -51,7 +52,9 @@ export async function openPictureInPicture(options: {
     // buffer, so capture neither freezes nor needs preserveDrawingBuffer.
     options.render();
     ctx.fillStyle = '#000'; ctx.fillRect(0, 0, 960, 540);
-    ctx.drawImage(source, 0, 0, 960, 540);
+    const scale = Math.min(960 / source.width, 540 / source.height);
+    const width = source.width * scale, height = source.height * scale;
+    ctx.drawImage(source, (960 - width) / 2, (540 - height) / 2, width, height);
     ctx.save(); ctx.scale(960 / 1280, 540 / 720);
     options.stage.querySelectorAll<SVGGElement>('svg[aria-hidden="true"] g').forEach(group => {
       const line = group.querySelector('line'), circle = group.querySelector('circle'), text = group.querySelector('text');

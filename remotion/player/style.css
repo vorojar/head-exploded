@@ -619,7 +619,7 @@ footer p {
 .video-stage .scene-wrap,.brand-poster{background:#000}
 
 /* Keep the live PiP bridge rendering without covering the lesson. */
-.pip-stream{position:fixed;left:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none}
+.pip-stream{position:fixed;left:0;bottom:0;width:160px;height:90px;aspect-ratio:16/9;object-fit:contain;opacity:.01;pointer-events:none}
 .pip-message{position:absolute;inset:auto 12px 76px;z-index:5;margin:0;padding:8px 10px;background:#202020;color:#fff;font-size:12px;border-radius:6px}
 
 @media(max-width:380px){.transport button{min-width:34px;width:34px;padding:6px}.transport output{font-size:9px;margin-left:1px}.rate-control{width:44px;min-width:44px}}
