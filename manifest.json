@@ -1,20 +1,20 @@
 {
-  "commit": "c82b48585c4836fdc31a014ac4c13f27a389e0f2",
-  "archive": "head-exploded-c82b48585c4836fdc31a014ac4c13f27a389e0f2.tar.gz",
+  "commit": "94a66c99cec4b779fd56cfb64e61c1bc5b90a5c1",
+  "archive": "head-exploded-94a66c99cec4b779fd56cfb64e61c1bc5b90a5c1.tar.gz",
   "files": {
-    "assets/SkullVideo-gz9-xZgetVxb.js": "21ad7996e69762a5a07adde4d503f932060956ba6728f3e75886049db079d5e3",
-    "assets/SkullVideo2-gz9-CwugnWaK.js": "e96d2d9a6fe8b87e784b6aae9ba23c15c143511c17a9c2270c3f5377ca838242",
-    "assets/SkullVideo3-gz9-_8aPqA9n.js": "6d7f2fb633e57fba0f8cc538f088c57b54ab8f768f63940a9a571f851a8f524c",
+    "assets/SkullVideo-gz9-DpVEq5Qe.js": "3b4cbb020c87df67bd20719de140ad0d22dc6854765a8c24df32372694a0fa5c",
+    "assets/SkullVideo2-gz9-B9R2X9Rq.js": "e0df12eb74889a1fc6495ca43188e7ee2a5d7a9e48e83f7fa70fe31f9f3bf4db",
+    "assets/SkullVideo3-gz9-CcxBjYsn.js": "93b2fd97defac85df023e43463a5e4ba4503435fc4a145863cbc3434e18ccad9",
     "assets/ehafo-logo-b7f15db925cf.webp": "b7f15db925cfa84356565f0dacc12578d29784e21f8000224d0477dce89103be",
     "assets/favicon-ijFA0Qr4.svg": "78886b2ee0dffc51e5d14ae7d4cb59f4632cb17867f3797c8985911d42ed7023",
-    "assets/index-gz9-CKqm8eFO.js": "3bac1a38d3db84381b5af6f333bf5c6df4fd0fdae765844ed7922f84b9bac3fd",
-    "assets/narration1-BHGIL9t4.mp3": "efd9158520f6d95d4a8b87b3b5af70559be7257c6c7d1e0828541ae284f9180c",
+    "assets/index-gz9-C7SWse8y.js": "04ae62d8b4dd697420a9e540b1edd2815669e6d7927a04c8dfae362668222593",
+    "assets/narration1-BhnjzgAv.mp3": "4664eb4425d888b5584dd34374c12890d916d8a4c60c05510a6b3f5c870c1282",
     "assets/narration2-D06J3snX.mp3": "e8a9801f54dba3810da67770493f069f31d997f4fb1526b7580bc46b7d8ca4cf",
-    "assets/narration3-BsYqrDtr.mp3": "711ee0ab636890afada248862ffb41f0d69ad38036ba6e8805545967ff0656f3",
+    "assets/narration3-DKELcMDu.mp3": "b36d2e50c5f657bcf275b50746f80b21eb7e66a08e84d1992036ed5d72abb834",
     "assets/og-classroom-7dd4fa292777.jpg": "7dd4fa29277726b11b392811f0b03e7f4887c77ee82b90ad9c1863ce1a96baa8",
-    "assets/skullMath-gz9-Nd90Ov2w.js": "f5acb8511d1f19eb117775d36247d7edd6d356c3838cb95d842d051bdf7cfaf5",
-    "index.html": "3a2f0a941b6fb621c781952782c89315f60e9583705f4975019f7d704b7bf1cc",
-    "version.json": "dbe972489c749932293dec6f706a840a8716d8e9dae856ac0da0ca12ee68993a"
+    "assets/skullMath-gz9-Bi4hu4Rh.js": "7fc141548f95eda522e380695cc75b5a1b3a5042e9a943a6fec49e35a82af053",
+    "index.html": "a28561ee1065d8e2910c37ae4482e0d90188464bae2e162226f624cdc3744e23",
+    "version.json": "c4069bc0c6b07c73398a24f14e6685975c360f5dc1b201607df4814246697032"
   },
-  "archiveSha256": "530438d3d93b5fe7a9acdca5161fbcdc51bf261e804b117ef56037b53b6fb271"
+  "archiveSha256": "27da1db9f8667ea22b8260d06f29e2fec2a679e6ece7c1437e3c3d94f3587d81"
 }
