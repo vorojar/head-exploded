@@ -68,9 +68,13 @@ function BoneMesh({ bone }: { bone: BoneState3 }) {
     return g;
   }, [bone.def]);
   return (
-    <mesh geometry={geometry} position={bone.position} castShadow receiveShadow>
+    <mesh geometry={geometry} position={bone.position} castShadow={(bone.opacity ?? 1) > .99} receiveShadow>
       <meshStandardMaterial
         color={[bone.color[0], bone.color[1], bone.color[2]]}
+        onUpdate={material=>{if(material.userData.teachingTransparent!==material.transparent){material.userData.teachingTransparent=material.transparent;material.needsUpdate=true;}}}
+        transparent={(bone.opacity ?? 1) < 1}
+        opacity={bone.opacity ?? 1}
+        depthWrite={(bone.opacity ?? 1) >= 1}
         roughness={0.5}
         metalness={0}
       />

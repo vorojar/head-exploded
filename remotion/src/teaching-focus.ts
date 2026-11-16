@@ -32,7 +32,7 @@ function focusAt(episode: number, timeline: FocusSegment[], frame: number) {
   return {start, bones};
 }
 /** Crossfade directly between focus sets: no rainbow flash at chapter edges. */
-export function teachingColors(episode: number, timeline: FocusSegment[], frame: number): (bone: BoneDef) => Vec3 {
+export function teachingAppearance(episode: number, timeline: FocusSegment[], frame: number): (bone: BoneDef) => {color: Vec3; opacity: number} {
   const current = focusAt(episode, timeline, frame);
   const previous = focusAt(episode, timeline, current.start - 1);
   const u = Math.max(0, Math.min((frame - current.start) / 24, 1));
@@ -41,6 +41,8 @@ export function teachingColors(episode: number, timeline: FocusSegment[], frame:
   return bone => {
     const from = previous.bones && !previous.bones.includes(bone.num) ? gray : bone.color;
     const to = current.bones && !current.bones.includes(bone.num) ? gray : bone.color;
-    return [0,1,2].map(i => from[i] + (to[i] - from[i]) * mix) as Vec3;
+    const fromOpacity = previous.bones && !previous.bones.includes(bone.num) ? .30 : 1;
+    const toOpacity = current.bones && !current.bones.includes(bone.num) ? .30 : 1;
+    return {color:[0,1,2].map(i => from[i] + (to[i] - from[i]) * mix) as Vec3, opacity:fromOpacity + (toOpacity - fromOpacity) * mix};
   };
 }

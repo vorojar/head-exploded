@@ -1,4 +1,4 @@
-import {teachingColors} from './teaching-focus';
+import {teachingAppearance} from './teaching-focus';
 /** Pure frame math for the head-exploded video. Ported 1:1 from head_video.py
  * (Blender) so the Remotion + Three.js render matches the Blender version:
  * same normalisation (max edge 2.6, centred), same explosion dirs/distances,
@@ -19,7 +19,7 @@ export const W = 1280;
 export const H = 720;
 export const FPS = 24;
 export const TOTAL_FRAMES = 2758;
-const RAMP = 24;
+const RAMP = 48;
 
 export type Vec3 = [number, number, number];
 
@@ -56,6 +56,7 @@ export type BoneState = {
   position: Vec3;
   /** current colour (dimmed to 45% when out of focus) */
   color: [number, number, number];
+  opacity?: number;
   /** projected AABB-centre on screen, or null when behind the camera */
   center2D: [number, number] | null;
 };
@@ -280,7 +281,7 @@ function dimAmount(num: number, seg: Segment, frame: number): number {
 export function computeFrame(frame: number, motion = false, focus = false): FrameState {
   const seg = segmentAt(frame);
   const cam = makeCamera(frame, motion);
-  const focusedColor = focus ? teachingColors(0, TIMELINE, frame) : null;
+  const focusedColor = focus ? teachingAppearance(0, TIMELINE, frame) : null;
   const {pos, lookAt} = gentleOrbit(cameraAt(frame), frame, motion);
   const bones: BoneState[] = BONES.map((def) => {
     const t = boneOffset(def.num, frame);
@@ -291,7 +292,8 @@ export function computeFrame(frame: number, motion = false, focus = false): Fram
     ];
     const dim = dimAmount(def.num, seg, frame);
     const f = 1 - 0.55 * dim;
-    const color: [number, number, number] = focusedColor ? focusedColor(def) : [
+    const appearance = focusedColor?.(def);
+    const color: [number, number, number] = appearance ? appearance.color : [
       def.color[0] * f,
       def.color[1] * f,
       def.color[2] * f,
@@ -309,7 +311,7 @@ export function computeFrame(frame: number, motion = false, focus = false): Fram
             (-ndc.y * 0.5 + 0.5) * H,
           ]
         : null;
-    return {def, position, color, center2D};
+    return {def, position, color, opacity:appearance?.opacity ?? 1, center2D};
   });
   return {segment: seg, camPos: pos, camTarget: lookAt, bones};
 }

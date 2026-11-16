@@ -87,7 +87,7 @@ function LessonPlayer({ episode }: { episode: number }) {
     update();window.addEventListener('resize',update);window.addEventListener('keydown',escape);
     return ()=>{document.body.style.overflow=previousOverflow;window.removeEventListener('resize',update);window.removeEventListener('keydown',escape);screen.orientation?.unlock?.();};
   },[full]);
-  const [speed, setSpeed] = useState(1);
+  const [speed, setSpeed] = useState(0.85);
   const [error, setError] = useState("");
   const [controlsVisible,setControlsVisible]=useState(true);
   const [captionMode,setCaptionMode]=useState<"both"|"off">("both");
@@ -290,7 +290,7 @@ function LessonPlayer({ episode }: { episode: number }) {
               <label className="rate-control" title="播放速度">
                 <Icon name="speed"/><span className="rate-value" aria-hidden="true">{speed}×</span>
                 <select aria-label="播放速度" value={speed} onChange={e=>{setSpeed(Number(e.target.value));revealControls();}}>
-                  {[0.75,1,1.25,1.5].map(v=><option key={v} value={v}>{v}×</option>)}
+                  {[0.75,0.85,1,1.25,1.5].map(v=><option key={v} value={v}>{v}×</option>)}
                 </select>
               </label>
               {canPictureInPicture()&&<button title={pipActive?"退出小窗":"小窗播放"} aria-label={pipActive?"退出小窗":"小窗播放"} aria-pressed={pipActive} disabled={!sceneReady||pipBusy} onClick={()=>{void togglePip();}}><Icon name="pip"/></button>}

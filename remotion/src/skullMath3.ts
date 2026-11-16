@@ -1,4 +1,4 @@
-import {teachingColors} from './teaching-focus';
+import {teachingAppearance} from './teaching-focus';
 /** Pure frame math for Episode 3 (systems & clinical).
  * Same bones / normalisation / lighting as Episodes 1–2, but new staging:
  * - vault: calvaria lifts away, top-down into the cranial cavity (CN map, CSF leak)
@@ -75,6 +75,7 @@ export type BoneState3 = {
   def: BoneDef;
   position: Vec3;
   color: [number, number, number];
+  opacity?: number;
   center2D: [number, number] | null;
 };
 
@@ -316,7 +317,7 @@ function project(cam: THREE.PerspectiveCamera, p: Vec3): [number, number] | null
 export function computeFrame3(frame: number, motion = false, focus = false): FrameState3 {
   const seg = segmentAt3(frame);
   const cam = makeCamera3(frame, motion);
-  const focusedColor = focus ? teachingColors(2, TIMELINE3, frame) : null;
+  const focusedColor = focus ? teachingAppearance(2, TIMELINE3, frame) : null;
   const {pos, lookAt, up} = gentleOrbit(cameraAt3(frame), frame, motion);
 
   const beat =
@@ -333,7 +334,8 @@ export function computeFrame3(frame: number, motion = false, focus = false): Fra
     const position = boneOffset3(def.num, frame);
     const dim = dimAmount3(def.num, seg, frame);
     const f = 1 - 0.55 * dim;
-    const color: [number, number, number] = focusedColor ? focusedColor(def) : [
+    const appearance = focusedColor?.(def);
+    const color: [number, number, number] = appearance ? appearance.color : [
       def.color[0] * f,
       def.color[1] * f,
       def.color[2] * f,
@@ -344,7 +346,7 @@ export function computeFrame3(frame: number, motion = false, focus = false): Fra
       def.center[2] + position[2],
     ];
     const center2D = project(cam, world);
-    return {def, position, color, center2D};
+    return {def, position, color, opacity:appearance?.opacity ?? 1, center2D};
   });
 
   const points: PointState3[] = seg.points.map((p) => ({

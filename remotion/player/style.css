@@ -623,3 +623,5 @@ footer p {
 .pip-message{position:absolute;inset:auto 12px 76px;z-index:5;margin:0;padding:8px 10px;background:#202020;color:#fff;font-size:12px;border-radius:6px}
 
 @media(max-width:380px){.transport button{min-width:34px;width:34px;padding:6px}.transport output{font-size:9px;margin-left:1px}.rate-control{width:44px;min-width:44px}}
+
+@media(max-width:700px){.rate-control svg{width:16px;height:16px}.rate-value{font-size:9px}}

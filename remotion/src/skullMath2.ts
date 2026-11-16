@@ -1,4 +1,4 @@
-import {teachingColors} from './teaching-focus';
+import {teachingAppearance} from './teaching-focus';
 /** Pure frame math for Episode 2 (sutures, foramina, clinical points).
  * Same bones / normalisation / lighting as Episode 1 (skullMath.ts), but
  * new staging: suture segments keep the skull assembled with no dimming,
@@ -50,6 +50,7 @@ export type BoneState2 = {
   position: Vec3;
   /** current colour (dimmed to 45% when out of focus) */
   color: [number, number, number];
+  opacity?: number;
   /** projected AABB-centre on screen, or null when behind the camera */
   center2D: [number, number] | null;
 };
@@ -267,13 +268,14 @@ function project(cam: THREE.PerspectiveCamera, p: Vec3): [number, number] | null
 export function computeFrame2(frame: number, motion = false, focus = false): FrameState2 {
   const seg = segmentAt2(frame);
   const cam = makeCamera2(frame, motion);
-  const focusedColor = focus ? teachingColors(1, TIMELINE2, frame) : null;
+  const focusedColor = focus ? teachingAppearance(1, TIMELINE2, frame) : null;
   const {pos, lookAt, up} = gentleOrbit(cameraAt2(frame), frame, motion);
   const bones: BoneState2[] = BONES.map((def) => {
     const position = boneOffset2(def.num, frame);
     const dim = dimAmount2(def.num, seg, frame);
     const f = 1 - 0.55 * dim;
-    const color: [number, number, number] = focusedColor ? focusedColor(def) : [
+    const appearance = focusedColor?.(def);
+    const color: [number, number, number] = appearance ? appearance.color : [
       def.color[0] * f,
       def.color[1] * f,
       def.color[2] * f,
@@ -284,7 +286,7 @@ export function computeFrame2(frame: number, motion = false, focus = false): Fra
       def.center[2] + position[2],
     ];
     const center2D = project(cam, world);
-    return {def, position, color, center2D};
+    return {def, position, color, opacity:appearance?.opacity ?? 1, center2D};
   });
   const points: PointState2[] = seg.points.map((p) => ({
     label: p.label,
