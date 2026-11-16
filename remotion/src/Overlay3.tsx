@@ -206,6 +206,7 @@ function CnTableLegend({ frameState }: { frameState: FrameState3 }) {
         {dots.map((d, i) => (
           <g key={i}>
             <line x1={d.anchor[0]} y1={d.anchor[1]} x2={d.x} y2={d.y} stroke={`var(--annotation-leader, ${GREY})`} strokeWidth={2}/>
+            <line x1={d.x} y1={d.y} x2={W - 24 - 330} y2={120 + i * 48 + 11} stroke={`var(--annotation-leader, ${GREY})`} strokeWidth={1.5} opacity={.7}/>
             <circle cx={d.x} cy={d.y} r={11} fill={RED} />
             <text
               x={d.x}
@@ -231,7 +232,7 @@ function CnTableLegend({ frameState }: { frameState: FrameState3 }) {
         }}
       >
         {legend.map((l, i) => (
-          <div key={i} style={{ display: "flex", marginBottom: 4 }}>
+          <div key={i} style={{ display: "flex", height: 44, marginBottom: 4 }}>
             <div
               style={{
                 width: 22,
@@ -250,10 +251,10 @@ function CnTableLegend({ frameState }: { frameState: FrameState3 }) {
               {l.num}
             </div>
             <div>
-              <div style={{ fontSize: 17, fontWeight: 700, color: INK }}>
+              <div style={{ fontSize: 17, fontWeight: 700, color: "var(--annotation-text, " + INK + ")" }}>
                 {l.name}
               </div>
-              <div style={{ fontSize: 14, fontStyle: "italic", color: GREY }}>
+              <div style={{ fontSize: 14, fontStyle: "italic", color: "var(--annotation-detail, " + GREY + ")" }}>
                 {l.latin}
               </div>
             </div>
