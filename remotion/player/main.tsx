@@ -14,6 +14,7 @@ import {
   lessons,
   segmentAt,
 } from "../src/lessons";
+import {canPictureInPicture, openPictureInPicture, type PictureInPictureSession} from "./picture-in-picture";
 import {PageLayout} from "./PageLayout";
 import {PlayerPlaceholder} from "./PlayerPlaceholder";
 import {BrandPoster} from "./BrandPoster";
@@ -31,9 +32,10 @@ import audio3 from "../public/narration3.mp3?url";
 const formatTime = (frames: number) =>
   `${Math.floor(frames / 24 / 60)}:${String(Math.floor(frames / 24) % 60).padStart(2, "0")}`;
 
-type IconName = "play" | "pause" | "volume" | "mute" | "speed" | "fullscreen" | "exit" | "captions";
+type IconName = "play" | "pause" | "volume" | "mute" | "speed" | "fullscreen" | "exit" | "captions" | "pip";
 function Icon({name}:{name:IconName}) {
   const paths:Record<IconName,React.ReactNode>={
+    pip:<><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 12h8v6h-8z" fill="currentColor" stroke="none"/></>,
     play:<path d="m8 5 11 7-11 7z" fill="currentColor" stroke="none"/>,
     pause:<><path d="M8 5v14M16 5v14" strokeWidth={4}/></>,
     volume:<><path d="M11 4 6 8H3v8h3l5 4z"/><path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></>,
@@ -48,6 +50,14 @@ function Icon({name}:{name:IconName}) {
 
 function LessonPlayer({ episode }: { episode: number }) {
   const player = useRef<PlayerRef>(null);
+  const renderer = useRef<(()=>void)|null>(null);
+  const markRenderer=useCallback((render:(()=>void)|null)=>{renderer.current=render;},[]);
+  const pip=useRef<PictureInPictureSession|null>(null);
+  const pipGeneration=useRef(0);
+  const [pipActive,setPipActive]=useState(false);
+  const [pipBusy,setPipBusy]=useState(false);
+  const [pipError,setPipError]=useState("");
+  useEffect(()=>()=>{pipGeneration.current++;void pip.current?.close();},[]);
   const shell = useRef<HTMLDivElement>(null);
   const knowledgeStrip = useRef<HTMLElement>(null);
   const [frame, setFrame] = useState(0);
@@ -132,8 +142,8 @@ function LessonPlayer({ episode }: { episode: number }) {
     if (!p) return;
     const sync: CallbackListener<"frameupdate"> = (e) =>
       setFrame(e.detail.frame);
-    const play = () => {if(!sceneReadyRef.current){p.pause();return;}setHasStarted(true);setPlaying(true);},
-      pause = () => setPlaying(false);
+    const play = () => {if(!sceneReadyRef.current){p.pause();return;}setHasStarted(true);setPlaying(true);pip.current?.playback(true);},
+      pause = () => {setPlaying(false);pip.current?.playback(false);};
     const mute: CallbackListener<"mutechange"> = (e) => setMuted(e.detail.isMuted);
     const fail: CallbackListener<"error"> = (e) =>
       setError(e.detail.error.message);
@@ -155,6 +165,22 @@ function LessonPlayer({ episode }: { episode: number }) {
   const seek = (value: number) => {
     player.current?.seekTo(value);
     setFrame(value);
+  };
+  const togglePip = async () => {
+    if(pipBusy)return;
+    setPipBusy(true);setPipError("");
+    try{
+      if(pip.current){await pip.current.close();pip.current=null;return;}
+      const stage=shell.current?.querySelector<HTMLElement>('.video-stage');
+      if(!stage||!renderer.current)throw new Error('请等待三维画面加载完成');
+      setPipActive(true);
+      const generation=++pipGeneration.current;
+      const session=await openPictureInPicture({stage,render:()=>renderer.current?.(),play:()=>player.current?.play(),pause:()=>player.current?.pause(),onClose:()=>{pip.current=null;setPipActive(false);}});
+      if(generation!==pipGeneration.current){await session.close();return;}
+      pip.current=session;
+      session.playback(player.current?.isPlaying()??false);
+    }catch{setPipActive(false);setPipError('当前浏览器未能开启小窗，请使用最新版 Chrome 或 Safari 重试');}
+    finally{setPipBusy(false);}
   };
   const toggleFull = async () => {
     if(full){
@@ -184,7 +210,7 @@ function LessonPlayer({ episode }: { episode: number }) {
             <Player
               ref={player}
               lazyComponent={lesson.load}
-              inputProps={{ gentleMotion: !matchMedia("(prefers-reduced-motion: reduce)").matches, webPlayer: true, compactLabels: compact, onSceneReady:markSceneReady }}
+              inputProps={{ gentleMotion: !matchMedia("(prefers-reduced-motion: reduce)").matches, webPlayer: true, compactLabels: compact || pipActive, onSceneReady:markSceneReady, onRenderer:markRenderer }}
               durationInFrames={lesson.total}
               fps={24}
               compositionWidth={1280}
@@ -267,12 +293,14 @@ function LessonPlayer({ episode }: { episode: number }) {
                   {[0.75,1,1.25,1.5].map(v=><option key={v} value={v}>{v}×</option>)}
                 </select>
               </label>
+              {canPictureInPicture()&&<button title={pipActive?"退出小窗":"小窗播放"} aria-label={pipActive?"退出小窗":"小窗播放"} aria-pressed={pipActive} disabled={!sceneReady||pipBusy} onClick={()=>{void togglePip();}}><Icon name="pip"/></button>}
               {<button title={full?"退出全屏":"全屏"} onClick={()=>{void toggleFull();}} aria-label={full?"退出全屏":"全屏学习"}>
                 <Icon name={full?"exit":"fullscreen"}/>
               </button>}
             </div>
           </div>
           </div>
+          {pipError&&<p className="pip-message" role="status">{pipError}</p>}
           {error && (
             <p className="player-error" role="alert">
               播放遇到问题：{error}

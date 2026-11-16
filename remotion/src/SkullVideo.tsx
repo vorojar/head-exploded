@@ -79,6 +79,7 @@ export const SkullVideo: React.FC<SceneProps> = ({
   webPlayer = false,
   compactLabels = false,
   onSceneReady,
+  onRenderer,
   gentleMotion = false,
 }) => {
   const frame = useCurrentFrame();
@@ -105,7 +106,7 @@ export const SkullVideo: React.FC<SceneProps> = ({
         {!webPlayer && <color attach="background" args={[background]} />}
         <CameraRig position={frameState.camPos} target={frameState.camTarget} />
         <StudioEnvironment />
-        {webPlayer && <SceneReady onReady={onSceneReady}/>}
+        {webPlayer && <SceneReady onReady={onSceneReady} onRenderer={onRenderer}/>}
         {/* Key light (Blender sun) with soft shadows; the environment
             now carries the ambient, so the fill lights are turned down. */}
         <directionalLight

@@ -82,6 +82,7 @@ export const SkullVideo2: React.FC<SceneProps> = ({
   webPlayer = false,
   compactLabels = false,
   onSceneReady,
+  onRenderer,
   gentleMotion = false,
 }) => {
   const frame = useCurrentFrame();
@@ -112,7 +113,7 @@ export const SkullVideo2: React.FC<SceneProps> = ({
           up={frameState.camUp}
         />
         <StudioEnvironment />
-        {webPlayer && <SceneReady onReady={onSceneReady}/>}
+        {webPlayer && <SceneReady onReady={onSceneReady} onRenderer={onRenderer}/>}
         <directionalLight
           position={[-2.5, 4.0, 3.0]}
           intensity={2.0}
