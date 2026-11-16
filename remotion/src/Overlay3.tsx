@@ -5,7 +5,8 @@ import { useFixedLabels, EmbeddedCaption } from "./LearningOverlay";
  * soft bruise ellipses for Battle's sign / raccoon eyes, and drip lines for
  * the CSF leak. Subtitle band identical to Episodes 1–2.
  */
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import {useCurrentFrame} from "remotion";
 import { H, W } from "./skullMath";
 import type { FrameState3 } from "./skullMath3";
 
@@ -160,6 +161,11 @@ function PointLabels({
 
 /** cn-table: ten numbered dots on the base + a side legend (Ep1 allout treatment). */
 function CnTableLegend({ frameState }: { frameState: FrameState3 }) {
+  const frame=useCurrentFrame();
+  const [selected,setSelected]=useState<number|null>(null);
+  const group=Math.min(2,Math.max(0,Math.floor((frame-frameState.segment.start)/(frameState.segment.end-frameState.segment.start)*3)));
+  const active=(i:number)=>selected!==null?selected===i:(group===0?i<3:group===1?i>=3&&i<5:i>=5);
+
   const movingDots = useMemo(() => {
     const pts = frameState.points
       .filter((p) => p.pos2D)
@@ -204,7 +210,7 @@ function CnTableLegend({ frameState }: { frameState: FrameState3 }) {
         style={{ position: "absolute", top: 0, left: 0 }}
       >
         {dots.map((d, i) => (
-          <g key={i}>
+          <g key={i} opacity={active(i)?1:.22}>
             <line x1={d.anchor[0]} y1={d.anchor[1]} x2={d.x} y2={d.y} stroke={`var(--annotation-leader, ${GREY})`} strokeWidth={2}/>
             <line x1={d.x} y1={d.y} x2={W - 24 - 330} y2={120 + i * 48 + 11} stroke={`var(--annotation-leader, ${GREY})`} strokeWidth={1.5} opacity={.7}/>
             <circle cx={d.x} cy={d.y} r={11} fill={RED} />
@@ -232,7 +238,7 @@ function CnTableLegend({ frameState }: { frameState: FrameState3 }) {
         }}
       >
         {legend.map((l, i) => (
-          <div key={i} style={{ display: "flex", height: 44, marginBottom: 4 }}>
+          <button key={i} type="button" aria-pressed={selected===i} onClick={e=>{e.stopPropagation();setSelected(selected===i?null:i);}} style={{ display: "flex", height: 44, marginBottom: 4, width:"100%",padding:0,border:0,background:"transparent",textAlign:"left",cursor:"pointer",opacity:active(i)?1:.55 }}>
             <div
               style={{
                 width: 22,
@@ -258,7 +264,7 @@ function CnTableLegend({ frameState }: { frameState: FrameState3 }) {
                 {l.latin}
               </div>
             </div>
-          </div>
+          </button>
         ))}
       </div>
     </>

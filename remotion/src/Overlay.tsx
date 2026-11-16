@@ -147,7 +147,7 @@ function FocusLabels({
     });
     return placePills(items, bandTop);
   }, [seg, bones, bandTop]);
-  const placements = useFixedLabels(movingPlacements);
+  const placements = useFixedLabels(movingPlacements.map((p,i)=>({...p,lx:Math.max(150,Math.max(p.name.length,p.latin.length)*7+48),ly:130+i*110})));
   return (
     <>
       <svg

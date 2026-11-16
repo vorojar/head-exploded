@@ -6,24 +6,28 @@
       "end": 182,
       "bones": [],
       "labels": [],
-      "text": "The adult human skull has twenty-two bones: eight cranial bones enclose the brain, and fourteen facial bones form the face."
+      "text": "The adult human skull has twenty-two bones: eight cranial bones enclose the brain, and fourteen facial bones form the face.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "id": "frontal",
       "start": 182,
-      "end": 334,
+      "end": 382,
       "bones": [
         1
       ],
       "labels": [
         "Frontal bone"
       ],
-      "text": "Frontal bone. It forms the forehead and brow ridges, and much of the anterior cranial fossa and orbital roofs."
+      "text": "Frontal bone. It forms the forehead and brow ridges, and much of the anterior cranial fossa and orbital roofs.",
+      "observationLeadFrames": 48,
+      "observationTailFrames": 0
     },
     {
       "id": "parietal",
-      "start": 334,
-      "end": 484,
+      "start": 382,
+      "end": 580,
       "bones": [
         2,
         3
@@ -32,12 +36,14 @@
         "Parietal bone (L)",
         "Parietal bone (R)"
       ],
-      "text": "Parietal bones, left and right. Together they form the roof and much of the side walls of the cranium."
+      "text": "Parietal bones, left and right. Together they form the roof and much of the side walls of the cranium.",
+      "observationLeadFrames": 48,
+      "observationTailFrames": 0
     },
     {
       "id": "temporal",
-      "start": 484,
-      "end": 634,
+      "start": 580,
+      "end": 826,
       "bones": [
         4,
         5
@@ -46,48 +52,56 @@
         "Temporal bone (L)",
         "Temporal bone (R)"
       ],
-      "text": "Temporal bones, left and right. Their petrous parts contain the inner ear, with organs of hearing and balance."
+      "text": "Temporal bones, left and right. Their petrous parts contain the inner ear, with organs of hearing and balance.",
+      "observationLeadFrames": 48,
+      "observationTailFrames": 48
     },
     {
       "id": "occipital",
-      "start": 634,
-      "end": 800,
+      "start": 826,
+      "end": 992,
       "bones": [
         6
       ],
       "labels": [
         "Occipital bone"
       ],
-      "text": "Occipital bone. It forms the back and part of the base of the cranium. At the foramen magnum, the medulla continues as the spinal cord."
+      "text": "Occipital bone. It forms the back and part of the base of the cranium. At the foramen magnum, the medulla continues as the spinal cord.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "id": "sphenoid",
-      "start": 800,
-      "end": 932,
+      "start": 992,
+      "end": 1220,
       "bones": [
         7
       ],
       "labels": [
         "Sphenoid bone"
       ],
-      "text": "Sphenoid bone. Shaped like a butterfly, it sits centrally in the cranial base and contributes to both orbits."
+      "text": "Sphenoid bone. Shaped like a butterfly, it sits centrally in the cranial base and contributes to both orbits.",
+      "observationLeadFrames": 48,
+      "observationTailFrames": 48
     },
     {
       "id": "ethmoid",
-      "start": 932,
-      "end": 1093,
+      "start": 1220,
+      "end": 1477,
       "bones": [
         8
       ],
       "labels": [
         "Ethmoid bone"
       ],
-      "text": "Ethmoid bone. Light and delicate, it lies between the two orbits. It forms parts of the nasal cavity and the medial orbital walls."
+      "text": "Ethmoid bone. Light and delicate, it lies between the two orbits. It forms parts of the nasal cavity and the medial orbital walls.",
+      "observationLeadFrames": 48,
+      "observationTailFrames": 48
     },
     {
       "id": "nasal",
-      "start": 1093,
-      "end": 1222,
+      "start": 1477,
+      "end": 1606,
       "bones": [
         9,
         10
@@ -96,12 +110,14 @@
         "Nasal bone (L)",
         "Nasal bone (R)"
       ],
-      "text": "Nasal bones, left and right. Together they form the bony bridge of the nose."
+      "text": "Nasal bones, left and right. Together they form the bony bridge of the nose.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "id": "lacrimal",
-      "start": 1222,
-      "end": 1420,
+      "start": 1606,
+      "end": 1804,
       "bones": [
         16,
         17
@@ -110,12 +126,14 @@
         "Lacrimal bone (L)",
         "Lacrimal bone (R)"
       ],
-      "text": "Lacrimal bones, left and right, are small bones in the medial orbital walls. They contribute to the fossa for the lacrimal sac."
+      "text": "Lacrimal bones, left and right, are small bones in the medial orbital walls. They contribute to the fossa for the lacrimal sac.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "id": "maxilla",
-      "start": 1420,
-      "end": 1586,
+      "start": 1804,
+      "end": 1970,
       "bones": [
         11,
         12
@@ -124,12 +142,14 @@
         "Maxilla (L)",
         "Maxilla (R)"
       ],
-      "text": "Maxillae, left and right, form much of the upper jaw. They hold the upper teeth and contain the maxillary sinuses."
+      "text": "Maxillae, left and right, form much of the upper jaw. They hold the upper teeth and contain the maxillary sinuses.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "id": "zygomatic",
-      "start": 1586,
-      "end": 1741,
+      "start": 1970,
+      "end": 2125,
       "bones": [
         13,
         14
@@ -138,12 +158,14 @@
         "Zygomatic bone (L)",
         "Zygomatic bone (R)"
       ],
-      "text": "Zygomatic bones, left and right, form the cheek prominences. They also contribute to the orbital walls and zygomatic arches."
+      "text": "Zygomatic bones, left and right, form the cheek prominences. They also contribute to the orbital walls and zygomatic arches.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "id": "palatine",
-      "start": 1741,
-      "end": 1900,
+      "start": 2125,
+      "end": 2380,
       "bones": [
         18,
         19
@@ -152,12 +174,14 @@
         "Palatine bone (L)",
         "Palatine bone (R)"
       ],
-      "text": "Palatine bones, left and right, form the posterior hard palate. They also contribute to the nasal cavity and a small part of each orbit."
+      "text": "Palatine bones, left and right, form the posterior hard palate. They also contribute to the nasal cavity and a small part of each orbit.",
+      "observationLeadFrames": 48,
+      "observationTailFrames": 48
     },
     {
       "id": "concha",
-      "start": 1900,
-      "end": 2103,
+      "start": 2380,
+      "end": 2583,
       "bones": [
         20,
         21
@@ -166,57 +190,69 @@
         "Inferior nasal concha (L)",
         "Inferior nasal concha (R)"
       ],
-      "text": "Inferior nasal conchae, left and right, are scroll-shaped bones on the lateral nasal walls. Their mucosal covering helps warm and humidify inspired air."
+      "text": "Inferior nasal conchae, left and right, are scroll-shaped bones on the lateral nasal walls. Their mucosal covering helps warm and humidify inspired air.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "id": "vomer",
-      "start": 2103,
-      "end": 2226,
+      "start": 2583,
+      "end": 2706,
       "bones": [
         22
       ],
       "labels": [
         "Vomer"
       ],
-      "text": "Vomer. A single midline bone, it forms the posteroinferior part of the bony nasal septum."
+      "text": "Vomer. A single midline bone, it forms the posteroinferior part of the bony nasal septum.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "id": "mandible",
-      "start": 2226,
-      "end": 2366,
+      "start": 2706,
+      "end": 2846,
       "bones": [
         15
       ],
       "labels": [
         "Mandible"
       ],
-      "text": "Mandible. The largest and strongest facial bone, it moves at the temporomandibular joints during chewing and speech."
+      "text": "Mandible. The largest and strongest facial bone, it moves at the temporomandibular joints during chewing and speech.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "id": "allout",
-      "start": 2366,
-      "end": 2492,
+      "start": 2846,
+      "end": 2972,
       "bones": [],
       "labels": "all",
-      "text": "Separated, all twenty-two bones are shown in this teaching model."
+      "text": "Separated, all twenty-two bones are shown in this teaching model.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "id": "back",
-      "start": 2492,
-      "end": 2612,
+      "start": 2972,
+      "end": 3092,
       "bones": [],
       "labels": [],
-      "text": "And back together: a complete bony skull."
+      "text": "And back together: a complete bony skull.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "id": "end",
-      "start": 2612,
-      "end": 2758,
+      "start": 3092,
+      "end": 3238,
       "bones": [],
       "labels": [],
-      "text": "Apart, the individual bones are easier to identify. Together, they protect the brain and support the face."
+      "text": "Apart, the individual bones are easier to identify. Together, they protect the brain and support the face.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     }
   ],
-  "total_frames": 2758,
+  "total_frames": 3238,
   "fps": 24
 }

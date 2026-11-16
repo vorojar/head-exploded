@@ -129,15 +129,16 @@ export function segmentAt3(frame: number): Segment3 {
 /** Vault target keyframes: the calvaria lifts at each vault segment (or the
  * first half of a two-part segment) and drops at each assembled segment.
  * Gaps are all > RAMP, so every ramp finishes before the next starts. */
+const at = (id:string) => TIMELINE3.find(s=>s.id===id)!;
 const VAULT_KEYS: {frame: number; target: number}[] = [
-  {frame: 324, target: 1}, // cn-front start
-  {frame: 1284, target: 0}, // cn-back midpoint (below half)
-  {frame: 1482, target: 1}, // cn-table start
-  {frame: 1691, target: 0}, // orbit-room start
-  {frame: 2404, target: 1}, // orbit-apex start (vault half)
-  {frame: 2606, target: 0}, // orbit-apex midpoint (front half)
-  {frame: 4854, target: 1}, // csf-leak start
-  {frame: 5188, target: 0}, // recap start
+  {frame:at('cn-front').start,target:1},
+  {frame:(at('cn-back').start+at('cn-back').end)/2,target:0},
+  {frame:at('cn-table').start,target:1},
+  {frame:at('orbit-room').start,target:0},
+  {frame:at('orbit-apex').start,target:1},
+  {frame:(at('orbit-apex').start+at('orbit-apex').end)/2,target:0},
+  {frame:at('csf-leak').start,target:1},
+  {frame:at('recap').start,target:0},
 ];
 
 const VAULT_LIFT: Vec3 = [0, 1.2, -1.3];

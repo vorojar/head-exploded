@@ -57,8 +57,10 @@ def main():
                 generated.append((phrase,samples))
             # Match changes of view and wall highlights to the spoken phrase groups.
             groups = [[i] for i in range(4)] if seg['id']=='orbit-walls' else ([[0,1],[2,3]] if seg['id'] in ['cn-back','orbit-apex'] else [list(range(len(generated)))])
-            start = seg['start']/FPS
-            duration = (seg['end']-seg['start'])/FPS
+            lead = seg.get('observationLeadFrames',0)/FPS
+            tail = seg.get('observationTailFrames',0)/FPS
+            start = seg['start']/FPS+lead
+            duration = (seg['end']-seg['start'])/FPS-lead-tail
             for group_index, indexes in enumerate(groups):
                 slot_start = start+duration*group_index/len(groups)
                 slot_duration = duration/len(groups)

@@ -59,6 +59,7 @@ export async function openPictureInPicture(options: {
     options.stage.querySelectorAll<SVGGElement>('svg[aria-hidden="true"] g').forEach(group => {
       const line = group.querySelector('line'), circle = group.querySelector('circle'), text = group.querySelector('text');
       if (!circle || !text) return;
+      ctx.globalAlpha=Number(group.getAttribute('opacity')??1);
       const n = (el: Element, key: string) => Number(el.getAttribute(key));
       if (line) {
         ctx.beginPath(); ctx.moveTo(n(line, 'x1'), n(line, 'y1')); ctx.lineTo(n(line, 'x2'), n(line, 'y2'));
@@ -69,7 +70,7 @@ export async function openPictureInPicture(options: {
       ctx.font = '700 32px sans-serif'; ctx.textAlign = 'center'; ctx.fillStyle = '#fff';
       ctx.fillText(text.textContent ?? '', n(text, 'x'), n(text, 'y'));
     });
-    ctx.restore();
+    ctx.restore(); ctx.globalAlpha=1;
     const captions = [...options.stage.querySelectorAll<HTMLElement>('.subtitle-box p')];
     const rows = captions.flatMap((el, i) => {
       const font = i === 0 ? '600 32px sans-serif' : '26px sans-serif';

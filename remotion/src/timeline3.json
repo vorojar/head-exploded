@@ -1,6 +1,6 @@
 {
   "fps": 24,
-  "total": 5499,
+  "total": 5643,
   "segments": [
     {
       "mode": "intro",
@@ -21,7 +21,9 @@
       "id": "intro",
       "start": 0,
       "end": 324,
-      "text": "Episodes one and two introduced the bones, sutures, and openings. Now we connect these landmarks to the cranial nerves, orbit, and jaw. We then review selected facial fractures and signs of skull-base injury."
+      "text": "Episodes one and two introduced the bones, sutures, and openings. Now we connect these landmarks to the cranial nerves, orbit, and jaw. We then review selected facial fractures and signs of skull-base injury.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "mode": "vault",
@@ -63,7 +65,9 @@
       "id": "cn-front",
       "start": 324,
       "end": 730,
-      "text": "Twelve cranial nerves use several routes through the skull. Olfactory filaments cross the cribriform plate; the optic nerve uses the optic canal. Nerves three, four, and six, with the ophthalmic division of five, pass through the superior orbital fissure."
+      "text": "Twelve cranial nerves use several routes through the skull. Olfactory filaments cross the cribriform plate; the optic nerve uses the optic canal. Nerves three, four, and six, with the ophthalmic division of five, pass through the superior orbital fissure.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "mode": "vault",
@@ -112,7 +116,9 @@
       "id": "cn-middle",
       "start": 730,
       "end": 1086,
-      "text": "The maxillary division of nerve five passes through the foramen rotundum. The mandibular division passes through the foramen ovale. The internal carotid artery enters through the carotid canal, then passes over the cartilage-filled foramen lacerum, not through its full depth."
+      "text": "The maxillary division of nerve five passes through the foramen rotundum. The mandibular division passes through the foramen ovale. The internal carotid artery enters through the carotid canal, then passes over the cartilage-filled foramen lacerum, not through its full depth.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "mode": "vault-below",
@@ -176,7 +182,9 @@
       "id": "cn-back",
       "start": 1086,
       "end": 1482,
-      "text": "The facial and vestibulocochlear nerves enter the internal acoustic meatus together. The facial nerve then follows the facial canal. It exits through the stylomastoid foramen. Nerves nine, ten, and eleven use the jugular foramen; twelve uses the hypoglossal canal."
+      "text": "The facial and vestibulocochlear nerves enter the internal acoustic meatus together. The facial nerve then follows the facial canal. It exits through the stylomastoid foramen. Nerves nine, ten, and eleven use the jugular foramen; twelve uses the hypoglossal canal.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "mode": "vault",
@@ -266,8 +274,10 @@
       "bones": [],
       "id": "cn-table",
       "start": 1482,
-      "end": 1691,
-      "text": "This overview groups ten selected routes used by cranial nerves. Use it to organize your anatomy study, alongside an atlas and cross-sectional images."
+      "end": 1835,
+      "text": "This overview groups ten selected routes used by cranial nerves. Use it to organize your anatomy study, alongside an atlas and cross-sectional images.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 144
     },
     {
       "mode": "assembled",
@@ -308,9 +318,11 @@
         18
       ],
       "id": "orbit-room",
-      "start": 1691,
-      "end": 1966,
-      "text": "The orbit is a cavity built from seven bones. Its broad opening faces forward and its apex points backward. It contains the eye, extraocular muscles, nerves, vessels, fat, and lacrimal structures."
+      "start": 1835,
+      "end": 2110,
+      "text": "The orbit is a cavity built from seven bones. Its broad opening faces forward and its apex points backward. It contains the eye, extraocular muscles, nerves, vessels, fat, and lacrimal structures.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "mode": "walls",
@@ -365,9 +377,11 @@
         }
       ],
       "id": "orbit-walls",
-      "start": 1966,
-      "end": 2404,
-      "text": "The roof: frontal bone and lesser wing of the sphenoid. The floor: maxilla, zygomatic, and a small contribution from palatine. The medial wall: ethmoid, lacrimal, maxilla, and sphenoid. The lateral wall: zygomatic and greater wing of the sphenoid."
+      "start": 2110,
+      "end": 2548,
+      "text": "The roof: frontal bone and lesser wing of the sphenoid. The floor: maxilla, zygomatic, and a small contribution from palatine. The medial wall: ethmoid, lacrimal, maxilla, and sphenoid. The lateral wall: zygomatic and greater wing of the sphenoid.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "mode": "vault-front",
@@ -437,9 +451,11 @@
       ],
       "bones": [],
       "id": "orbit-apex",
-      "start": 2404,
-      "end": 2808,
-      "text": "The optic canal transmits the optic nerve and ophthalmic artery. The superior orbital fissure transmits nerves three, four, six, and the ophthalmic division of five. The inferior orbital fissure transmits infraorbital and zygomatic branches of the maxillary nerve, with vessels connecting the orbit to adjacent spaces."
+      "start": 2548,
+      "end": 2952,
+      "text": "The optic canal transmits the optic nerve and ophthalmic artery. The superior orbital fissure transmits nerves three, four, six, and the ophthalmic division of five. The inferior orbital fissure transmits infraorbital and zygomatic branches of the maxillary nerve, with vessels connecting the orbit to adjacent spaces.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "mode": "assembled",
@@ -482,9 +498,11 @@
         4
       ],
       "id": "tmj",
-      "start": 2808,
-      "end": 3067,
-      "text": "The temporomandibular joint connects the mandible to the temporal bone. A fibrocartilaginous disc separates its joint spaces. Rotation and translation allow opening, chewing, and speech."
+      "start": 2952,
+      "end": 3211,
+      "text": "The temporomandibular joint connects the mandible to the temporal bone. A fibrocartilaginous disc separates its joint spaces. Rotation and translation allow opening, chewing, and speech.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "mode": "dislocate",
@@ -520,9 +538,11 @@
         4
       ],
       "id": "tmj-dislocation",
-      "start": 3067,
-      "end": 3325,
-      "text": "In an anterior dislocation, the mandibular condyle moves beyond the articular eminence. The mouth may lock open. A blow to the chin can instead fracture the condylar region."
+      "start": 3211,
+      "end": 3469,
+      "text": "In an anterior dislocation, the mandibular condyle moves beyond the articular eminence. The mouth may lock open. A blow to the chin can instead fracture the condylar region.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "mode": "assembled",
@@ -557,9 +577,11 @@
         15
       ],
       "id": "tmj-nerve",
-      "start": 3325,
-      "end": 3633,
-      "text": "The inferior alveolar nerve enters the mandibular foramen and supplies the lower teeth. Its mental branch exits through the mental foramen to the lower lip and chin. A mental nerve block numbs these soft tissues, not the teeth."
+      "start": 3469,
+      "end": 3777,
+      "text": "The inferior alveolar nerve enters the mandibular foramen and supplies the lower teeth. Its mental branch exits through the mental foramen to the lower lip and chin. A mental nerve block numbs these soft tissues, not the teeth.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "mode": "fracture",
@@ -622,9 +644,11 @@
         ]
       ],
       "id": "lefort-1",
-      "start": 3633,
-      "end": 3905,
-      "text": "Le Fort one is a horizontal maxillary fracture above the teeth. It separates the tooth-bearing maxilla and hard palate from the upper face. All classic Le Fort patterns involve the pterygoid plates, beyond this front-view schematic."
+      "start": 3777,
+      "end": 4049,
+      "text": "Le Fort one is a horizontal maxillary fracture above the teeth. It separates the tooth-bearing maxilla and hard palate from the upper face. All classic Le Fort patterns involve the pterygoid plates, beyond this front-view schematic.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "mode": "fracture",
@@ -692,9 +716,11 @@
         ]
       ],
       "id": "lefort-2",
-      "start": 3905,
-      "end": 4193,
-      "text": "Le Fort two is a pyramidal midface fracture. It crosses the nasal bridge, medial orbits, and inferior orbital rims, and extends through the maxilla toward the pterygoid plates."
+      "start": 4049,
+      "end": 4337,
+      "text": "Le Fort two is a pyramidal midface fracture. It crosses the nasal bridge, medial orbits, and inferior orbital rims, and extends through the maxilla toward the pterygoid plates.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "mode": "fracture",
@@ -757,9 +783,11 @@
         ]
       ],
       "id": "lefort-3",
-      "start": 4193,
-      "end": 4504,
-      "text": "Le Fort three causes craniofacial disjunction. Fractures cross the nasofrontal region, orbital walls, and zygomatic arches, with pterygoid plate involvement. Actual trauma patterns may be asymmetric or mixed."
+      "start": 4337,
+      "end": 4648,
+      "text": "Le Fort three causes craniofacial disjunction. Fractures cross the nasofrontal region, orbital walls, and zygomatic arches, with pterygoid plate involvement. Actual trauma patterns may be asymmetric or mixed.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "mode": "signs",
@@ -815,9 +843,11 @@
         ]
       ],
       "id": "battle-raccoon",
-      "start": 4504,
-      "end": 4854,
-      "text": "Battle's sign is bruising over the mastoid, suggesting skull-base injury. Bilateral raccoon eyes raise concern for an anterior skull-base fracture. These signs may be delayed and do not establish the diagnosis alone. Their absence does not exclude a fracture."
+      "start": 4648,
+      "end": 4998,
+      "text": "Battle's sign is bruising over the mastoid, suggesting skull-base injury. Bilateral raccoon eyes raise concern for an anterior skull-base fracture. These signs may be delayed and do not establish the diagnosis alone. Their absence does not exclude a fracture.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "mode": "vault",
@@ -868,9 +898,11 @@
         ]
       ],
       "id": "csf-leak",
-      "start": 4854,
-      "end": 5188,
-      "text": "A confirmed cerebrospinal fluid leak indicates a dural defect. Clear fluid from the nose or ear after trauma is suspicious, but not diagnostic. Urgent assessment is needed because a persistent leak can increase meningitis risk. Leakage may start hours or days after injury."
+      "start": 4998,
+      "end": 5332,
+      "text": "A confirmed cerebrospinal fluid leak indicates a dural defect. Clear fluid from the nose or ear after trauma is suspicious, but not diagnostic. Urgent assessment is needed because a persistent leak can increase meningitis risk. Leakage may start hours or days after injury.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     },
     {
       "mode": "intro",
@@ -889,9 +921,11 @@
       "points": [],
       "bones": [],
       "id": "recap",
-      "start": 5188,
-      "end": 5499,
-      "text": "Twenty-two bones, selected nerve pathways, the orbit, and the jaw. These models help build a spatial map. Use them alongside anatomical references; schematic markers are not diagnostic imaging."
+      "start": 5332,
+      "end": 5643,
+      "text": "Twenty-two bones, selected nerve pathways, the orbit, and the jaw. These models help build a spatial map. Use them alongside anatomical references; schematic markers are not diagnostic imaging.",
+      "observationLeadFrames": 0,
+      "observationTailFrames": 0
     }
   ]
 }

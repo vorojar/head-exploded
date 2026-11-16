@@ -37,14 +37,17 @@ function StudioEnvironment() {
 function CameraRig({
   position,
   target,
+  offsetX,
 }: {
   position: [number, number, number];
   target: [number, number, number];
+  offsetX:number;
 }) {
   const camera = useThree((s) => s.camera);
   useLayoutEffect(() => {
     camera.position.set(position[0], position[1], position[2]);
     camera.lookAt(target[0], target[1], target[2]);
+    camera.setViewOffset(W,H,-offsetX,0,W,H);
     camera.updateProjectionMatrix();
   });
   return null;
@@ -108,7 +111,7 @@ export const SkullVideo: React.FC<SceneProps> = ({
         }}
       >
         {!webPlayer && <color attach="background" args={[background]} />}
-        <CameraRig position={frameState.camPos} target={frameState.camTarget} />
+        <CameraRig position={frameState.camPos} target={frameState.camTarget} offsetX={frameState.viewOffsetX}/>
         <StudioEnvironment />
         {webPlayer && <SceneReady onReady={onSceneReady} onRenderer={onRenderer}/>}
         {/* Key light (Blender sun) with soft shadows; the environment

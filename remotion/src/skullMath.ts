@@ -18,7 +18,7 @@ THREE.ColorManagement.enabled = false;
 export const W = 1280;
 export const H = 720;
 export const FPS = 24;
-export const TOTAL_FRAMES = 2758;
+export const TOTAL_FRAMES = timelineData.total_frames;
 const RAMP = 48;
 
 export type Vec3 = [number, number, number];
@@ -67,6 +67,7 @@ export type FrameState = {
   /** point the camera looks at (origin in wide shots, the focused bone's centre in focus shots) */
   camTarget: Vec3;
   bones: BoneState[];
+  viewOffsetX: number;
 };
 
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
@@ -171,7 +172,7 @@ for (const seg of BONE_SEGS) {
   }
   const size = Math.max(mx[0] - mn[0], mx[1] - mn[1], mx[2] - mn[2]);
   // Visible height at distance d is ~0.506*d (FOV 28.4 deg); fill ~70%.
-  const dist = clamp(2.82 * size, 2.2, 6.5);
+  const dist = clamp(3.15 * size, 2.5, 8.5);
   FOCUS_KF.set(seg.id, {dir, lookAt: expC, dist});
 }
 
@@ -242,11 +243,18 @@ export function gentleOrbit<T extends {pos: Vec3; lookAt: Vec3; up?: Vec3}>(came
   return {...camera, pos};
 }
 
+function viewOffset(frame:number):number {
+  const seg=segmentAt(frame),index=TIMELINE.indexOf(seg);
+  const from=index>0&&TIMELINE[index-1].bones.length?96:0,to=seg.bones.length?96:0;
+  return from+(to-from)*smooth((frame-seg.start)/48);
+}
+
 function makeCamera(frame: number, motion = false): THREE.PerspectiveCamera {
   const cam = new THREE.PerspectiveCamera(CAM_FOV, W / H, 0.1, 100);
   const {pos, lookAt} = gentleOrbit(cameraAt(frame), frame, motion);
   cam.position.set(pos[0], pos[1], pos[2]);
   cam.lookAt(lookAt[0], lookAt[1], lookAt[2]);
+  cam.setViewOffset(W,H,-viewOffset(frame),0,W,H);
   cam.updateProjectionMatrix();
   cam.updateMatrixWorld();
   return cam;
@@ -313,5 +321,5 @@ export function computeFrame(frame: number, motion = false, focus = false): Fram
         : null;
     return {def, position, color, opacity:appearance?.opacity ?? 1, center2D};
   });
-  return {segment: seg, camPos: pos, camTarget: lookAt, bones};
+  return {segment: seg, camPos: pos, camTarget: lookAt, bones, viewOffsetX:viewOffset(frame)};
 }

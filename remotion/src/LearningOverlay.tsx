@@ -18,7 +18,7 @@ export function useFixedLabels<T extends {lx: number; ly: number}>(positions: T[
 }
 
 import { useCurrentFrame } from "remotion";
-import { annotationsAt, captionAt, captionText } from "./lessons";
+import { annotationsAt, captionAt, captionText, segmentAt } from "./lessons";
 
 export function EmbeddedCaption({ episode }: { episode: number }) {
   const frame = useCurrentFrame();
@@ -59,6 +59,9 @@ export function CompactMarkers({
   frameState: MarkerState;
 }) {
   const frame = useCurrentFrame();
+  const segment=segmentAt(episode,frame);
+  const group=Math.min(2,Math.max(0,Math.floor((frame-segment.start)/(segment.end-segment.start)*3)));
+  const emphasized=(i:number)=>episode!==2||segment.id!=="cn-table"||(group===0?i<3:group===1?i>=3&&i<5:i>=5);
   const markers = annotationsAt(episode, frame)
     .map((a) => ({
       a,
@@ -102,8 +105,8 @@ export function CompactMarkers({
       style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
       aria-hidden="true"
     >
-      {fixed.map(({ a, lx: x, ly: y, anchor }) => (
-        <g key={a.number}>
+      {fixed.map(({ a, lx: x, ly: y, anchor }, i) => (
+        <g key={a.number} opacity={emphasized(i)?1:.22}>
           <line
             x1={anchor[0]}
             y1={anchor[1]}
