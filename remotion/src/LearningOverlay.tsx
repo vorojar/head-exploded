@@ -114,12 +114,13 @@ export function CompactMarkers({
             y2={y}
             stroke="var(--annotation-leader, #156f68)"
             strokeWidth={4}
+            strokeDasharray={a.point!==undefined?"10 7":undefined}
           />
           <circle
             cx={x}
             cy={y}
             r={30}
-            fill="#103e3a"
+            fill={a.point!==undefined?"none":"#103e3a"}
             stroke="white"
             strokeWidth={4}
           />
@@ -127,7 +128,7 @@ export function CompactMarkers({
             x={x}
             y={y + 11}
             textAnchor="middle"
-            fill="white"
+            fill="white" stroke="#000" strokeWidth={2} paintOrder="stroke"
             fontSize={32}
             fontWeight={700}
             fontFamily="sans-serif"

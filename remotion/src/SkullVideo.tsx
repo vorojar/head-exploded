@@ -1,3 +1,4 @@
+import {OrientationCue} from './OrientationCue';
 import {SceneReady} from './SceneReady';
 import { FixedLabels, CompactMarkers } from "./LearningOverlay";
 import { WEB_PLAYER_BACKGROUND, type SceneProps } from "./lessons";
@@ -136,6 +137,7 @@ export const SkullVideo: React.FC<SceneProps> = ({
           <BoneMesh key={b.def.num} bone={b} />
         ))}
       </ThreeCanvas>
+      {webPlayer&&<OrientationCue view={frameState} compact={compactLabels}/>}
       <FixedLabels enabled={webPlayer && gentleMotion} layoutKey={frameState.segment.id}>
       <Overlay
         frameState={frameState}

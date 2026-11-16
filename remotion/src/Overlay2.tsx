@@ -99,7 +99,7 @@ function placePills(
   return placements;
 }
 
-function PillLayer({ placements: movingPlacements }: { placements: Placement[] }) {
+function PillLayer({ placements: movingPlacements, illustrative=false }: { placements: Placement[]; illustrative?:boolean }) {
   const placements = useFixedLabels(movingPlacements);
   return (
     <>
@@ -117,8 +117,9 @@ function PillLayer({ placements: movingPlacements }: { placements: Placement[] }
               y2={p.ly}
               stroke={`var(--annotation-leader, ${GREY})`}
               strokeWidth={2}
+              strokeDasharray={illustrative?"10 7":undefined}
             />
-            <circle cx={p.bx} cy={p.by} r={4} fill={RED} />
+            <circle cx={p.bx} cy={p.by} r={illustrative?6:4} fill={illustrative?"none":RED} stroke={illustrative?RED:undefined} strokeWidth={2}/>
           </g>
         ))}
       </svg>
@@ -178,7 +179,7 @@ function PointLabels({
       }));
     return placePills(items, bandTop);
   }, [frameState, bandTop]);
-  return <PillLayer placements={placements} />;
+  return <PillLayer placements={placements} illustrative/>;
 }
 
 function BoneLabels({

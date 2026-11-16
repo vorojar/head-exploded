@@ -63,13 +63,26 @@ export async function openPictureInPicture(options: {
       const n = (el: Element, key: string) => Number(el.getAttribute(key));
       if (line) {
         ctx.beginPath(); ctx.moveTo(n(line, 'x1'), n(line, 'y1')); ctx.lineTo(n(line, 'x2'), n(line, 'y2'));
-        ctx.strokeStyle = 'rgba(255,255,255,.85)'; ctx.lineWidth = 4; ctx.stroke();
+        ctx.strokeStyle = 'rgba(255,255,255,.85)'; ctx.lineWidth = 4;
+        ctx.setLineDash((line.getAttribute('stroke-dasharray')??'').split(/[ ,]+/).map(Number).filter(n=>n>0));ctx.stroke();ctx.setLineDash([]);
       }
       ctx.beginPath(); ctx.arc(n(circle, 'cx'), n(circle, 'cy'), n(circle, 'r'), 0, Math.PI * 2);
-      ctx.fillStyle = '#103e3a'; ctx.fill(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 4; ctx.stroke();
+      if(circle.getAttribute('fill')!=='none'){ctx.fillStyle = '#103e3a'; ctx.fill();} ctx.strokeStyle = '#fff'; ctx.lineWidth = 4; ctx.stroke();
       ctx.font = '700 32px sans-serif'; ctx.textAlign = 'center'; ctx.fillStyle = '#fff';
+      ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.strokeText(text.textContent ?? '', n(text, 'x'), n(text, 'y'));
       ctx.fillText(text.textContent ?? '', n(text, 'x'), n(text, 'y'));
     });
+    ctx.globalAlpha=1;
+    options.stage.querySelectorAll<SVGPathElement>('path[data-schematic-fracture]').forEach(path=>{
+      const length=path.getTotalLength(),progress=Number(path.dataset.progress??0),end=length*progress;
+      const start=path.getPointAtLength(0);ctx.beginPath();ctx.moveTo(start.x,start.y);
+      for(let i=1;i<=80;i++){const p=path.getPointAtLength(end*i/80);ctx.lineTo(p.x,p.y);}
+      ctx.strokeStyle=path.getAttribute('stroke')??'#dc3c3c';ctx.lineWidth=5;ctx.setLineDash([14,10]);ctx.stroke();ctx.setLineDash([]);
+    });
+    const orientation=options.stage.querySelector('svg[data-orientation]');
+    orientation?.querySelectorAll('line').forEach(line=>{ctx.beginPath();ctx.moveTo(Number(line.getAttribute('x1')),Number(line.getAttribute('y1')));ctx.lineTo(Number(line.getAttribute('x2')),Number(line.getAttribute('y2')));ctx.strokeStyle=line.getAttribute('stroke')??'#a7bdb4';ctx.globalAlpha=Number(line.getAttribute('opacity')??1);ctx.lineWidth=2;ctx.stroke();});
+    ctx.globalAlpha=1;ctx.textAlign='center';ctx.textBaseline='middle';
+    orientation?.querySelectorAll('text').forEach(text=>{ctx.font=`600 ${text.getAttribute('font-size')??23}px sans-serif`;ctx.textAlign=text.hasAttribute('data-schematic-legend')?'left':'center';ctx.fillStyle=text.getAttribute('fill')??'#fff';ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.strokeText(text.textContent??'',Number(text.getAttribute('x')),Number(text.getAttribute('y')));ctx.fillText(text.textContent??'',Number(text.getAttribute('x')),Number(text.getAttribute('y')));});
     ctx.restore(); ctx.globalAlpha=1;
     const captions = [...options.stage.querySelectorAll<HTMLElement>('.subtitle-box p')];
     const rows = captions.flatMap((el, i) => {

@@ -5,7 +5,7 @@ import { useFixedLabels, EmbeddedCaption } from "./LearningOverlay";
  * soft bruise ellipses for Battle's sign / raccoon eyes, and drip lines for
  * the CSF leak. Subtitle band identical to Episodes 1–2.
  */
-import { useMemo, useState } from "react";
+import { useMemo, useState, useId } from "react";
 import {useCurrentFrame} from "remotion";
 import { H, W } from "./skullMath";
 import type { FrameState3 } from "./skullMath3";
@@ -77,7 +77,7 @@ function placePills(
   return placements;
 }
 
-function PillLayer({ placements: movingPlacements }: { placements: Placement[] }) {
+function PillLayer({ placements: movingPlacements, illustrative=false }: { placements: Placement[]; illustrative?:boolean }) {
   const placements = useFixedLabels(movingPlacements);
   return (
     <>
@@ -95,8 +95,9 @@ function PillLayer({ placements: movingPlacements }: { placements: Placement[] }
               y2={p.ly}
               stroke={`var(--annotation-leader, ${GREY})`}
               strokeWidth={2}
+              strokeDasharray={illustrative?"10 7":undefined}
             />
-            <circle cx={p.bx} cy={p.by} r={4} fill={RED} />
+            <circle cx={p.bx} cy={p.by} r={illustrative?6:4} fill={illustrative?"none":RED} stroke={illustrative?RED:undefined} strokeWidth={2}/>
           </g>
         ))}
       </svg>
@@ -156,7 +157,7 @@ function PointLabels({
       }));
     return placePills(items, bandTop);
   }, [frameState, bandTop]);
-  return <PillLayer placements={placements} />;
+  return <PillLayer placements={placements} illustrative/>;
 }
 
 /** cn-table: ten numbered dots on the base + a side legend (Ep1 allout treatment). */
@@ -211,9 +212,9 @@ function CnTableLegend({ frameState }: { frameState: FrameState3 }) {
       >
         {dots.map((d, i) => (
           <g key={i} opacity={active(i)?1:.22}>
-            <line x1={d.anchor[0]} y1={d.anchor[1]} x2={d.x} y2={d.y} stroke={`var(--annotation-leader, ${GREY})`} strokeWidth={2}/>
-            <line x1={d.x} y1={d.y} x2={W - 24 - 330} y2={120 + i * 48 + 11} stroke={`var(--annotation-leader, ${GREY})`} strokeWidth={1.5} opacity={.7}/>
-            <circle cx={d.x} cy={d.y} r={11} fill={RED} />
+            <line x1={d.anchor[0]} y1={d.anchor[1]} x2={d.x} y2={d.y} stroke={`var(--annotation-leader, ${GREY})`} strokeWidth={2} strokeDasharray="10 7"/>
+            <line x1={d.x} y1={d.y} x2={W - 24 - 330} y2={120 + i * 48 + 11} stroke={`var(--annotation-leader, ${GREY})`} strokeWidth={1.5} opacity={.7} strokeDasharray="10 7"/>
+            <circle cx={d.x} cy={d.y} r={11} fill="none" stroke={RED} strokeWidth={2}/>
             <text
               x={d.x}
               y={d.y + 4}
@@ -244,12 +245,13 @@ function CnTableLegend({ frameState }: { frameState: FrameState3 }) {
                 width: 22,
                 height: 22,
                 borderRadius: "50%",
-                background: RED,
+                background: "transparent",
+                border: `2px solid ${RED}`,
                 color: "white",
                 fontSize: 13,
                 fontWeight: 700,
                 textAlign: "center",
-                lineHeight: "22px",
+                lineHeight: "18px",
                 flexShrink: 0,
                 marginRight: 8,
               }}
@@ -304,6 +306,7 @@ function WallLabel({
 
 /** Le Fort fracture line: SVG polyline drawn progressively. */
 function FractureLine({ frameState }: { frameState: FrameState3 }) {
+  const maskId="fracture-"+useId().replace(/:/g,"");
   const pts = frameState.fracture2D;
   if (!pts || pts.length < 2) return null;
   const d = pts
@@ -312,16 +315,16 @@ function FractureLine({ frameState }: { frameState: FrameState3 }) {
   const total = 1000;
   return (
     <svg width={W} height={H} style={{ position: "absolute", top: 0, left: 0 }}>
-      <path
+      <defs><mask id={maskId}><path d={d} fill="none" stroke="white" strokeWidth={9} pathLength={total} strokeDasharray={total} strokeDashoffset={total * (1 - frameState.fractureProgress)}/></mask></defs>
+      <path data-schematic-fracture="true" data-progress={frameState.fractureProgress}
         d={d}
         fill="none"
         stroke={FRACTURE_RED}
         strokeWidth={5}
         strokeLinecap="round"
         strokeLinejoin="round"
-        pathLength={total}
-        strokeDasharray={total}
-        strokeDashoffset={total * (1 - frameState.fractureProgress)}
+        strokeDasharray="14 10"
+        mask={`url(#${maskId})`}
       />
     </svg>
   );
