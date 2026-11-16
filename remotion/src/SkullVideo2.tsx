@@ -87,7 +87,7 @@ export const SkullVideo2: React.FC<SceneProps> = ({
 }) => {
   const frame = useCurrentFrame();
   const background = webPlayer ? WEB_PLAYER_BACKGROUND : "white";
-  const frameState = useMemo(() => computeFrame2(frame, webPlayer && gentleMotion), [frame, webPlayer, gentleMotion]);
+  const frameState = useMemo(() => computeFrame2(frame, webPlayer && gentleMotion, webPlayer), [frame, webPlayer, gentleMotion]);
   const fade =
     !webPlayer && frame < 24
       ? 1 - (frame / 24) * (frame / 24) * (3 - 2 * (frame / 24))

@@ -1,3 +1,4 @@
+import {teachingColors} from './teaching-focus';
 /** Pure frame math for Episode 2 (sutures, foramina, clinical points).
  * Same bones / normalisation / lighting as Episode 1 (skullMath.ts), but
  * new staging: suture segments keep the skull assembled with no dimming,
@@ -263,15 +264,16 @@ function project(cam: THREE.PerspectiveCamera, p: Vec3): [number, number] | null
   ];
 }
 
-export function computeFrame2(frame: number, motion = false): FrameState2 {
+export function computeFrame2(frame: number, motion = false, focus = false): FrameState2 {
   const seg = segmentAt2(frame);
   const cam = makeCamera2(frame, motion);
+  const focusedColor = focus ? teachingColors(1, TIMELINE2, frame) : null;
   const {pos, lookAt, up} = gentleOrbit(cameraAt2(frame), frame, motion);
   const bones: BoneState2[] = BONES.map((def) => {
     const position = boneOffset2(def.num, frame);
     const dim = dimAmount2(def.num, seg, frame);
     const f = 1 - 0.55 * dim;
-    const color: [number, number, number] = [
+    const color: [number, number, number] = focusedColor ? focusedColor(def) : [
       def.color[0] * f,
       def.color[1] * f,
       def.color[2] * f,

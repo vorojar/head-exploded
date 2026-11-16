@@ -1,3 +1,4 @@
+import {teachingColors} from './teaching-focus';
 /** Pure frame math for the head-exploded video. Ported 1:1 from head_video.py
  * (Blender) so the Remotion + Three.js render matches the Blender version:
  * same normalisation (max edge 2.6, centred), same explosion dirs/distances,
@@ -276,9 +277,10 @@ function dimAmount(num: number, seg: Segment, frame: number): number {
   return 1;
 }
 
-export function computeFrame(frame: number, motion = false): FrameState {
+export function computeFrame(frame: number, motion = false, focus = false): FrameState {
   const seg = segmentAt(frame);
   const cam = makeCamera(frame, motion);
+  const focusedColor = focus ? teachingColors(0, TIMELINE, frame) : null;
   const {pos, lookAt} = gentleOrbit(cameraAt(frame), frame, motion);
   const bones: BoneState[] = BONES.map((def) => {
     const t = boneOffset(def.num, frame);
@@ -289,7 +291,7 @@ export function computeFrame(frame: number, motion = false): FrameState {
     ];
     const dim = dimAmount(def.num, seg, frame);
     const f = 1 - 0.55 * dim;
-    const color: [number, number, number] = [
+    const color: [number, number, number] = focusedColor ? focusedColor(def) : [
       def.color[0] * f,
       def.color[1] * f,
       def.color[2] * f,
