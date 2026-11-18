@@ -44,9 +44,15 @@ export async function openPictureInPicture(options: {
   document.body.append(video);
   let closed = false;
   let timer: ReturnType<typeof setInterval> | undefined;
-  let controlsReady = false;
   const media = navigator.mediaSession;
   const previousPlayback = media?.playbackState;
+  const registeredActions: MediaSessionAction[] = [];
+  const playFromVideo = () => {
+    if (!closed && !video.paused) options.play();
+  };
+  const pauseFromVideo = () => {
+    if (!closed && video.paused) options.pause();
+  };
   const draw = () => {
     // Background tabs stop RAF. Render explicitly before copying the WebGL
     // buffer, so capture neither freezes nor needs preserveDrawingBuffer.
@@ -100,15 +106,30 @@ export async function openPictureInPicture(options: {
   const cleanup = () => {
     if (closed) return;
     closed = true; clearInterval(timer);
+    video.removeEventListener('play', playFromVideo);
+    video.removeEventListener('pause', pauseFromVideo);
     stream.getTracks().forEach(t => t.stop());
     video.pause(); video.srcObject = null; video.remove();
-    if (media && controlsReady) {
-      media.setActionHandler('play', null); media.setActionHandler('pause', null);
+    if (media && registeredActions.length > 0) {
+      for (const action of registeredActions) media.setActionHandler(action, null);
       media.playbackState = previousPlayback ?? 'none';
     }
     options.onClose();
   };
-  const playback = (playing: boolean) => {if (media && controlsReady) media.playbackState = playing ? 'playing' : 'paused';};
+  const playback = (playing: boolean) => {
+    if (closed) return;
+    if (media && registeredActions.length > 0) {
+      media.playbackState = playing ? 'playing' : 'paused';
+    }
+    if (playing && video.paused) {
+      void video.play().catch(() => {
+        // If the browser refuses to resume the small window, keep the lesson paused too.
+        if (!closed && video.paused) options.pause();
+      });
+    } else if (!playing && !video.paused) {
+      video.pause();
+    }
+  };
   const closedBySystem = () => {
     if (document.hidden) options.pause();
     cleanup();
@@ -126,9 +147,19 @@ export async function openPictureInPicture(options: {
       if (video.webkitPresentationMode !== 'picture-in-picture') throw new Error('当前浏览器不支持实时画面的画中画');
     }
     else throw new Error('当前浏览器暂不支持系统小窗');
+    // Some systems act on the video directly instead of sending Media Session actions.
+    video.addEventListener('play', playFromVideo);
+    video.addEventListener('pause', pauseFromVideo);
     if (media) {
-      media.setActionHandler('play', options.play); media.setActionHandler('pause', options.pause);
-      controlsReady = true;
+      const actions = [['play', options.play], ['pause', options.pause]] as const;
+      for (const [action, handler] of actions) {
+        try {
+          media.setActionHandler(action, handler);
+          registeredActions.push(action);
+        } catch {
+          // Native video events still work if a platform omits a Media Session action.
+        }
+      }
     }
   } catch (error) {cleanup(); throw error;}
   return {playback, close: async () => {

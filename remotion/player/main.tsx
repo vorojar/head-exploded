@@ -217,6 +217,7 @@ function LessonPlayer({ episode }: { episode: number }) {
               compositionHeight={720}
               controls={false}
               clickToPlay={false}
+              browserMediaControlsBehavior={{ mode: "do-nothing" }}
               spaceKeyToPlayOrPause={sceneReady}
               acknowledgeRemotionLicense
               numberOfSharedAudioTags={1}
