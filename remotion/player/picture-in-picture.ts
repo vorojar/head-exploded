@@ -2,7 +2,11 @@ type WebKitVideo = HTMLVideoElement & {
   webkitSetPresentationMode?: (mode: 'inline' | 'picture-in-picture') => void;
   webkitPresentationMode?: string;
 };
-export type PictureInPictureSession = {close: () => Promise<void>; playback: (playing: boolean) => void};
+export type PictureInPictureSession = {
+  close: () => Promise<void>;
+  playback: (playing: boolean) => void;
+  position: (seconds: number, playbackRate: number) => void;
+};
 export const canPictureInPicture = () =>
   typeof HTMLCanvasElement.prototype.captureStream === 'function' &&
   (document.pictureInPictureEnabled || 'webkitSetPresentationMode' in HTMLVideoElement.prototype);
@@ -24,6 +28,8 @@ export async function openPictureInPicture(options: {
   render: () => void;
   play: () => void;
   pause: () => void;
+  duration: number;
+  seek: (seconds: number) => void;
   onClose: () => void;
 }): Promise<PictureInPictureSession> {
   const source = options.stage.querySelector('canvas');
@@ -47,6 +53,16 @@ export async function openPictureInPicture(options: {
   const media = navigator.mediaSession;
   const previousPlayback = media?.playbackState;
   const registeredActions: MediaSessionAction[] = [];
+  let positionPublished = false;
+  const position = (seconds: number, playbackRate: number) => {
+    if (closed || typeof media?.setPositionState !== 'function') return;
+    media.setPositionState({
+      duration: options.duration,
+      position: Math.max(0, Math.min(options.duration, seconds)),
+      playbackRate,
+    });
+    positionPublished = true;
+  };
   const playFromVideo = () => {
     if (!closed && !video.paused) options.play();
   };
@@ -110,6 +126,7 @@ export async function openPictureInPicture(options: {
     video.removeEventListener('pause', pauseFromVideo);
     stream.getTracks().forEach(t => t.stop());
     video.pause(); video.srcObject = null; video.remove();
+    if (positionPublished) media?.setPositionState();
     if (media && registeredActions.length > 0) {
       for (const action of registeredActions) media.setActionHandler(action, null);
       media.playbackState = previousPlayback ?? 'none';
@@ -151,7 +168,13 @@ export async function openPictureInPicture(options: {
     video.addEventListener('play', playFromVideo);
     video.addEventListener('pause', pauseFromVideo);
     if (media) {
-      const actions = [['play', options.play], ['pause', options.pause]] as const;
+      const actions: [MediaSessionAction, MediaSessionActionHandler][] = [
+        ['play', options.play],
+        ['pause', options.pause],
+        ['seekto', ({seekTime}) => {
+          if (seekTime !== undefined && Number.isFinite(seekTime)) options.seek(seekTime);
+        }],
+      ];
       for (const [action, handler] of actions) {
         try {
           media.setActionHandler(action, handler);
@@ -162,7 +185,7 @@ export async function openPictureInPicture(options: {
       }
     }
   } catch (error) {cleanup(); throw error;}
-  return {playback, close: async () => {
+  return {playback, position, close: async () => {
     try {
       if (document.pictureInPictureElement === video) await document.exitPictureInPicture();
       else if (video.webkitPresentationMode === 'picture-in-picture') video.webkitSetPresentationMode?.('inline');

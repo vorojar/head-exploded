@@ -29,8 +29,10 @@ import audio3 from "../public/narration3.mp3?url";
   name: `narration${i + 1}.mp3`,
   src,
 }));
+const FPS = 24;
+const DEFAULT_SPEED = 0.85;
 const formatTime = (frames: number) =>
-  `${Math.floor(frames / 24 / 60)}:${String(Math.floor(frames / 24) % 60).padStart(2, "0")}`;
+  `${Math.floor(frames / FPS / 60)}:${String(Math.floor(frames / FPS) % 60).padStart(2, "0")}`;
 
 type IconName = "play" | "pause" | "volume" | "mute" | "speed" | "fullscreen" | "exit" | "captions" | "pip";
 function Icon({name}:{name:IconName}) {
@@ -87,7 +89,8 @@ function LessonPlayer({ episode }: { episode: number }) {
     update();window.addEventListener('resize',update);window.addEventListener('keydown',escape);
     return ()=>{document.body.style.overflow=previousOverflow;window.removeEventListener('resize',update);window.removeEventListener('keydown',escape);screen.orientation?.unlock?.();};
   },[full]);
-  const [speed, setSpeed] = useState(0.85);
+  const [speed, setSpeed] = useState(DEFAULT_SPEED);
+  const playbackRate = useRef(DEFAULT_SPEED);
   const [error, setError] = useState("");
   const [controlsVisible,setControlsVisible]=useState(true);
   const [captionMode,setCaptionMode]=useState<"both"|"off">("both");
@@ -142,12 +145,31 @@ function LessonPlayer({ episode }: { episode: number }) {
     if (!p) return;
     const sync: CallbackListener<"frameupdate"> = (e) =>
       setFrame(e.detail.frame);
-    const play = () => {if(!sceneReadyRef.current){p.pause();return;}setHasStarted(true);setPlaying(true);pip.current?.playback(true);},
-      pause = () => {setPlaying(false);pip.current?.playback(false);};
+    const publishPosition = (frame: number) => pip.current?.position(frame / FPS, playbackRate.current);
+    const timeUpdate: CallbackListener<"timeupdate" | "seeked"> = ({detail}) => publishPosition(detail.frame);
+    const rateChange: CallbackListener<"ratechange"> = ({detail}) => {
+      playbackRate.current = detail.playbackRate;
+      publishPosition(p.getCurrentFrame());
+    };
+    const play = () => {
+      if (!sceneReadyRef.current) {p.pause();return;}
+      setHasStarted(true);
+      setPlaying(true);
+      pip.current?.playback(true);
+      publishPosition(p.getCurrentFrame());
+    };
+    const pause = () => {
+      setPlaying(false);
+      pip.current?.playback(false);
+      publishPosition(p.getCurrentFrame());
+    };
     const mute: CallbackListener<"mutechange"> = (e) => setMuted(e.detail.isMuted);
     const fail: CallbackListener<"error"> = (e) =>
       setError(e.detail.error.message);
     p.addEventListener("frameupdate", sync);
+    p.addEventListener("timeupdate", timeUpdate);
+    p.addEventListener("seeked", timeUpdate);
+    p.addEventListener("ratechange", rateChange);
     p.addEventListener("play", play);
     p.addEventListener("pause", pause);
     p.addEventListener("ended", pause);
@@ -155,6 +177,9 @@ function LessonPlayer({ episode }: { episode: number }) {
     p.addEventListener("mutechange", mute);
     return () => {
       p.removeEventListener("frameupdate", sync);
+      p.removeEventListener("timeupdate", timeUpdate);
+      p.removeEventListener("seeked", timeUpdate);
+      p.removeEventListener("ratechange", rateChange);
       p.removeEventListener("play", play);
       p.removeEventListener("pause", pause);
       p.removeEventListener("ended", pause);
@@ -175,10 +200,19 @@ function LessonPlayer({ episode }: { episode: number }) {
       if(!stage||!renderer.current)throw new Error('请等待三维画面加载完成');
       setPipActive(true);
       const generation=++pipGeneration.current;
-      const session=await openPictureInPicture({stage,render:()=>renderer.current?.(),play:()=>player.current?.play(),pause:()=>player.current?.pause(),onClose:()=>{pip.current=null;setPipActive(false);}});
+      const session=await openPictureInPicture({
+        stage,
+        render:()=>renderer.current?.(),
+        play:()=>player.current?.play(),
+        pause:()=>player.current?.pause(),
+        duration:lesson.total / FPS,
+        seek:seconds=>seek(Math.max(0, Math.min(lesson.total - 1, Math.round(seconds * FPS)))),
+        onClose:()=>{pip.current=null;setPipActive(false);},
+      });
       if(generation!==pipGeneration.current){await session.close();return;}
       pip.current=session;
       session.playback(player.current?.isPlaying()??false);
+      session.position((player.current?.getCurrentFrame()??0) / FPS, playbackRate.current);
     }catch{setPipActive(false);setPipError('当前浏览器未能开启小窗，请使用最新版 Chrome 或 Safari 重试');}
     finally{setPipBusy(false);}
   };
@@ -212,7 +246,7 @@ function LessonPlayer({ episode }: { episode: number }) {
               lazyComponent={lesson.load}
               inputProps={{ gentleMotion: !matchMedia("(prefers-reduced-motion: reduce)").matches, webPlayer: true, compactLabels: compact || pipActive, onSceneReady:markSceneReady, onRenderer:markRenderer }}
               durationInFrames={lesson.total}
-              fps={24}
+              fps={FPS}
               compositionWidth={1280}
               compositionHeight={720}
               controls={false}
