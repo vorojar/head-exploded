@@ -6,6 +6,7 @@ export type PictureInPictureSession = {
   close: () => Promise<void>;
   playback: (playing: boolean) => void;
   position: (seconds: number, playbackRate: number) => void;
+  volume: (muted: boolean) => void;
 };
 export const canPictureInPicture = () =>
   typeof HTMLCanvasElement.prototype.captureStream === 'function' &&
@@ -28,6 +29,8 @@ export async function openPictureInPicture(options: {
   render: () => void;
   play: () => void;
   pause: () => void;
+  isMuted: () => boolean;
+  setMuted: (muted: boolean) => void;
   duration: number;
   seek: (seconds: number) => void;
   onClose: () => void;
@@ -42,7 +45,7 @@ export async function openPictureInPicture(options: {
   const track = stream.getVideoTracks()[0] as CanvasCaptureMediaStreamTrack;
   const video = document.createElement('video') as WebKitVideo;
   video.width = 960; video.height = 540;
-  video.muted = true;
+  video.muted = options.isMuted();
   video.playsInline = true;
   video.setAttribute('aria-hidden', 'true');
   video.className = 'pip-stream';
@@ -68,6 +71,16 @@ export async function openPictureInPicture(options: {
   };
   const pauseFromVideo = () => {
     if (!closed && video.paused) options.pause();
+  };
+  // The bridge carries the picture; its native mute control drives the lesson audio.
+  const volumeFromVideo = () => {
+    const muted = video.muted || video.volume === 0;
+    if (!closed && muted !== options.isMuted()) options.setMuted(muted);
+  };
+  const volume = (muted: boolean) => {
+    if (closed) return;
+    video.muted = muted;
+    if (!muted && video.volume === 0) video.volume = 1;
   };
   const draw = () => {
     // Background tabs stop RAF. Render explicitly before copying the WebGL
@@ -124,6 +137,7 @@ export async function openPictureInPicture(options: {
     closed = true; clearInterval(timer);
     video.removeEventListener('play', playFromVideo);
     video.removeEventListener('pause', pauseFromVideo);
+    video.removeEventListener('volumechange', volumeFromVideo);
     stream.getTracks().forEach(t => t.stop());
     video.pause(); video.srcObject = null; video.remove();
     if (positionPublished) media?.setPositionState();
@@ -167,6 +181,7 @@ export async function openPictureInPicture(options: {
     // Some systems act on the video directly instead of sending Media Session actions.
     video.addEventListener('play', playFromVideo);
     video.addEventListener('pause', pauseFromVideo);
+    video.addEventListener('volumechange', volumeFromVideo);
     if (media) {
       const actions: [MediaSessionAction, MediaSessionActionHandler][] = [
         ['play', options.play],
@@ -185,7 +200,7 @@ export async function openPictureInPicture(options: {
       }
     }
   } catch (error) {cleanup(); throw error;}
-  return {playback, position, close: async () => {
+  return {playback, position, volume, close: async () => {
     try {
       if (document.pictureInPictureElement === video) await document.exitPictureInPicture();
       else if (video.webkitPresentationMode === 'picture-in-picture') video.webkitSetPresentationMode?.('inline');

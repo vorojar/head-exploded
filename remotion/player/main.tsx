@@ -163,7 +163,10 @@ function LessonPlayer({ episode }: { episode: number }) {
       pip.current?.playback(false);
       publishPosition(p.getCurrentFrame());
     };
-    const mute: CallbackListener<"mutechange"> = (e) => setMuted(e.detail.isMuted);
+    const mute: CallbackListener<"mutechange"> = ({detail}) => {
+      setMuted(detail.isMuted);
+      pip.current?.volume(detail.isMuted);
+    };
     const fail: CallbackListener<"error"> = (e) =>
       setError(e.detail.error.message);
     p.addEventListener("frameupdate", sync);
@@ -205,6 +208,11 @@ function LessonPlayer({ episode }: { episode: number }) {
         render:()=>renderer.current?.(),
         play:()=>player.current?.play(),
         pause:()=>player.current?.pause(),
+        isMuted:()=>player.current?.isMuted()??false,
+        setMuted:muted=>{
+          if (muted) player.current?.mute();
+          else player.current?.unmute();
+        },
         duration:lesson.total / FPS,
         seek:seconds=>seek(Math.max(0, Math.min(lesson.total - 1, Math.round(seconds * FPS)))),
         onClose:()=>{pip.current=null;setPipActive(false);},
@@ -212,6 +220,7 @@ function LessonPlayer({ episode }: { episode: number }) {
       if(generation!==pipGeneration.current){await session.close();return;}
       pip.current=session;
       session.playback(player.current?.isPlaying()??false);
+      session.volume(player.current?.isMuted()??false);
       session.position((player.current?.getCurrentFrame()??0) / FPS, playbackRate.current);
     }catch{setPipActive(false);setPipError('当前浏览器未能开启小窗，请使用最新版 Chrome 或 Safari 重试');}
     finally{setPipBusy(false);}
